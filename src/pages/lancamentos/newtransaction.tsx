@@ -4,12 +4,16 @@ import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
 import Link from 'next/link'
 import { FormEvent, useState} from 'react';
-import { useTransactions } from '../../hooks/useTransactions';
+import { api } from "../../services/api";
+// import { useTransactions } from '../../hooks/useTransactions';
 
+// interface RadioInputProps{
+//     isActive: boolean;
+// }
 
 export default function CreateTransaction(){
 
-    const {createTransaction} = useTransactions();
+    // const {createTransaction} = useTransactions();
 
     const [type, setType] = useState('deposit');
     const [date, setDate] = useState('');    
@@ -23,26 +27,40 @@ export default function CreateTransaction(){
     async function handleNewCreateTransaction(event: FormEvent){
         event.preventDefault();   
 
-        await createTransaction ({
+        const data = {
             type,
-            date,              
+            date,
             category,
             bills,
             payment,
             bank,
-            value, 
+            value,
             history
-        })
+        }
 
-        setType('deposit');
-        setDate('');        
-        setCategory(''); 
-        setBills('');       
-        setPayment('');
-        setBank('');
-        setValue(0);
-        setHistory('');        
+        api.post('/transactions', data)
     }
+
+    //     await createTransaction ({
+    //         type,
+    //         date,              
+    //         category,
+    //         bills,
+    //         payment,
+    //         bank,
+    //         value, 
+    //         history
+    //     })
+
+    //     setType('deposit');
+    //     setDate('');        
+    //     setCategory(''); 
+    //     setBills('');       
+    //     setPayment('');
+    //     setBank('');
+    //     setValue(0);
+    //     setHistory('');        
+    // }    
 
     return (
         <Box>
@@ -65,6 +83,7 @@ export default function CreateTransaction(){
                                 type='button' 
                                 onClick={() => {setType('deposit');}}
                                 isActive={type === 'deposit'}
+                                // bg={(props) => props.isActive ? 'green' : 'red'}
                                 // activeColor="green"
                             >
                                     <Checkbox colorScheme="green"/>
@@ -128,8 +147,8 @@ export default function CreateTransaction(){
                                 name="valor" 
                                 type="number" 
                                 label="Valor"
-                                // value={value} 
-                                // onChange={event => setValue(Number(event.target.value))}
+                                value={value} 
+                                onChange={event => setValue(Number(event.target.value))}
                             />
                         </SimpleGrid>
 

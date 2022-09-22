@@ -4,17 +4,36 @@ import { SideBar } from "../../components/Sidebar/index";
 import { Pagination } from "../../components/Pagination";
 import {RiAddLine, RiPencilLine, RiDeleteBin3Line } from 'react-icons/ri'
 import Link from 'next/link'
-import { cursorTo } from "readline";
-import { useTransactions } from '../../hooks/useTransactions';
+// import { cursorTo } from "readline";
+// import { useTransactions } from '../../hooks/useTransactions';
+import { useEffect, useState } from "react";
+import {api} from "../../services/api"
+
+interface Transaction{
+    // id: number;
+    type: string;
+    date: string;
+    category: string;
+    bills: string;
+    payment: string;
+    bank: string;
+    value: number;
+    history: string;           
+}
 
 export default function TransactionsTable(){
 
-    const {transactions} = useTransactions();  
+    const [transactions, setTransactions] = useState<Transaction[]>([]);  
 
     const isWideVersion = useBreakpointValue({
         base: false,
         lg: true,
     });
+
+    useEffect(() => {
+        api.get('/transactions')        
+        .then(response => setTransactions(response.data.transactions))
+    }, []);
 
     return (
         <Box>
@@ -42,7 +61,8 @@ export default function TransactionsTable(){
                     </Flex>
                     <Table colorScheme="whiteAlpha" width="100%">
                         <Thead>
-                            <Tr>                                
+                            {/* Colocar a Key e o ID das transacoes */}
+                            <Tr>                               
                                 <Th>Data</Th>
                                 <Th>Categoria</Th>
                                 <Th>Conta</Th>
@@ -54,39 +74,44 @@ export default function TransactionsTable(){
                             </Tr>
                         </Thead> 
                         <Tbody>
-                            
-                            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                <Td fontSize="sm">12/08/2022</Td>
-                                <Td fontSize="sm">Alimentação</Td>  
-                                <Td fontSize="sm">Lanches</Td>  
-                                <Td fontSize="sm" textAlign="center">À Vista</Td>   
-                                <Td fontSize="sm">Banco do Brasil</Td>  
-                                <Td fontSize="sm">5.000,00 R$</Td>
-                                <Td fontSize="sm">Compra de Pizza</Td>                             
-                                {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
-                                <Td>
-                                    <Button 
-                                        as="a" 
-                                        size="sm" 
-                                        fontSize="sm" 
-                                        colorScheme="purple"
-                                        leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
-                                    > 
-                                        Editar
-                                    </Button>
-                                    <Button 
-                                        as="a" 
-                                        size="sm" 
-                                        fontSize="sm" 
-                                        colorScheme="purple"
-                                        leftIcon={<Icon as={RiDeleteBin3Line} fontSize="15"/>}
-                                        mt="2"
-                                    > 
-                                        Excluir
-                                    </Button>
-                                </Td>
-                            </Tr>                           
-                            
+                            {transactions.map((transaction) => (
+                                <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
+                                    <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
+                                        new Date(transaction.date)
+                                    )}</Td>
+                                    <Td fontSize="sm">{transaction.category}</Td>  
+                                    <Td fontSize="sm">{transaction.bills}</Td>  
+                                    <Td fontSize="sm" textAlign="center">{transaction.payment}</Td>   
+                                    <Td fontSize="sm">{transaction.bank}</Td>  
+                                    <Td fontSize="sm">{new Intl.NumberFormat('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL'
+                                    }).format(transaction.value)}</Td>
+                                    <Td fontSize="sm">{transaction.history}</Td>                             
+                                    {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
+                                    <Td>
+                                        <Button 
+                                            as="a" 
+                                            size="sm" 
+                                            fontSize="sm" 
+                                            colorScheme="purple"
+                                            leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
+                                        > 
+                                            Editar
+                                        </Button>
+                                        <Button 
+                                            as="a" 
+                                            size="sm" 
+                                            fontSize="sm" 
+                                            colorScheme="purple"
+                                            leftIcon={<Icon as={RiDeleteBin3Line} fontSize="15"/>}
+                                            mt="2"
+                                        > 
+                                            Excluir
+                                        </Button>
+                                    </Td>
+                                </Tr>                           
+                            ))}
                         </Tbody>
                     </Table>
                     <Pagination/>

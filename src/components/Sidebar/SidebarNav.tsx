@@ -21,7 +21,7 @@ export function SidebarNav(){
             </NavSection>
             
             <NavSection title='ACOMPANHAMENTOS'>
-                <NavLink icon={RiInputMethodLine} href="/forms">Cartão de Créditos</NavLink>
+                <NavLink icon={RiInputMethodLine} href="/acompanhamentos/creditcard">Cartão de Créditos</NavLink>
                 <NavLink icon={RiGitMergeLine} href="/automation">Contas a Receber</NavLink>   
                 <NavLink icon={RiGitMergeLine} href="/acompanhamentos/billstopay">Contas a Pagar</NavLink>                  
             </NavSection>

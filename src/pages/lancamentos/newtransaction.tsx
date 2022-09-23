@@ -5,6 +5,8 @@ import { Input } from "../../components/Form/Input";
 import Link from 'next/link'
 import { FormEvent, useState} from 'react';
 import { api } from "../../services/api";
+import { toast } from 'react-toastify';
+
 // import { useTransactions } from '../../hooks/useTransactions';
 
 // interface RadioInputProps{
@@ -167,8 +169,13 @@ export default function CreateTransaction(){
                             <Link href="/lancamentos" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link>                            
-                            <Link href="/lancamentos" passHref>
+                            <Link href="/lancamentos" passHref>                                
                                 <Button colorScheme="whatsapp">Realizar Lançamento</Button>
+                                    {/* if (Input !== null) {
+                                        toast.error('Preencha todos os campos do formuário!')              
+                                    } else {
+                                        toast.success('Transação realizada com suceso!')                                 
+                                    } */}
                             </Link>
                         </HStack>
                     </Flex>

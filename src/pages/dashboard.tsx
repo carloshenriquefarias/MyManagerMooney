@@ -57,7 +57,6 @@ const options = {
             opacityto: 0.3,
         }
     }
-
 }
 
 const series= [
@@ -71,7 +70,10 @@ export default function Dashboard(){
                     
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar /> 
-                {/* <Summary />                          */}
+                {/* <SimpleGrid>
+                    <Summary /> 
+                </SimpleGrid> */}
+                                        
                 <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start"> 
                                                     
                     <Box

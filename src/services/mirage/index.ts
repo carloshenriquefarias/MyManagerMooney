@@ -46,15 +46,15 @@ export function makeServer(){
         },
 
         seeds (server){
-            server.createList('transactions', 10)
+            server.createList('transactions', 100)
         },
 
         routes(){
             this.namespace = 'api';
             this.timing = 750;
 
-            this.get('/lancamentos')
-            this.post('/lancamentos')
+            this.get('/lancamentos/registration')
+            this.post('/lancamentos/registration')
             //Criando as rotas no miragejs
 
             this.namespace = '';

@@ -1,8 +1,41 @@
-import {Flex, Button, Stack } from '@chakra-ui/react'
+import {Flex, Button, Stack, useFormErrorStyles } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
-// import {useForm } from "react-hook-form"
+import {useForm, SubmitHandler } from "react-hook-form"
+
+import * as yup from 'yup'
+// import { SubmitHandler, useForm } from "react-hook-form";
+import {yupResolver } from "@hookform/resolvers/yup"
+
+type SignInFormData = {
+  email: string;
+  password: string;
+}
+
+type CreateUserFormData = {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+
+const signInFormSchema = yup.object().shape({
+    name: yup.string().required('Nome Obrigatório'),
+    email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
+    password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
+    password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
+})
 
 export default function SignIn() {
+
+  const {register, handleSubmit, formState} = useForm({
+    resolver: yupResolver(signInFormSchema)
+  });
+
+  const handleSignIn: SubmitHandler<SignInFormData> = async (valeus) =>{
+    await new Promise (resolve => setTimeout (resolve, 2000));
+    console.log(valeus);
+  }
+
   return (
     <Flex 
       w="100vw" 
@@ -18,12 +51,13 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
+          onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
-            <Input name='email' type='email' label='E-mail'/>
-            <Input name='password' type='password' label='Senha'/>           
+            <Input name='email' type='email' label='E-mail' ref={register}/>
+            <Input name='password' type='password' label='Senha'ref={register}/>           
           </Stack>
-        <Button type='submit' mt="6" colorScheme="pink">Entrar</Button>
+        <Button type='submit' mt="6" colorScheme="pink" isLoading={formState.isSubmitting}>Entrar</Button>
         </Flex>
     </Flex>
   )

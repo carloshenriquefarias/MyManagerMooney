@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.3.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.8",
     "apexcharts": "^3.35.5",
     "axios": "^0.27.2",
     "framer-motion": "^7.3.2",
@@ -21,10 +22,11 @@
     "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.35.0",
+    "react-hook-form": "^7.37.0",
     "react-icons": "^4.4.0",
     "react-query": "^3.39.2",
-    "react-toastify": "^9.0.8"
+    "react-toastify": "^9.0.8",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",

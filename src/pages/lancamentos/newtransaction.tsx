@@ -3,9 +3,11 @@ import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
 import Link from 'next/link'
-import { FormEvent, useState} from 'react';
+import { FormEvent, useState, useRef} from 'react';
 import { api } from "../../services/api";
 import { toast } from 'react-toastify';
+import {useForm} from 'react-hook-form';
+
 
 // import { useTransactions } from '../../hooks/useTransactions';
 
@@ -16,6 +18,12 @@ import { toast } from 'react-toastify';
 export default function CreateTransaction(){
 
     // const {createTransaction} = useTransactions();
+    const searchInputRef = useRef<HTMLInputElement>(null)
+    const {register, handleSubmit} = useForm();
+
+    function handleNewTransaction(){
+
+    }
 
     const [type, setType] = useState('deposit');
     const [date, setDate] = useState('');    
@@ -110,12 +118,14 @@ export default function CreateTransaction(){
                                 label="Data da Transação" 
                                 type="date" value={date} 
                                 onChange={event => setDate(event.target.value)}
+                                ref={register}
                             />
                             <Input 
                                 name="categoria" 
                                 label="Categoria"                                
                                 value={category} 
                                 onChange={event => setCategory(event.target.value)}
+                                ref={register}
                             />
                         </SimpleGrid>
 
@@ -125,17 +135,19 @@ export default function CreateTransaction(){
                                 label="Conta"
                                 value={bills} 
                                 onChange={event => setBills(event.target.value)}
+                                ref={register}
                             />
                             <Input 
                                 name="pagamento" 
                                 label="Forma de Pagamento"
                                 value={payment} 
                                 onChange={event => setPayment(event.target.value)}
+                                ref={register}
                             />
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            <Input name="parcelas" label="Escolha a quantidade de parcelas"/>                           
+                            <Input name="parcelas" label="Escolha a quantidade de parcelas" ref={register}/>                           
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
@@ -144,6 +156,7 @@ export default function CreateTransaction(){
                                 label="Banco"
                                 value={bank} 
                                 onChange={event => setBank(event.target.value)}
+                                ref={register}
                             />
                             <Input 
                                 name="valor" 
@@ -151,6 +164,7 @@ export default function CreateTransaction(){
                                 label="Valor"
                                 value={value} 
                                 onChange={event => setValue(Number(event.target.value))}
+                                ref={register}
                             />
                         </SimpleGrid>
 
@@ -160,6 +174,7 @@ export default function CreateTransaction(){
                                 label="Histórico"
                                 value={history} 
                                 onChange={event => setHistory(event.target.value)}
+                                ref={register}
                             />                           
                         </SimpleGrid>
 
@@ -170,7 +185,7 @@ export default function CreateTransaction(){
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link>                            
                             <Link href="/lancamentos" passHref>                                
-                                <Button colorScheme="whatsapp">Realizar Lançamento</Button>
+                                <Button colorScheme="whatsapp" ref={searchInputRef}>Realizar Lançamento</Button>
                                     {/* if (Input !== null) {
                                         toast.error('Preencha todos os campos do formuário!')              
                                     } else {

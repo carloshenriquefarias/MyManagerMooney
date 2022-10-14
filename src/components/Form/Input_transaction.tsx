@@ -1,5 +1,6 @@
-import { FormControl, FormLabel, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormLabel, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
 import {forwardRef} from 'react'
+import {FieldError} from 'react-hook-form';
 
 interface InputTransactionProps extends ChakraInputProps{
     // id: number;
@@ -10,7 +11,8 @@ interface InputTransactionProps extends ChakraInputProps{
     payment: string;
     bank: string;
     value: number;
-    history: string;    
+    history: string; 
+    error?: FieldError;   
 }
 
 //Encaminhamento de Ref no formulario, transformar a function em const
@@ -23,11 +25,12 @@ const InputTransactionBase = ({
     payment, 
     bank, 
     value, 
-    history,
+    history,     
+    error=null,
     ...rest}:InputTransactionProps, ref) =>{
 
     return (
-        <FormControl> 
+        <FormControl isInvalid={!! error}> 
             {/* {!! label && <FormLabel htmlFor={date}>{label}</FormLabel> } */}
 
             <ChakraInput 
@@ -51,6 +54,11 @@ const InputTransactionBase = ({
             size="lg"
             {...rest}
             />
+            {!!error && (
+                <FormErrorMessage>
+                    {error.message}
+                </FormErrorMessage>
+            )}
         </FormControl> 
     );
 }

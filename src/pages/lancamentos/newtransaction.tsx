@@ -6,8 +6,11 @@ import Link from 'next/link'
 import { FormEvent, useState, useRef} from 'react';
 import { api } from "../../services/api";
 import { toast } from 'react-toastify';
-import {useForm} from 'react-hook-form';
+// import {useForm} from 'react-hook-form';
 
+import * as yup from 'yup'
+import { SubmitHandler, useForm } from "react-hook-form";
+import {yupResolver } from "@hookform/resolvers/yup"
 
 // import { useTransactions } from '../../hooks/useTransactions';
 
@@ -15,15 +18,45 @@ import {useForm} from 'react-hook-form';
 //     isActive: boolean;
 // }
 
-export default function CreateTransaction(){
+interface InputTransactionProps {
+    // id: number;
+    type: string;
+    date: string;
+    category: string;
+    bills: string;
+    payment: string;
+    bank: string;
+    value: number;
+    history: string;    
+}
+
+const createTransactionFormSchema = yup.object().shape({
+    type: yup.string().required(''),
+    date: yup.string().required('Escolha a data'),
+    category: yup.string().required('Escolha a categoria'),
+    bills: yup.string().required('Escolha a conta'),
+    payment: yup.string().required('Escolha a forma de pagamento'),
+    bank: yup.string().required('Escolha o banco'),
+    value: yup.number().required('Digite o valor da transação'),
+    history: yup.string().required('Digite o histórico'),        
+})
+
+export default function CreateTransaction(){    
+
+    const {register, handleSubmit, formState} = useForm({
+        resolver: yupResolver(createTransactionFormSchema)
+    });
+
+    const {errors} = formState
+
+    const handleNewTransaction: SubmitHandler<InputTransactionProps> = async (valeus) =>{
+        await new Promise (resolve => setTimeout (resolve, 2000));
+        console.log('valeus');
+    }
 
     // const {createTransaction} = useTransactions();
-    const searchInputRef = useRef<HTMLInputElement>(null)
-    const {register, handleSubmit} = useForm();
-
-    function handleNewTransaction(){
-
-    }
+    // const searchInputRef = useRef<HTMLInputElement>(null)
+    // const {register, handleSubmit} = useForm();
 
     const [type, setType] = useState('deposit');
     const [date, setDate] = useState('');    
@@ -78,7 +111,13 @@ export default function CreateTransaction(){
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar />
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
-                <Box flex="1" borderRadius={8} bg="gray.800" p="6"> 
+                <Box 
+                    as="form" 
+                    flex="1" 
+                    borderRadius={8} 
+                    bg="gray.800" p="6" 
+                    onSubmit={handleSubmit(handleNewTransaction)}
+                > 
                     <Heading size="lg" fontWeight="normal">Cadastrar Nova Transação</Heading>
                     <Divider my="6" borderColor="gray.700"></Divider>
 
@@ -112,20 +151,22 @@ export default function CreateTransaction(){
                             </Button>                            
                         </SimpleGrid>
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200" >
                             <Input 
                                 name="data" 
                                 label="Data da Transação" 
                                 type="date" value={date} 
                                 onChange={event => setDate(event.target.value)}
-                                ref={register}
+                                {...register("data")}
+                                error={errors.date}
                             />
                             <Input 
                                 name="categoria" 
                                 label="Categoria"                                
                                 value={category} 
                                 onChange={event => setCategory(event.target.value)}
-                                ref={register}
+                                {...register("categoria")}
+                                error={errors.category}
                             />
                         </SimpleGrid>
 
@@ -135,19 +176,26 @@ export default function CreateTransaction(){
                                 label="Conta"
                                 value={bills} 
                                 onChange={event => setBills(event.target.value)}
-                                ref={register}
+                                {...register("conta")}
+                                error={errors.bills}
                             />
                             <Input 
                                 name="pagamento" 
                                 label="Forma de Pagamento"
                                 value={payment} 
                                 onChange={event => setPayment(event.target.value)}
-                                ref={register}
+                                {...register("pagamento")}
+                                error={errors.payment}
                             />
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            <Input name="parcelas" label="Escolha a quantidade de parcelas" ref={register}/>                           
+                            <Input 
+                                name="parcelas" 
+                                label="Escolha a quantidade de parcelas" 
+                                {...register("parcelas")}
+                                error={errors.payment}
+                            />                           
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
@@ -156,7 +204,8 @@ export default function CreateTransaction(){
                                 label="Banco"
                                 value={bank} 
                                 onChange={event => setBank(event.target.value)}
-                                ref={register}
+                                {...register("banco")}
+                                error={errors.bank}
                             />
                             <Input 
                                 name="valor" 
@@ -164,7 +213,8 @@ export default function CreateTransaction(){
                                 label="Valor"
                                 value={value} 
                                 onChange={event => setValue(Number(event.target.value))}
-                                ref={register}
+                                {...register("valor")}
+                                error={errors.value}
                             />
                         </SimpleGrid>
 
@@ -174,7 +224,8 @@ export default function CreateTransaction(){
                                 label="Histórico"
                                 value={history} 
                                 onChange={event => setHistory(event.target.value)}
-                                ref={register}
+                                {...register("historico")}
+                                error={errors.history}
                             />                           
                         </SimpleGrid>
 
@@ -185,7 +236,14 @@ export default function CreateTransaction(){
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link>                            
                             <Link href="/lancamentos" passHref>                                
-                                <Button colorScheme="whatsapp" ref={searchInputRef}>Realizar Lançamento</Button>
+                                <Button 
+                                    type="submit" 
+                                    colorScheme="whatsapp" 
+                                    // ref={searchInputRef}                                     
+                                    isLoading={formState.isSubmitting}
+                                >
+                                    Realizar Lançamento
+                                </Button>
                                     {/* if (Input !== null) {
                                         toast.error('Preencha todos os campos do formuário!')              
                                     } else {

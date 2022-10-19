@@ -235,7 +235,7 @@ export default function CreateTransaction(){
                             <Link href="/lancamentos" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link>                            
-                            <Link href="/lancamentos" passHref>                                
+                            {/* <Link href="/lancamentos" passHref>                                 */}
                                 <Button 
                                     type="submit" 
                                     colorScheme="whatsapp" 
@@ -249,7 +249,7 @@ export default function CreateTransaction(){
                                     } else {
                                         toast.success('Transação realizada com suceso!')                                 
                                     } */}
-                            </Link>
+                            {/* </Link> */}
                         </HStack>
                     </Flex>
 

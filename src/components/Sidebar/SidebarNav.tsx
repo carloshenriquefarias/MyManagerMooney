@@ -11,6 +11,7 @@ export function SidebarNav(){
             <NavSection title='LANÇAMENTOS'>
                 <NavLink icon={RiAddCircleLine} href="/lancamentos/newtransaction">Nova Transação</NavLink>
                 <NavLink icon={RiFileList3Line} href="/lancamentos/cadastros">Cadastros</NavLink>  
+                {/* <NavLink icon={RiFileList3Line} href="/lancamentos/registration/receitas">Cadastros</NavLink> */}
                 <NavLink icon={RiEdit2Line} href="/lancamentos">Lançamentos</NavLink>                                              
             </NavSection>
 

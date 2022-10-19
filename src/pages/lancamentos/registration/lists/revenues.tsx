@@ -1,45 +1,38 @@
 import { Box, Flex, Heading, Spinner, Button, Icon, Text, Table, Thead, Tr, Th, Td, Checkbox, Tbody, useBreakpointValue } from "@chakra-ui/react";
-import { Header } from "../../components/Header/Index";
-import { SideBar } from "../../components/Sidebar/index";
-import { Pagination } from "../../components/Pagination";
+import { Header } from "../../../../components/Header/Index";
+import { SideBar } from "../../../../components/Sidebar/index";
+import { Pagination } from "../../../../components/Pagination";
 import {RiAddLine, RiPencilLine, RiDeleteBin3Line } from 'react-icons/ri'
+import { useEffect, useState } from "react";
 import Link from 'next/link'
-import {useQuery} from 'react-query'
+import {api} from "../../../../services/api"
+
+// import {useQuery} from 'react-query'
 // import { cursorTo } from "readline";
 // import { useTransactions } from '../../hooks/useTransactions';
-import { useEffect, useState } from "react";
-import {api} from "../../services/api"
+// import { Transactions } from "../../../../services/hooks/useTransactions";
+// import {api} from "../../services/api"
 
-interface Transaction{
+interface ListRevenues{
     // id: number;
-    type: string;
-    date: string;
-    category: string;
-    bills: string;
-    payment: string;
-    bank: string;
-    value: number;
-    history: string;           
+    categoryOfRevenue: string;
+    bills: string;           
 }
 
-export default function TransactionsTable(){
+export default function RevenuesTable(){  
 
-    // const {data, isLoading, error} = useQuery('transactions_list', async () => {
-    //     const response = await fetch('http://localhost:3000/api/lancamentos/registration');
-    //     const data = await response.json();
-    // })
-
-    // const [transactions, setTransactions] = useState<Transaction[]>([]);  
-
-    // const isWideVersion = useBreakpointValue({
-    //     base: false,
-    //     lg: true,
-    // });
-
-    // useEffect(() => {
-    //     api.get('/transactions')        
-    //     .then(response => setTransactions(response.data.transactions))
-    // }, []);
+    const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);
+     
+    //Listando as receitas cadastradas na tabela
+    useEffect(() => {
+        async function loadRevenues() {          
+        await api.get('/transactions').then( response => {
+            // setListRevenuesTable(response.data);
+            console.log(response.data);
+        })      
+        }
+        loadRevenues();    
+    }, []);     
 
     return (
         <Box>
@@ -49,64 +42,38 @@ export default function TransactionsTable(){
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"> 
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="normal">Lançamentos Realizados</Heading>
+                        <Heading size="lg" fontWeight="normal">Receitas Cadastradas</Heading>
                         {/* as = a => converte o botao como link para outra pagina */}
                         
-                        <Link href="/lancamentos/newtransaction" passHref>
+                        <Link href="/lancamentos/registration/receitas" passHref>
                             <Button 
                                 as="a" 
                                 size="sm" 
                                 fontSize="sm" 
-                                colorScheme="pink"
+                                colorScheme="whatsapp"
                                 leftIcon={<Icon as={RiAddLine}fontSize="20"/>}
                             > 
-                                Cadastrar Novo Lançamento
+                                Cadastrar Nova Receita
                             </Button>
                         </Link>
                         
-                    </Flex>
-
-                    {/* {isLoading ? (
-                        <Flex justify="center">
-                            <Spinner/>
-                        </Flex>
-                    ): error ?(
-                        <Flex justify="center">
-                           <Text >Falha ao obter dados dos usuários</Text>
-                        </Flex>                        
-                    ): ( */}
+                    </Flex>                    
                         <>                        
                             <Table colorScheme="whiteAlpha" width="100%">
                                 <Thead>
                                     {/* Colocar a Key e o ID das transacoes */}
                                     <Tr>                               
-                                        <Th>Data</Th>
-                                        <Th>Categoria</Th>
-                                        <Th>Conta</Th>
-                                        <Th fontSize="sm" textAlign="center">Forma de Pagamento</Th>
-                                        <Th>Tipo de Banco</Th>
-                                        <Th>Valor da Transação</Th>
-                                        <Th>Histórico</Th>                                
+                                        <Th>Categoria da Receita</Th>
+                                        <Th>Conta</Th>                                                                       
                                         <Th w="8">Ações</Th>
                                     </Tr>
                                 </Thead> 
                                 <Tbody>
-                                    {/* {transactions.map((transaction) => (
+                                    {ListRevenuesTable.map((ListRevenuesTable) => (                                                      
                                         <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                            <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
-                                                new Date(transaction.date)
-                                            )}</Td>
-                                            <Td fontSize="sm">{transaction.category}</Td>  
-                                            <Td fontSize="sm">{transaction.bills}</Td>  
-                                            <Td fontSize="sm" textAlign="center">{transaction.payment}</Td>   
-                                            <Td fontSize="sm">{transaction.bank}</Td>  
-                                            <Td fontSize="sm">{new Intl.NumberFormat('pt-BR', {
-                                                style: 'currency',
-                                                currency: 'BRL'
-                                            }).format(transaction.value)}</Td>
-                                            <Td fontSize="sm">{transaction.history}</Td>                              */}
-                                            {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
-                                            {/* <Td>
+                                            <Td fontSize="sm">{ListRevenuesTable.categoryOfRevenue}</Td>
+                                            <Td fontSize="sm">{ListRevenuesTable.bills}</Td>                                   
+                                            <Td>
                                                 <Button 
                                                     as="a" 
                                                     size="sm" 
@@ -127,17 +94,12 @@ export default function TransactionsTable(){
                                                     Excluir
                                                 </Button>
                                             </Td>
-                                        </Tr>                           
-                                    ))}                                     */}
+                                        </Tr>
+                                    ))}     
                                     <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                        <Td fontSize="sm">10 de abril de 2022</Td>
-                                        <Td fontSize="sm">Alimentos</Td>  
-                                        <Td fontSize="sm">Lanches</Td>  
-                                        <Td fontSize="sm" textAlign="center">Cartao</Td>   
-                                        <Td fontSize="sm">Banco do Brasil</Td>  
-                                        <Td fontSize="sm">10,00</Td>
-                                        <Td fontSize="sm">Valor ref a compra de pizza</Td>                             
-                                        {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
+                                        <Td fontSize="sm">Receitas Financeiras</Td>
+                                        <Td fontSize="sm">Salário</Td>                                                          
+                                        
                                         <Td>
                                             <Button 
                                                 as="a" 
@@ -159,13 +121,12 @@ export default function TransactionsTable(){
                                                 Excluir
                                             </Button>
                                         </Td>
-                                    </Tr>                           
+                                    </Tr>                          
                                     
                                 </Tbody>
                             </Table>
                             <Pagination/>
-                        </>
-                    {/* )} */}
+                        </>                  
                 </Box>
             </Flex>
         </Box>

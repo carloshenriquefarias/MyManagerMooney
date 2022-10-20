@@ -16,7 +16,8 @@ export default function Receitas(){
         event.preventDefault();   
         console.log('valor do categoryOfRevenue: ', categoryOfRevenue)
         console.log('valor do bills: ', bills)
-        // await createRevenue ({
+
+        // await handleNewCreateRevenue ({
         //     categoryOfRevenue, 
         //     bills            
         // })

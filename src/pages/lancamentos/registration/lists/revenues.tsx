@@ -23,11 +23,11 @@ export default function RevenuesTable(){
 
     const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);
      
-    //Listando as receitas cadastradas na tabela
+    //Pegando os dados da API e Listando as receitas cadastradas na tabela
     useEffect(() => {
         async function loadRevenues() {          
         await api.get('/transactions').then( response => {
-            // setListRevenuesTable(response.data);
+            setListRevenuesTable(response.data);
             console.log(response.data);
         })      
         }

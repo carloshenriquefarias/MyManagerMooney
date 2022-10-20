@@ -3,14 +3,15 @@ import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
 import Link from 'next/link'
-import { FormEvent, useState, useRef} from 'react';
+import { FormEvent, useState, useEffect, useRef} from 'react';
 import { api } from "../../services/api";
 import { toast } from 'react-toastify';
-// import {useForm} from 'react-hook-form';
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
+
+// import {useForm} from 'react-hook-form';
 
 // import { useTransactions } from '../../hooks/useTransactions';
 
@@ -30,6 +31,8 @@ interface InputTransactionProps {
     history: string;    
 }
 
+//Fazendo a validação do formulário
+
 const createTransactionFormSchema = yup.object().shape({
     type: yup.string().required(''),
     date: yup.string().required('Escolha a data'),
@@ -41,7 +44,9 @@ const createTransactionFormSchema = yup.object().shape({
     history: yup.string().required('Digite o histórico'),        
 })
 
-export default function CreateTransaction(){    
+export default function CreateTransaction(){ 
+    
+    //Validando o formulario da transação
 
     const {register, handleSubmit, formState} = useForm({
         resolver: yupResolver(createTransactionFormSchema)
@@ -52,11 +57,9 @@ export default function CreateTransaction(){
     const handleNewTransaction: SubmitHandler<InputTransactionProps> = async (valeus) =>{
         await new Promise (resolve => setTimeout (resolve, 2000));
         console.log('valeus');
-    }
+    }   
 
-    // const {createTransaction} = useTransactions();
-    // const searchInputRef = useRef<HTMLInputElement>(null)
-    // const {register, handleSubmit} = useForm();
+    // Utilizando o useState e armazenando dados
 
     const [type, setType] = useState('deposit');
     const [date, setDate] = useState('');    
@@ -69,7 +72,7 @@ export default function CreateTransaction(){
 
     async function handleNewCreateTransaction(event: FormEvent){
         event.preventDefault();   
-
+        // Colocar o await
         const data = {
             type,
             date,
@@ -79,31 +82,8 @@ export default function CreateTransaction(){
             bank,
             value,
             history
-        }
-
-        api.post('/transactions', data)
-    }
-
-    //     await createTransaction ({
-    //         type,
-    //         date,              
-    //         category,
-    //         bills,
-    //         payment,
-    //         bank,
-    //         value, 
-    //         history
-    //     })
-
-    //     setType('deposit');
-    //     setDate('');        
-    //     setCategory(''); 
-    //     setBills('');       
-    //     setPayment('');
-    //     setBank('');
-    //     setValue(0);
-    //     setHistory('');        
-    // }    
+        }        
+    }     
 
     return (
         <Box>
@@ -258,3 +238,28 @@ export default function CreateTransaction(){
         </Box>
     );
 }   
+
+    // const {createTransaction} = useTransactions();
+    // const searchInputRef = useRef<HTMLInputElement>(null)
+    // const {register, handleSubmit} = useForm();
+
+     //     await createTransaction ({
+    //         type,
+    //         date,              
+    //         category,
+    //         bills,
+    //         payment,
+    //         bank,
+    //         value, 
+    //         history
+    //     })
+
+    //     setType('deposit');
+    //     setDate('');        
+    //     setCategory(''); 
+    //     setBills('');       
+    //     setPayment('');
+    //     setBank('');
+    //     setValue(0);
+    //     setHistory('');        
+    // }  

@@ -4,11 +4,12 @@ import { SideBar } from "../../components/Sidebar/index";
 import { Pagination } from "../../components/Pagination";
 import {RiAddLine, RiPencilLine, RiDeleteBin3Line } from 'react-icons/ri'
 import Link from 'next/link'
-import {useQuery} from 'react-query'
-// import { cursorTo } from "readline";
-// import { useTransactions } from '../../hooks/useTransactions';
+import {useQuery} from 'react-query';
 import { useEffect, useState } from "react";
 import {api} from "../../services/api"
+
+// import { cursorTo } from "readline";
+// import { useTransactions } from '../../hooks/useTransactions'
 
 interface Transaction{
     // id: number;
@@ -24,22 +25,31 @@ interface Transaction{
 
 export default function TransactionsTable(){
 
-    // const {data, isLoading, error} = useQuery('transactions_list', async () => {
-    //     const response = await fetch('http://localhost:3000/api/lancamentos/registration');
-    //     const data = await response.json();
-    // })
+    //Pegando os dados da API e Listando as receitas cadastradas na tabela
 
-    // const [transactions, setTransactions] = useState<Transaction[]>([]);  
+    const {data, isLoading, error} = useQuery('transactions_list', async () => {
+        const response = await fetch('http://localhost:3000/api/lancamentos/registration');
+        const data = await response.json();
+    }) 
 
-    // const isWideVersion = useBreakpointValue({
-    //     base: false,
-    //     lg: true,
-    // });
+    const [transactions, setTransactions] = useState<Transaction[]>([]);  
 
-    // useEffect(() => {
-    //     api.get('/transactions')        
-    //     .then(response => setTransactions(response.data.transactions))
-    // }, []);
+    useEffect(() => {
+        async function transactions() {          
+        await api.get('/transactions').then( response => {
+            setTransactions(response.data);
+            console.log(response.data);
+        })      
+        }
+        transactions();    
+    }, []);
+    
+    //Reduzindo o tamanho da tela
+
+    const isWideVersion = useBreakpointValue({
+        base: false,
+        lg: true,
+    });
 
     return (
         <Box>
@@ -66,7 +76,7 @@ export default function TransactionsTable(){
                         
                     </Flex>
 
-                    {/* {isLoading ? (
+                    {isLoading ? (
                         <Flex justify="center">
                             <Spinner/>
                         </Flex>
@@ -74,7 +84,7 @@ export default function TransactionsTable(){
                         <Flex justify="center">
                            <Text >Falha ao obter dados dos usuários</Text>
                         </Flex>                        
-                    ): ( */}
+                    ): (
                         <>                        
                             <Table colorScheme="whiteAlpha" width="100%">
                                 <Thead>
@@ -91,7 +101,7 @@ export default function TransactionsTable(){
                                     </Tr>
                                 </Thead> 
                                 <Tbody>
-                                    {/* {transactions.map((transaction) => (
+                                    {transactions.map((transaction) => (
                                         <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
                                             <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
                                                 new Date(transaction.date)
@@ -104,9 +114,9 @@ export default function TransactionsTable(){
                                                 style: 'currency',
                                                 currency: 'BRL'
                                             }).format(transaction.value)}</Td>
-                                            <Td fontSize="sm">{transaction.history}</Td>                              */}
+                                            <Td fontSize="sm">{transaction.history}</Td>                             
                                             {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
-                                            {/* <Td>
+                                            <Td>
                                                 <Button 
                                                     as="a" 
                                                     size="sm" 
@@ -128,7 +138,7 @@ export default function TransactionsTable(){
                                                 </Button>
                                             </Td>
                                         </Tr>                           
-                                    ))}                                     */}
+                                    ))}                                    
                                     <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
                                         <Td fontSize="sm">10 de abril de 2022</Td>
                                         <Td fontSize="sm">Alimentos</Td>  
@@ -137,7 +147,7 @@ export default function TransactionsTable(){
                                         <Td fontSize="sm">Banco do Brasil</Td>  
                                         <Td fontSize="sm">10,00</Td>
                                         <Td fontSize="sm">Valor ref a compra de pizza</Td>                             
-                                        {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
+                                        { isWideVersion && <Td>12 de setembro de 2022</Td>}
                                         <Td>
                                             <Button 
                                                 as="a" 
@@ -165,7 +175,7 @@ export default function TransactionsTable(){
                             </Table>
                             <Pagination/>
                         </>
-                    {/* )} */}
+                    )}
                 </Box>
             </Flex>
         </Box>

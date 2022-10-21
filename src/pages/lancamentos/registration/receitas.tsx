@@ -5,6 +5,8 @@ import { Input } from "../../../components/Form/Input";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 import { useEffect, useState, FormEvent } from "react";
+import { api } from "../../../services/api";
+import { toast } from 'react-toastify';
 
 
 export default function Receitas(){
@@ -16,6 +18,24 @@ export default function Receitas(){
         event.preventDefault();   
         console.log('valor do categoryOfRevenue: ', categoryOfRevenue)
         console.log('valor do bills: ', bills)
+
+        try {
+            const response = await api.post('/revenues', {
+                categoryOfRevenue : categoryOfRevenue,
+                bills: bills               
+                
+            })
+
+            console.log(response.data)
+
+            if (response) {
+                toast.success('Seu cadastro foi realizado com sucesso!');
+                return;
+            }
+
+        } catch (error) {
+            
+        }
 
         // await handleNewCreateRevenue ({
         //     categoryOfRevenue, 
@@ -68,15 +88,15 @@ export default function Receitas(){
                             <Link href="/lancamentos/registration/lists/revenues" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link> 
-                            <Link href="/lancamentos/registration/lists/revenues" passHref>                           
-                                <Button 
-                                    colorScheme="whatsapp" 
-                                    type="submit"
-                                >
-                                    Finalizar Cadastro 
-                                </Button> 
+                            {/* <Link href="/lancamentos/registration/lists/revenues" passHref>                            */}
+                            <Button 
+                                colorScheme="whatsapp" 
+                                type="submit"
+                            >
+                                Finalizar Cadastro 
+                            </Button> 
                                 {/* <Spinner size="sm" color="gray.500" ml="4"/> */}
-                            </Link>                           
+                            {/* </Link>                            */}
                         </HStack>
                     </Flex>
 

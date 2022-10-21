@@ -26,10 +26,10 @@ export default function RevenuesTable(){
     //Pegando os dados da API e Listando as receitas cadastradas na tabela
     useEffect(() => {
         async function loadRevenues() {          
-        await api.get('/transactions').then( response => {
-            setListRevenuesTable(response.data);
-            console.log(response.data);
-        })      
+            await api.get('/revenues').then( response => {
+                setListRevenuesTable(response.data);
+                console.log(response.data);
+            })      
         }
         loadRevenues();    
     }, []);     
@@ -96,7 +96,7 @@ export default function RevenuesTable(){
                                             </Td>
                                         </Tr>
                                     ))}     
-                                    <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
+                                    {/* <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
                                         <Td fontSize="sm">Receitas Financeiras</Td>
                                         <Td fontSize="sm">Salário</Td>                                                          
                                         
@@ -121,7 +121,7 @@ export default function RevenuesTable(){
                                                 Excluir
                                             </Button>
                                         </Td>
-                                    </Tr>                          
+                                    </Tr>                           */}
                                     
                                 </Tbody>
                             </Table>

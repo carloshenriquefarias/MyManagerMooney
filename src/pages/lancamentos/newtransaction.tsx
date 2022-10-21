@@ -21,7 +21,7 @@ import {yupResolver } from "@hookform/resolvers/yup"
 
 interface InputTransactionProps {
     // id: number;
-    type: string;
+    // type: string;
     date: string;
     category: string;
     bills: string;
@@ -34,56 +34,53 @@ interface InputTransactionProps {
 //Fazendo a validação do formulário
 
 const createTransactionFormSchema = yup.object().shape({
-    type: yup.string().required(''),
+    // type: yup.string().required(''),
     date: yup.string().required('Escolha a data'),
     category: yup.string().required('Escolha a categoria'),
     bills: yup.string().required('Escolha a conta'),
     payment: yup.string().required('Escolha a forma de pagamento'),
     bank: yup.string().required('Escolha o banco'),
     value: yup.number().required('Digite o valor da transação'),
-    history: yup.string().required('Digite o histórico'),        
+    history: yup.string().required('Digite o histórico'),     
 })
 
-export default function CreateTransaction(){ 
-    
+export default function CreateTransaction(){  
+
     //Validando o formulario da transação
 
-    const {register, handleSubmit, formState} = useForm({
+    const {register, handleSubmit, formState} = useForm<InputTransactionProps>({
         resolver: yupResolver(createTransactionFormSchema)
     });
 
     const {errors} = formState
 
-    const handleNewTransaction: SubmitHandler<InputTransactionProps> = async (valeus) =>{
-        await new Promise (resolve => setTimeout (resolve, 2000));
-        console.log('valeus');
+    const handleNewTransaction: SubmitHandler<InputTransactionProps> = async (dados) =>{
+        // await new Promise (resolve => setTimeout (resolve, 2000));
+        console.log(dados);
+
+        try {
+            const response = await api.post('/newtransaction', {                
+                // type: dados.type,
+                date: dados.date,
+                category: dados.category,
+                bills: dados.bills,
+                payment: dados.payment,
+                bank: dados.bank,
+                value: dados.value,
+                history: dados.history                
+            })
+
+            console.log(response.data)
+
+            if (response) {
+                toast.success('Seu cadastro foi realizado com sucesso!');
+                return;
+            }
+
+        } catch (error) {  
+
+        }
     }   
-
-    // Utilizando o useState e armazenando dados
-
-    const [type, setType] = useState('deposit');
-    const [date, setDate] = useState('');    
-    const [category, setCategory] = useState('');
-    const [bills, setBills] = useState('');
-    const [payment, setPayment] = useState('');
-    const [bank, setBank] = useState('');
-    const [value, setValue] = useState(0);
-    const [history, setHistory] = useState('')
-
-    async function handleNewCreateTransaction(event: FormEvent){
-        event.preventDefault();   
-        // Colocar o await
-        const data = {
-            type,
-            date,
-            category,
-            bills,
-            payment,
-            bank,
-            value,
-            history
-        }        
-    }     
 
     return (
         <Box>
@@ -101,17 +98,15 @@ export default function CreateTransaction(){
                     <Heading size="lg" fontWeight="normal">Cadastrar Nova Transação</Heading>
                     <Divider my="6" borderColor="gray.700"></Divider>
 
-                    <VStack spacing="6" onSubmit={handleNewCreateTransaction}>
-                        
+                    <VStack spacing="6" >                        
                         <Text>Escolha o tipo de transação que deseja realizar</Text>
-
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
+                        {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
                             <Button 
                                 colorScheme="purple" 
                                 gap="2" 
                                 type='button' 
-                                onClick={() => {setType('deposit');}}
-                                isActive={type === 'deposit'}
+                                // onClick={() => {setType('deposit');}}
+                                // isActive={type === 'deposit'}
                                 // bg={(props) => props.isActive ? 'green' : 'red'}
                                 // activeColor="green"
                             >
@@ -122,30 +117,27 @@ export default function CreateTransaction(){
                                 colorScheme="purple" 
                                 gap="2"
                                 type='button'
-                                onClick={() => {setType('withdraw');}} 
+                                // onClick={() => {setType('withdraw');}} 
                                 // activeColor="red"
-                                isActive={type === 'withdraw'}
+                                // isActive={type === 'withdraw'}
                             >
                                     <Checkbox colorScheme="red"/>
                                     Despesas
                             </Button>                            
-                        </SimpleGrid>
+                        </SimpleGrid> */}
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200" >
                             <Input 
                                 name="data" 
                                 label="Data da Transação" 
-                                type="date" value={date} 
-                                onChange={event => setDate(event.target.value)}
-                                {...register("data")}
+                                type="date"                                
+                                {...register("date")}
                                 error={errors.date}
                             />
                             <Input 
                                 name="categoria" 
-                                label="Categoria"                                
-                                value={category} 
-                                onChange={event => setCategory(event.target.value)}
-                                {...register("categoria")}
+                                label="Categoria"                      
+                                {...register("category")}
                                 error={errors.category}
                             />
                         </SimpleGrid>
@@ -153,18 +145,14 @@ export default function CreateTransaction(){
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <Input 
                                 name="conta" 
-                                label="Conta"
-                                value={bills} 
-                                onChange={event => setBills(event.target.value)}
-                                {...register("conta")}
+                                label="Conta"                                
+                                {...register("bills")}
                                 error={errors.bills}
                             />
                             <Input 
                                 name="pagamento" 
-                                label="Forma de Pagamento"
-                                value={payment} 
-                                onChange={event => setPayment(event.target.value)}
-                                {...register("pagamento")}
+                                label="Forma de Pagamento"                                
+                                {...register("payment")}
                                 error={errors.payment}
                             />
                         </SimpleGrid>
@@ -173,27 +161,24 @@ export default function CreateTransaction(){
                             <Input 
                                 name="parcelas" 
                                 label="Escolha a quantidade de parcelas" 
-                                {...register("parcelas")}
-                                error={errors.payment}
+                                // {...register("parcelas")}
+                                // error={errors.payment}
                             />                           
                         </SimpleGrid>
-
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+                       
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                            
                             <Input 
-                                name="banco" 
-                                label="Banco"
-                                value={bank} 
-                                onChange={event => setBank(event.target.value)}
-                                {...register("banco")}
+                                name="bank" 
+                                // type="number" 
+                                label="Nome do banco"                                                            
                                 error={errors.bank}
+                                {...register("bank")}
                             />
                             <Input 
                                 name="valor" 
                                 type="number" 
-                                label="Valor"
-                                value={value} 
-                                onChange={event => setValue(Number(event.target.value))}
-                                {...register("valor")}
+                                label="Valor"                                
+                                {...register("value")}
                                 error={errors.value}
                             />
                         </SimpleGrid>
@@ -201,13 +186,11 @@ export default function CreateTransaction(){
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <Input 
                                 name="historico" 
-                                label="Histórico"
-                                value={history} 
-                                onChange={event => setHistory(event.target.value)}
-                                {...register("historico")}
+                                label="Histórico"                                
+                                {...register("history")}
                                 error={errors.history}
                             />                           
-                        </SimpleGrid>
+                        </SimpleGrid>                       
 
                     </VStack>
                     <Flex mt="6" justify="flex-end">
@@ -215,7 +198,7 @@ export default function CreateTransaction(){
                             <Link href="/lancamentos" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
                             </Link>                            
-                            {/* <Link href="/lancamentos" passHref>                                 */}
+                           
                                 <Button 
                                     type="submit" 
                                     colorScheme="whatsapp" 
@@ -229,7 +212,7 @@ export default function CreateTransaction(){
                                     } else {
                                         toast.success('Transação realizada com suceso!')                                 
                                     } */}
-                            {/* </Link> */}
+                           
                         </HStack>
                     </Flex>
 

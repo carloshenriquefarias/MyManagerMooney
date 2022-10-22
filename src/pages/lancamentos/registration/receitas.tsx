@@ -8,21 +8,39 @@ import { useEffect, useState, FormEvent } from "react";
 import { api } from "../../../services/api";
 import { toast } from 'react-toastify';
 
+import * as yup from 'yup'
+import { SubmitHandler, useForm } from "react-hook-form";
+import {yupResolver } from "@hookform/resolvers/yup"
+
+interface InputRevenuesProps{
+    categoryOfRevenue: string;
+    bills: string;
+}
+
+const createRevenuesFormSchema = yup.object().shape({
+    // type: yup.string().required(''),
+    categoryOfRevenue: yup.string().required('Digite uma categoria'),    
+    bills: yup.string().required('Digite a nova conta')         
+})
 
 export default function Receitas(){
 
-    const [categoryOfRevenue, setcategoryOfRevenue] = useState('');
-    const [bills, setBills] = useState(''); 
+    //Validando o formulario da transação
 
-    async function handleNewCreateRevenue(event: FormEvent){
-        event.preventDefault();   
-        console.log('valor do categoryOfRevenue: ', categoryOfRevenue)
-        console.log('valor do bills: ', bills)
+    const {register, handleSubmit, formState} = useForm<InputRevenuesProps>({
+        resolver: yupResolver(createRevenuesFormSchema)
+    });
+
+    const {errors} = formState
+
+    const handleNewRevenues: SubmitHandler<InputRevenuesProps> = async (dados) =>{
+        // await new Promise (resolve => setTimeout (resolve, 2000));
+        console.log(dados);    
 
         try {
             const response = await api.post('/revenues', {
-                categoryOfRevenue : categoryOfRevenue,
-                bills: bills               
+                categoryOfRevenue: dados.categoryOfRevenue,
+                bills: dados.bills           
                 
             })
 
@@ -36,14 +54,7 @@ export default function Receitas(){
         } catch (error) {
             
         }
-
-        // await handleNewCreateRevenue ({
-        //     categoryOfRevenue, 
-        //     bills            
-        // })
-
-        // setcategoryOfRevenue('');
-        // setBills('');        
+     
     }
 
     return (
@@ -53,7 +64,7 @@ export default function Receitas(){
                 <SideBar />
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8" 
-                    as="form" onSubmit={handleNewCreateRevenue}
+                    as="form" onSubmit={handleSubmit(handleNewRevenues)}
                 >
                     <Flex mb="8" justify="space-between" align="center">
                         <Heading size="lg" fontWeight="normal" justifyContent="space-between" alignItems="center">
@@ -69,16 +80,16 @@ export default function Receitas(){
                             <Input 
                                 name="data" 
                                 label="Informe a Categoria da Receita" 
-                                placeholder="Ex: Receitas Familiares"
-                                value={categoryOfRevenue} 
-                                onChange={event => setcategoryOfRevenue(event.target.value)}
+                                placeholder="Ex: Receitas Familiares"                                                                
+                                error={errors.categoryOfRevenue}
+                                {...register("categoryOfRevenue")}
                             />
                             <Input 
                                 name="categoria" 
                                 label="Informe a conta que deseja cadastrar" 
-                                placeholder="Ex: Salário"
-                                value={bills} 
-                                onChange={event => setBills(event.target.value)}
+                                placeholder="Ex: Salário"                       
+                                error={errors.bills}    
+                                {...register("bills")}                            
                             />                            
                         </SimpleGrid>                       
                         

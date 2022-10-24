@@ -1,15 +1,16 @@
-import { FormControl, FormErrorMessage, FormLabel, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, FormLabel, Select as ChakraSelect, SelectProps as ChakraSelectProps } from "@chakra-ui/react";
 import {forwardRef, ForwardRefRenderFunction} from 'react';
 import {FieldError} from 'react-hook-form';
 
-interface InputProps extends ChakraInputProps{
+interface SelectProps extends ChakraSelectProps{
     name: string;
     label?: string;
     error?: FieldError;
+    data: any;
 }
 
-const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> 
-= ({name, label, error=null, ...rest}: InputProps, ref) =>{
+const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> 
+= ({name, label, error=null, data, ...rest}: SelectProps, ref) =>{
 
     //Encaminhamento de Ref no formulario, transformar a function em const
 
@@ -17,7 +18,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
         <FormControl isInvalid={!!error}> 
             {!! label && <FormLabel htmlFor={name}>{label}</FormLabel> }
 
-            <ChakraInput 
+            <ChakraSelect 
                 name={name} 
                 id={name}
                 focusBorderColor='pink.500'
@@ -28,16 +29,24 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
                 }}
                 ref={ref}
                 size="lg"
-                {...rest}
-            />
+                {...rest}                
+            >
+                {data.map(transaction => {
+                    return (
+                        <option key={transaction.id} value={transaction.id}>
+                            {transaction.description}
+                        </option>
+                    )
+                })} 
+            </ChakraSelect>
             {!!error && (
                 <FormErrorMessage>
                     {error.message}
                 </FormErrorMessage>
-            )}
+            )}           
             
         </FormControl> 
     );
 }
 
-export const Input = forwardRef(InputBase);
+export const Select = forwardRef(SelectBase);

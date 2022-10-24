@@ -125,7 +125,7 @@ export default function RevenuesTable(){
                                     
                                 </Tbody>
                             </Table>
-                            <Pagination/>
+                            {/* <Pagination/> */}
                         </>                  
                 </Box>
             </Flex>

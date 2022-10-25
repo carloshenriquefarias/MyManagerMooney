@@ -31,13 +31,13 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
                 size="lg"
                 {...rest}                
             >
-                {data.map(transaction => {
+                {/* {data.map(transaction => {
                     return (
                         <option key={transaction.id} value={transaction.id}>
                             {transaction.description}
                         </option>
                     )
-                })} 
+                })}  */}
             </ChakraSelect>
             {!!error && (
                 <FormErrorMessage>

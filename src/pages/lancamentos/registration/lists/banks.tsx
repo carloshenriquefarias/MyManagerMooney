@@ -13,25 +13,24 @@ import {api} from "../../../../services/api"
 // import { Transactions } from "../../../../services/hooks/useTransactions";
 // import {api} from "../../services/api"
 
-interface ListExpenses{
+interface ListBanks{
     // id: number;
-    categoryOfExpenses: string;
-    bills: string;           
+    bank: string;              
 }
 
-export default function ExpensesTable(){  
+export default function BanksTable(){  
 
-    const [ListExpensesTable, setListExpensesTable] = useState<ListExpenses[]>([]);
+    const [ListBanks, setListBanks] = useState<ListBanks[]>([]);
      
     //Pegando os dados da API e Listando as receitas cadastradas na tabela
     useEffect(() => {
-        async function loadExpenses() {          
-            await api.get('/expenses').then( response => {
-                setListExpensesTable(response.data);
+        async function loadBanks() {          
+            await api.get('/banks').then( response => {
+                setListBanks(response.data);
                 console.log(response.data);
             })      
         }
-        loadExpenses();    
+        loadBanks();    
     }, []);     
 
     return (
@@ -69,10 +68,9 @@ export default function ExpensesTable(){
                                     </Tr>
                                 </Thead> 
                                 <Tbody>
-                                    {ListExpensesTable.map((ListExpensesTable) => (                                                      
+                                    {ListBanks.map((ListBanks) => (                                                      
                                         <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                            <Td fontSize="sm">{ListExpensesTable.categoryOfExpenses}</Td>
-                                            <Td fontSize="sm">{ListExpensesTable.bills}</Td>                                   
+                                            <Td fontSize="sm">{ListBanks.bank}</Td>                                                                              
                                             <Td>
                                                 <Button 
                                                     as="a" 
@@ -95,34 +93,7 @@ export default function ExpensesTable(){
                                                 </Button>
                                             </Td>
                                         </Tr>
-                                    ))}     
-                                    {/* <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                        <Td fontSize="sm">Receitas Financeiras</Td>
-                                        <Td fontSize="sm">Salário</Td>                                                          
-                                        
-                                        <Td>
-                                            <Button 
-                                                as="a" 
-                                                size="sm" 
-                                                fontSize="sm" 
-                                                colorScheme="purple"
-                                                leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
-                                            > 
-                                                Editar
-                                            </Button>
-                                            <Button 
-                                                as="a" 
-                                                size="sm" 
-                                                fontSize="sm" 
-                                                colorScheme="purple"
-                                                leftIcon={<Icon as={RiDeleteBin3Line} fontSize="15"/>}
-                                                mt="2"
-                                            > 
-                                                Excluir
-                                            </Button>
-                                        </Td>
-                                    </Tr>                           */}
-                                    
+                                    ))}                            
                                 </Tbody>
                             </Table>
                             {/* <Pagination/> */}

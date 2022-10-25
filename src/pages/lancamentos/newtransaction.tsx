@@ -1,8 +1,8 @@
-import { Box, Flex, Heading, Checkbox, NumberInput, Divider, VStack, SimpleGrid, HStack, Button, Text, FormErrorMessage, FormLabel, FormControl} from "@chakra-ui/react";
+import { Box, Flex, Heading, Select, Checkbox, NumberInput, Divider, VStack, SimpleGrid, HStack, Button, Text, FormErrorMessage, FormLabel, FormControl} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
-import { Select } from "../../components/Form/Select";
+// import { Select } from "../../components/Form/Select";
 import Link from 'next/link'
 import { FormEvent, useState, useEffect, useRef} from 'react';
 import { api } from "../../services/api";
@@ -159,34 +159,31 @@ export default function CreateTransaction(){
                                 {...register("date")}
                                 error={errors.date}
                             /> 
-                            <Select
+                            {/* <Select
                                 name="categoria" 
                                 label="Escolha a categoria"                     
                                 error={errors.category}
                                 {...register("category")}
-                                data={ListRevenuesTable}
+                                data={ListRevenuesTable}  
+                            >
+                                {ListRevenuesTable.map(revenue => {
+                                    return (
+                                        <option key={revenue.id} value={revenue.id}>
+                                            {revenue.categoryOfRevenue}
+                                        </option>
+                                    )
+                                })} 
+                            </Select>    */}                
 
-                                // {ListRevenuesTable.map(revenue => {
-                                //     return (
-                                //         <option key={revenue.id} value={revenue.id}>
-                                //             {revenue.categoryOfRevenue}
-                                //         </option>
-                                //     )
-                                // })} 
-                            />                            
-
-                            {/* <FormControl > 
+                            <FormControl > 
                                 <FormLabel htmlFor={"category"}>{"Escolha a categoria"}</FormLabel>
                                 <Select                                
                                     focusBorderColor='pink.500'
-                                    _hover={{
-                                        bg: 'gray.900'
-                                        }}                                
-                                        bg="gray.900"
-                                        variant="filled"
-                                        size="lg"  
-                                        {...register("category")} 
-                                                                    
+                                    _hover={{bg: 'gray.900'}}                                
+                                    bg="gray.900"
+                                    variant="filled"
+                                    size="lg"  
+                                    {...register("category")}                                                                     
                                 >                                       
                                     {ListRevenuesTable.map(revenue => {
                                         return (
@@ -197,7 +194,7 @@ export default function CreateTransaction(){
                                     })}                     
                                 
                                 </Select>
-                            </FormControl>  */}                
+                            </FormControl>                                                            
                             
                         </SimpleGrid>                       
 
@@ -223,8 +220,8 @@ export default function CreateTransaction(){
                                 type="number" 
                                 // {...register("parcelas")}
                                 // error={errors.payment}
-                            />                           
-                        </SimpleGrid>
+                            />                                                       
+                        </SimpleGrid>                       
                        
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                            
                             <Input 
@@ -306,3 +303,5 @@ export default function CreateTransaction(){
     //     setValue(0);
     //     setHistory('');        
     // }  
+
+     

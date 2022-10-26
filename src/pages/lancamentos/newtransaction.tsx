@@ -1,19 +1,17 @@
-import { Box, Flex, Heading, Select, Checkbox, NumberInput, Divider, VStack, SimpleGrid, HStack, Button, Text, FormErrorMessage, FormLabel, FormControl} from "@chakra-ui/react";
+import { Box, Flex, Heading,  Checkbox, NumberInput, Divider, VStack, SimpleGrid, HStack, Button, Text, FormErrorMessage, FormLabel, FormControl, Alert} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
-// import { Select } from "../../components/Form/Select";
+import { Select } from "../../components/Form/Select";
 import Link from 'next/link'
 import { FormEvent, useState, useEffect, useRef} from 'react';
 import { api } from "../../services/api";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast, TypeOptions } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
-
-// import {useForm} from 'react-hook-form';
-// import { useTransactions } from '../../hooks/useTransactions';
 
 // interface RadioInputProps{
 //     isActive: boolean;
@@ -37,12 +35,17 @@ interface ListRevenues{
     bills: string;           
 }
 
+interface ListBanks{
+    id: string;
+    bank: string;              
+}
+
 //Fazendo a validação do formulário
 
 export default function CreateTransaction(){  
 
-    const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);
-    // const products = ["Product 1", "Product 2", "Product 3", "Product 4"];
+    const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);    
+    const [ListBanks, setListBanks] = useState<ListBanks[]>([]); 
 
     //Validando o formulario da transação
 
@@ -67,8 +70,10 @@ export default function CreateTransaction(){
 
     const {errors} = formState
 
+    //Listando novas transações
+
     const handleNewTransaction: SubmitHandler<TransactionProps> = async (dados) =>{
-        await new Promise (resolve => setTimeout (resolve, 1200));
+        // await new Promise (resolve => setTimeout (resolve, 1200));
         console.log(dados);        
 
         try {
@@ -82,21 +87,26 @@ export default function CreateTransaction(){
                 value: dados.value,
                 history: dados.history                
             })
-
-            console.log(response.data)
-
-            if (response) {
-                toast.success('Seu cadastro foi realizado com sucesso!');
-                return;
-            }
+            console.log(response.data)                 
 
         } catch (error) {  
 
-        }
+        }        
+        toast.success('Seu cadastro foi realizado com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     }   
         
     //Pegando os dados da API e Listando as receitas cadastradas na tabela
 
+    //Receitas
     useEffect(() => {
         async function loadRevenues() {          
             await api.get('/revenues').then( response => {
@@ -105,6 +115,17 @@ export default function CreateTransaction(){
             })      
         }
         loadRevenues();    
+    }, []); 
+
+    //Bancos
+    useEffect(() => {
+        async function ListBanks() {          
+            await api.get('/banks').then( response => {
+                setListBanks(response.data);
+                console.log(response.data);
+            })      
+        }
+        ListBanks();    
     }, []); 
 
     return (
@@ -124,7 +145,7 @@ export default function CreateTransaction(){
                     <Divider my="6" borderColor="gray.700"></Divider>
 
                     <VStack spacing="6" >                        
-                        <Text>Escolha o tipo de transação que deseja realizar</Text>
+                        {/* <Text>Escolha o tipo de transação que deseja realizar</Text> */}
                         {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
                             <Button 
                                 colorScheme="purple" 
@@ -159,59 +180,52 @@ export default function CreateTransaction(){
                                 {...register("date")}
                                 error={errors.date}
                             /> 
-                            {/* <Select
+                            <Select                                
                                 name="categoria" 
                                 label="Escolha a categoria"                     
-                                error={errors.category}
-                                {...register("category")}
-                                data={ListRevenuesTable}  
-                            >
-                                {ListRevenuesTable.map(revenue => {
+                                error={errors.category}                                                               
+                                option={ListRevenuesTable.map(revenue => {
                                     return (
                                         <option key={revenue.id} value={revenue.id}>
                                             {revenue.categoryOfRevenue}
                                         </option>
                                     )
-                                })} 
-                            </Select>    */}                
+                                })}
+                                {...register("category")}                               
+                            >                              
+                            </Select>                  
+                        </SimpleGrid>   
 
-                            <FormControl > 
-                                <FormLabel htmlFor={"category"}>{"Escolha a categoria"}</FormLabel>
-                                <Select                                
-                                    focusBorderColor='pink.500'
-                                    _hover={{bg: 'gray.900'}}                                
-                                    bg="gray.900"
-                                    variant="filled"
-                                    size="lg"  
-                                    {...register("category")}                                                                     
-                                >                                       
-                                    {ListRevenuesTable.map(revenue => {
-                                        return (
-                                            <option key={revenue.id} value={revenue.id}>
-                                                {revenue.categoryOfRevenue}
-                                            </option>
-                                        )
-                                    })}                     
-                                
-                                </Select>
-                            </FormControl>                                                            
-                            
-                        </SimpleGrid>                       
-
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            <Input 
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200" >                            
+                            <Select                                                        
                                 name="conta" 
-                                label="Conta"                                
-                                {...register("bills")}
-                                error={errors.bills}
-                            />
-                            <Input 
+                                label="Conta"                                            
+                                error={errors.bills}                                                               
+                                option={ListRevenuesTable.map(revenue => {
+                                    return (                                        
+                                        <option key={revenue.id} value={revenue.id}>
+                                            {revenue.bills}
+                                        </option>
+                                    )
+                                })}  
+                                {...register("bills")}                               
+                            >                              
+                            </Select>                        
+                            <Select                                
                                 name="pagamento" 
-                                label="Forma de Pagamento"                                
-                                {...register("payment")}
-                                error={errors.payment}
-                            />
-                        </SimpleGrid>
+                                label="Forma de Pagamento"                      
+                                error={errors.payment}                                                               
+                                option={ListRevenuesTable.map(revenue => {
+                                    return (
+                                        <option key={revenue.id} value={revenue.id}>
+                                            {revenue.bills}
+                                        </option>
+                                    )
+                                })}  
+                                {...register("payment")}                               
+                            >                              
+                            </Select>                            
+                        </SimpleGrid>              
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <Input 
@@ -223,20 +237,27 @@ export default function CreateTransaction(){
                             />                                                       
                         </SimpleGrid>                       
                        
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                            
-                            <Input 
-                                name="bank" 
-                                // type="number" 
-                                label="Nome do banco"                                                            
-                                error={errors.bank}
-                                {...register("bank")}
-                            />
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                    
+                            <Select                                
+                                name="bank"                                 
+                                label="Nome do banco"                      
+                                error={errors.bank}                                                               
+                                option={ListBanks.map(BankList => {
+                                    return (
+                                        <option key={BankList.id} value={BankList.id}>
+                                            {BankList.bank}
+                                        </option>
+                                    )
+                                })}  
+                                {...register("bank")}                               
+                            >                              
+                            </Select>     
                             <Input 
                                 name="valor" 
                                 type="number" 
-                                label="Valor"                                
-                                {...register("value")}
+                                label="Valor"                        
                                 error={errors.value}
+                                {...register("value")}
                             />
                         </SimpleGrid>
 
@@ -254,54 +275,22 @@ export default function CreateTransaction(){
                         <HStack spacing="4">
                             <Link href="/lancamentos" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
-                            </Link>                            
-                           
-                                <Button 
-                                    type="submit" 
-                                    colorScheme="whatsapp" 
-                                    // ref={searchInputRef}                                     
-                                    isLoading={formState.isSubmitting}
-                                >
-                                    Realizar Lançamento
-                                </Button>
-                                    {/* if (Input !== null) {
-                                        toast.error('Preencha todos os campos do formuário!')              
-                                    } else {
-                                        toast.success('Transação realizada com suceso!')                                 
-                                    } */}
-                           
+                            </Link>                      
+                            <Button 
+                                type="submit" 
+                                colorScheme="whatsapp" 
+                                // ref={searchInputRef}                                     
+                                isLoading={formState.isSubmitting}                                                      
+                            >
+                                Realizar Lançamento
+                            </Button>                   
                         </HStack>
                     </Flex>
 
                 </Box>
             </Flex>
+            <ToastContainer/>
         </Box>
     );
 }   
 
-    // const {createTransaction} = useTransactions();
-    // const searchInputRef = useRef<HTMLInputElement>(null)
-    // const {register, handleSubmit} = useForm();
-
-     //     await createTransaction ({
-    //         type,
-    //         date,              
-    //         category,
-    //         bills,
-    //         payment,
-    //         bank,
-    //         value, 
-    //         history
-    //     })
-
-    //     setType('deposit');
-    //     setDate('');        
-    //     setCategory(''); 
-    //     setBills('');       
-    //     setPayment('');
-    //     setBank('');
-    //     setValue(0);
-    //     setHistory('');        
-    // }  
-
-     

@@ -5,7 +5,8 @@ import { Input } from "../../../components/Form/Input";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 import { api } from "../../../services/api";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast, TypeOptions } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -49,7 +50,16 @@ export default function Bancos(){
         } catch (error) {
             
         }
-        
+        toast.success('Seu cadastro foi realizado com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     }
 
     return (
@@ -81,15 +91,21 @@ export default function Bancos(){
                         <HStack spacing="4">
                             <Link href="/lancamentos/registration/lists/banks" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
-                            </Link> 
-                            {/* <Link href="/lancamentos/cadastros" passHref>                            */}
-                                <Button colorScheme="whatsapp" type="submit">Finalizar Cadastro </Button> 
-                            {/* </Link>                            */}
+                            </Link>                            
+                            <Button 
+                                colorScheme="whatsapp" 
+                                type="submit"
+                                isLoading={formState.isSubmitting}
+                            >
+                                Finalizar Cadastro 
+                            </Button> 
+                          
                         </HStack>
                     </Flex>
 
                 </Box>
             </Flex>
+            <ToastContainer/>
         </Box>
     );
 }   

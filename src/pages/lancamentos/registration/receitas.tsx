@@ -6,7 +6,8 @@ import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons
 import Link from 'next/link'
 import { useEffect, useState, FormEvent } from "react";
 import { api } from "../../../services/api";
-import { toast } from 'react-toastify';
+import { ToastContainer, toast, TypeOptions } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -54,7 +55,16 @@ export default function Receitas(){
         } catch (error) {
             
         }
-     
+        toast.success('Seu cadastro foi realizado com sucesso!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     }
 
     return (
@@ -98,21 +108,20 @@ export default function Receitas(){
                         <HStack spacing="4" >
                             <Link href="/lancamentos/registration/lists/revenues" passHref>
                                 <Button colorScheme="whiteAlpha">Cancelar</Button>
-                            </Link> 
-                            {/* <Link href="/lancamentos/registration/lists/revenues" passHref>                            */}
+                            </Link>                                                     
                             <Button 
                                 colorScheme="whatsapp" 
                                 type="submit"
+                                isLoading={formState.isSubmitting}
                             >
                                 Finalizar Cadastro 
-                            </Button> 
-                                {/* <Spinner size="sm" color="gray.500" ml="4"/> */}
-                            {/* </Link>                            */}
+                            </Button>                                                        
                         </HStack>
                     </Flex>
 
                 </Box>
             </Flex>
+            <ToastContainer/>
         </Box>
     );
 }   

@@ -23,20 +23,20 @@ interface Transaction{
     history: string;           
 }
 
-export default function TransactionsTable(){
+export default function TransactionsTable(){   
 
     //Pegando os dados da API e Listando as receitas cadastradas na tabela
 
-    const {data, isLoading, error} = useQuery('transactions_list', async () => {
-        const response = await fetch('http://localhost:3000/api/lancamentos/registration');
-        const data = await response.json();
-    }) 
+    // const {data, isLoading, error} = useQuery('transactions_list', async () => {
+    //     const response = await fetch('http://localhost:3000/api/lancamentos/registration');
+    //     const data = await response.json();
+    // }) 
 
     const [transactions, setTransactions] = useState<Transaction[]>([]);  
 
     useEffect(() => {
         async function transactions() {          
-        await api.get('/transactions').then( response => {
+        await api.get('/newtransaction').then( response => {
             setTransactions(response.data);
             console.log(response.data);
         })      
@@ -76,7 +76,7 @@ export default function TransactionsTable(){
                         
                     </Flex>
 
-                    {isLoading ? (
+                    {/* {isLoading ? (
                         <Flex justify="center">
                             <Spinner/>
                         </Flex>
@@ -84,12 +84,13 @@ export default function TransactionsTable(){
                         <Flex justify="center">
                            <Text >Falha ao obter dados dos usuários</Text>
                         </Flex>                        
-                    ): (
+                    ): ( */}
                         <>                        
                             <Table colorScheme="whiteAlpha" width="100%">
                                 <Thead>
                                     {/* Colocar a Key e o ID das transacoes */}
-                                    <Tr>                               
+                                    <Tr>    
+                                        <Th>Tipo</Th>                           
                                         <Th>Data</Th>
                                         <Th>Categoria</Th>
                                         <Th>Conta</Th>
@@ -103,9 +104,11 @@ export default function TransactionsTable(){
                                 <Tbody>
                                     {transactions.map((transaction) => (
                                         <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                            <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
+                                            <Td fontSize="sm">{transaction.type}</Td>
+                                            <Td fontSize="sm">{transaction.date}</Td>
+                                            {/* <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
                                                 new Date(transaction.date)
-                                            )}</Td>
+                                            )}</Td> */}
                                             <Td fontSize="sm">{transaction.category}</Td>  
                                             <Td fontSize="sm">{transaction.bills}</Td>  
                                             <Td fontSize="sm" textAlign="center">{transaction.payment}</Td>   
@@ -138,8 +141,24 @@ export default function TransactionsTable(){
                                                 </Button>
                                             </Td>
                                         </Tr>                           
-                                    ))}                                    
-                                    <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
+                                    ))}                             
+                                </Tbody>
+                            </Table>
+                            <Pagination/>
+                        </>
+                    {/* )} */}
+                </Box>
+            </Flex>
+        </Box>
+    );
+}   
+
+
+
+
+
+
+                                    {/* <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
                                         <Td fontSize="sm">10 de abril de 2022</Td>
                                         <Td fontSize="sm">Alimentos</Td>  
                                         <Td fontSize="sm">Lanches</Td>  
@@ -169,15 +188,4 @@ export default function TransactionsTable(){
                                                 Excluir
                                             </Button>
                                         </Td>
-                                    </Tr>                           
-                                    
-                                </Tbody>
-                            </Table>
-                            <Pagination/>
-                        </>
-                    )}
-                </Box>
-            </Flex>
-        </Box>
-    );
-}   
+                                    </Tr>                            */}

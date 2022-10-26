@@ -6,11 +6,11 @@ interface SelectProps extends ChakraSelectProps{
     name: string;
     label?: string;
     error?: FieldError;
-    data: any;
+    option: any;
 }
 
 const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> 
-= ({name, label, error=null, data, ...rest}: SelectProps, ref) =>{
+= ({name, label, error=null, option, ...rest}: SelectProps, ref) =>{
 
     //Encaminhamento de Ref no formulario, transformar a function em const
 
@@ -30,14 +30,10 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
                 ref={ref}
                 size="lg"
                 {...rest}                
-            >
-                {/* {data.map(transaction => {
-                    return (
-                        <option key={transaction.id} value={transaction.id}>
-                            {transaction.description}
-                        </option>
-                    )
-                })}  */}
+            >   
+                <option disabled selected ></option>
+                {option}
+                
             </ChakraSelect>
             {!!error && (
                 <FormErrorMessage>

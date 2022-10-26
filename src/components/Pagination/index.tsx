@@ -69,16 +69,15 @@ export function Pagination({
                         {(currentPage + 1 + siblingsCount) < lastpage && <Text>...</Text>}
                         <PaginationItem onPageChange={onPageChange} number={lastpage} />                    
                     </>                    
-                )}
-             
-
-                {/* <PaginationItem number={1} isCurrent/>
-                <PaginationItem number={2} />
-                <PaginationItem number={3} />
-                <PaginationItem number={4} />
-                <PaginationItem number={5} />                */}
+                )}         
             </Stack>
             
         </Stack>
     );
 }
+
+{/* <PaginationItem number={1} isCurrent/>
+                <PaginationItem number={2} />
+                <PaginationItem number={3} />
+                <PaginationItem number={4} />
+                <PaginationItem number={5} />                */}

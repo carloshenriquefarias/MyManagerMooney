@@ -75,9 +75,3 @@ export function Pagination({
         </Stack>
     );
 }
-
-{/* <PaginationItem number={1} isCurrent/>
-                <PaginationItem number={2} />
-                <PaginationItem number={3} />
-                <PaginationItem number={4} />
-                <PaginationItem number={5} />                */}

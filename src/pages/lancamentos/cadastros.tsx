@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Button} 
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
-import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
+import {RiAddLine, RiBankCardLine, RiSearchLine, RiMoneyDollarCircleLine, RiShoppingCart2Line, RiHandCoinLine } from 'react-icons/ri'
 import Link from 'next/link'
 
 
@@ -21,24 +21,45 @@ export default function Cadastros(){
                             <Link href="/lancamentos/registration/receitas" passHref>
                                 <Button 
                                     colorScheme="purple" 
-                                    h="40" fontSize="35" 
-                                    leftIcon={<Icon as={RiSearchLine}
+                                    h="40" fontSize="30" 
+                                    leftIcon={<Icon as={RiMoneyDollarCircleLine}
                                     fontSize="35"/>}
                                 >
                                     Receitas
                                 </Button>
                             </Link>
                             <Link href="/lancamentos/registration/despesas" passHref>
-                                <Button colorScheme="purple" h="40"fontSize="35" leftIcon={<Icon as={RiSearchLine}fontSize="35"/>}>Despesas</Button>
+                                <Button 
+                                    colorScheme="purple" 
+                                    h="40"fontSize="30" 
+                                    leftIcon={<Icon as={RiShoppingCart2Line}
+                                    fontSize="35"/>}
+                                >
+                                    Despesas
+                                </Button>
                             </Link>
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
                             <Link href="/lancamentos/registration/bancos" passHref>
-                                <Button colorScheme="purple" h="40"fontSize="35"leftIcon={<Icon as={RiSearchLine}fontSize="35"/>}>Bancos</Button>
+                                <Button 
+                                    colorScheme="purple" 
+                                    h="40"fontSize="30"
+                                    leftIcon={<Icon as={RiBankCardLine}
+                                    fontSize="35"/>}
+                                >
+                                    Bancos
+                                </Button>
                             </Link>
-                            <Link href="/lancamentos/registration/outros" passHref>
-                                <Button colorScheme="purple" h="40"fontSize="35"leftIcon={<Icon as={RiSearchLine}fontSize="35"/>}>Outros</Button>
+                            <Link href="/lancamentos/registration/NewPayment" passHref>
+                                <Button 
+                                    colorScheme="purple" 
+                                    h="40"fontSize="30"
+                                    leftIcon={<Icon as={RiHandCoinLine}
+                                    fontSize="35"/>}
+                                >
+                                    Forma de Pagamento
+                                </Button>
                             </Link>
                         </SimpleGrid>
                         

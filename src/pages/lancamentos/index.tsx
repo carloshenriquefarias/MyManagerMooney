@@ -144,7 +144,7 @@ export default function TransactionsTable(){
                                     ))}                             
                                 </Tbody>
                             </Table>
-                            <Pagination/>
+                            {/* <Pagination/> */}
                         </>
                     {/* )} */}
                 </Box>
@@ -152,40 +152,3 @@ export default function TransactionsTable(){
         </Box>
     );
 }   
-
-
-
-
-
-
-                                    {/* <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                                        <Td fontSize="sm">10 de abril de 2022</Td>
-                                        <Td fontSize="sm">Alimentos</Td>  
-                                        <Td fontSize="sm">Lanches</Td>  
-                                        <Td fontSize="sm" textAlign="center">Cartao</Td>   
-                                        <Td fontSize="sm">Banco do Brasil</Td>  
-                                        <Td fontSize="sm">10,00</Td>
-                                        <Td fontSize="sm">Valor ref a compra de pizza</Td>                             
-                                        { isWideVersion && <Td>12 de setembro de 2022</Td>}
-                                        <Td>
-                                            <Button 
-                                                as="a" 
-                                                size="sm" 
-                                                fontSize="sm" 
-                                                colorScheme="purple"
-                                                leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
-                                            > 
-                                                Editar
-                                            </Button>
-                                            <Button 
-                                                as="a" 
-                                                size="sm" 
-                                                fontSize="sm" 
-                                                colorScheme="purple"
-                                                leftIcon={<Icon as={RiDeleteBin3Line} fontSize="15"/>}
-                                                mt="2"
-                                            > 
-                                                Excluir
-                                            </Button>
-                                        </Td>
-                                    </Tr>                            */}

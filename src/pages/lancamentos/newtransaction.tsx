@@ -1,4 +1,7 @@
-import { Box, Flex, Heading,  Checkbox, NumberInput, Divider, VStack, SimpleGrid, HStack, Button, Text, FormErrorMessage, FormLabel, FormControl, Alert} from "@chakra-ui/react";
+import { Box, Flex, Heading,  Checkbox, 
+    Divider, VStack, SimpleGrid, HStack, Button, Text, 
+    FormErrorMessage, FormLabel, FormControl, Alert, Show
+} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
@@ -8,6 +11,13 @@ import { FormEvent, useState, useEffect, useRef} from 'react';
 import { api } from "../../services/api";
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
+import {
+    NumberInput,
+    NumberInputField,
+    NumberInputStepper,
+    NumberIncrementStepper,
+    NumberDecrementStepper,
+  } from '@chakra-ui/react'
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -40,23 +50,25 @@ interface ListBanks{
     bank: string;              
 }
 
+interface ListPaymentMethod{
+    id: string;
+   description: string;              
+}
+
 //Fazendo a validação do formulário
 
 export default function CreateTransaction(){  
 
     const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);    
     const [ListBanks, setListBanks] = useState<ListBanks[]>([]); 
-
+    const [ListPaymentMethod, setListPaymentMethod] = useState<ListPaymentMethod[]>([]);
+    const [parcelas, setParcelas] = useState('');
     //Validando o formulario da transação
 
     const createTransactionFormSchema = yup.object().shape({
         // type: yup.string().required(''),
-        // product: yup.string().required("Please select a product").oneOf(products),
         date: yup.string().required('Escolha a data'),
         category:yup.string().required('Escolha a categoria'),
-        // selectCategory: yup.string().required()
-        //     .oneOf(["usa", "mexico"])
-        //     .label("Selected Country"),
         bills: yup.string().required('Escolha a conta'),
         payment: yup.string().required('Escolha a forma de pagamento'),
         bank: yup.string().required('Escolha o banco'),
@@ -70,6 +82,10 @@ export default function CreateTransaction(){
 
     const {errors} = formState
 
+
+    function handleParcelas(value){
+        setParcelas(value)
+    }
     //Listando novas transações
 
     const handleNewTransaction: SubmitHandler<TransactionProps> = async (dados) =>{
@@ -114,20 +130,29 @@ export default function CreateTransaction(){
                 console.log(response.data);
             })      
         }
-        loadRevenues();    
-    }, []); 
 
-    //Bancos
-    useEffect(() => {
         async function ListBanks() {          
             await api.get('/banks').then( response => {
                 setListBanks(response.data);
                 console.log(response.data);
             })      
         }
-        ListBanks();    
+        async function ListPaymentMethod() {          
+            await api.get('/payment').then( response => {
+                setListPaymentMethod(response.data);
+                console.log(response.data);
+            })      
+        }
+
+
+
+        loadRevenues();    
+        ListBanks(); 
+        ListPaymentMethod();   
     }, []); 
 
+    
+   
     return (
         <Box>
             <Header/>
@@ -145,10 +170,10 @@ export default function CreateTransaction(){
                     <Divider my="6" borderColor="gray.700"></Divider>
 
                     <VStack spacing="6" >                        
-                        {/* <Text>Escolha o tipo de transação que deseja realizar</Text> */}
-                        {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
+                        <Text>Escolha o tipo de transação que deseja realizar</Text>
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
                             <Button 
-                                colorScheme="purple" 
+                                colorScheme="teal" 
                                 gap="2" 
                                 type='button' 
                                 // onClick={() => {setType('deposit');}}
@@ -156,21 +181,21 @@ export default function CreateTransaction(){
                                 // bg={(props) => props.isActive ? 'green' : 'red'}
                                 // activeColor="green"
                             >
-                                    <Checkbox colorScheme="green"/>
-                                    Receitas
+                                <Checkbox colorScheme="green"/>
+                                Receitas
                             </Button>
                             <Button 
-                                colorScheme="purple" 
+                                colorScheme="teal" 
                                 gap="2"
                                 type='button'
                                 // onClick={() => {setType('withdraw');}} 
                                 // activeColor="red"
                                 // isActive={type === 'withdraw'}
                             >
-                                    <Checkbox colorScheme="red"/>
-                                    Despesas
+                                <Checkbox colorScheme="red"/>
+                                Despesas
                             </Button>                            
-                        </SimpleGrid> */}
+                        </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200" >
                            <Input 
@@ -211,30 +236,47 @@ export default function CreateTransaction(){
                                 {...register("bills")}                               
                             >                              
                             </Select>                        
-                            <Select                                
+                            <Select      
+                                
+                                onChange={event => setParcelas(event.target.value)}                        
                                 name="pagamento" 
                                 label="Forma de Pagamento"                      
                                 error={errors.payment}                                                               
-                                option={ListRevenuesTable.map(revenue => {
+                                option={ListPaymentMethod.map(ListPayment => {
                                     return (
-                                        <option key={revenue.id} value={revenue.id}>
-                                            {revenue.bills}
+                                        <option key={ListPayment.id} value={ListPayment.id}>
+                                            {ListPayment.description}
                                         </option>
                                     )
                                 })}  
                                 {...register("payment")}                               
                             >                              
                             </Select>                            
-                        </SimpleGrid>              
+                        </SimpleGrid>     
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+                            <label htmlFor="">Parcelas: {parcelas}</label>
+                        </SimpleGrid>
+                                 
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            <Input 
+                            {/* <Input 
                                 name="parcelas" 
                                 label="Escolha a quantidade de parcelas"
                                 type="number" 
                                 // {...register("parcelas")}
                                 // error={errors.payment}
-                            />                                                       
+                            />  */}
+                            {(parcelas=='Cartão') ? 
+                                
+                            <NumberInput defaultValue={0} min={0} max={2000}>                                
+                                <NumberInputField />
+                                    <NumberInputStepper>
+                                        <NumberIncrementStepper />
+                                        <NumberDecrementStepper />
+                                    </NumberInputStepper>
+                            </NumberInput> 
+                            
+                            : null }
                         </SimpleGrid>                       
                        
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                    

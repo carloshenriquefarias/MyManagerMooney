@@ -1,5 +1,5 @@
-import { Box, Flex, Heading,  Checkbox, 
-    Divider, VStack, SimpleGrid, HStack, Button, Text, 
+import { Box, Flex, Heading,  Checkbox, Radio, RadioGroup,
+    Divider, VStack, SimpleGrid, HStack, Button, Text, Stack,
     FormErrorMessage, FormLabel, FormControl, Alert, Show
 } from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
@@ -122,21 +122,23 @@ export default function CreateTransaction(){
         
     //Pegando os dados da API e Listando as receitas cadastradas na tabela
 
-    //Receitas
+    
     useEffect(() => {
+        //Receitas
         async function loadRevenues() {          
             await api.get('/revenues').then( response => {
                 setListRevenuesTable(response.data);
                 console.log(response.data);
             })      
         }
-
+        //Bancos
         async function ListBanks() {          
             await api.get('/banks').then( response => {
                 setListBanks(response.data);
                 console.log(response.data);
             })      
         }
+        //Pagamentos
         async function ListPaymentMethod() {          
             await api.get('/payment').then( response => {
                 setListPaymentMethod(response.data);
@@ -144,14 +146,11 @@ export default function CreateTransaction(){
             })      
         }
 
-
-
         loadRevenues();    
         ListBanks(); 
-        ListPaymentMethod();   
-    }, []); 
+        ListPaymentMethod(); 
 
-    
+    }, []);     
    
     return (
         <Box>
@@ -171,8 +170,29 @@ export default function CreateTransaction(){
 
                     <VStack spacing="6" >                        
                         <Text>Escolha o tipo de transação que deseja realizar</Text>
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%">                            
-                            <Button 
+                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" >  
+                            <RadioGroup 
+                                defaultValue='2'
+                                bg="gray.900" 
+                                my="1" 
+                                maxWidth={1480} 
+                                mx="auto" 
+                                px="8"
+                                py="5"
+                            >
+                                <Stack spacing={5} direction='row'>
+                                    <Radio colorScheme='red' value='1'>
+                                        Despesas
+                                    </Radio>
+                                    <Radio colorScheme='green' value='2'>
+                                        Receitas
+                                    </Radio>
+                                    <Radio colorScheme='blue' value='3'>
+                                        Investimentos
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>                          
+                            {/* <Button 
                                 colorScheme="teal" 
                                 gap="2" 
                                 type='button' 
@@ -194,7 +214,7 @@ export default function CreateTransaction(){
                             >
                                 <Checkbox colorScheme="red"/>
                                 Despesas
-                            </Button>                            
+                            </Button>                             */}
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200" >
@@ -253,9 +273,9 @@ export default function CreateTransaction(){
                             >                              
                             </Select>                            
                         </SimpleGrid>     
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+                        {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <label htmlFor="">Parcelas: {parcelas}</label>
-                        </SimpleGrid>
+                        </SimpleGrid> */}
                                  
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
@@ -299,6 +319,10 @@ export default function CreateTransaction(){
                                 type="number" 
                                 label="Valor"                        
                                 error={errors.value}
+                                // fontSize="sm">{new Intl.NumberFormat('pt-BR', {
+                                //     style: 'currency',
+                                //     currency: 'BRL'
+                                // })}
                                 {...register("value")}
                             />
                         </SimpleGrid>

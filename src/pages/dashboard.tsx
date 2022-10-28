@@ -10,6 +10,7 @@ const Chart = dynamic(() => import ('react-apexcharts'), {
     ssr: false
 }); //usado para carregar loads dinamicos
 
+
 const options = {
     chart:{
         toolbar:{ //Titulo do Grafico
@@ -87,7 +88,7 @@ export default function Dashboard(){
 
                         </Chart>
                     </Box>
-                    <Box
+                    {/* <Box
                         p={["6","8"]}
                         bg="gray.800"
                         borderRadius={8}
@@ -131,7 +132,7 @@ export default function Dashboard(){
                     >
                         <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
                         <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box>
+                    </Box> */}
                 </SimpleGrid>
             </Flex>
         </Flex>

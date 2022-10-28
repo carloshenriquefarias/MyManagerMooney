@@ -1,5 +1,5 @@
 import { Stack, Box, useBreakpointValue } from '@chakra-ui/react'
-import { RiDashboardLine, RiFileList3Line, RiEdit2Line, RiAddCircleLine, RiBankCardLine, RiLogoutBoxRLine, RiNumbersLine, RiLogoutBoxLine } from 'react-icons/ri'
+import { RiDashboardLine, RiFileList3Line, RiEdit2Line, RiBankLine, RiAddCircleLine, RiBankCardLine, RiLogoutBoxRLine, RiNumbersLine, RiLogoutBoxLine } from 'react-icons/ri'
 import { NavSection } from './NavSection'
 import { NavLink } from './NavLink'
 
@@ -18,7 +18,7 @@ export function SidebarNav(){
             <NavSection title='RELATÓRIOS'>                                        
                 <NavLink icon={RiDashboardLine} href="/dashboard">Dashboard</NavLink>
                 <NavLink icon={RiNumbersLine} href="/othersreports">Outros Relatórios</NavLink>
-                {/* <NavLink icon={RiContactsLine} href="/lancamentos">Usuários</NavLink>                     */}
+                <NavLink icon={RiBankLine} href="/analisebancaria">Análise Bancária</NavLink>                    
             </NavSection>
             
             <NavSection title='ACOMPANHAMENTOS'>

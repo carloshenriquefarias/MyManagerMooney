@@ -10,17 +10,17 @@ interface NavSectionProps{
 export function NavSection({title, children}: NavSectionProps){
     return(
         <Box>
-                    <Text 
-                        fontWeight="bold" 
-                        fontSize="small" 
-                        color="gray.400"
-                    >
-                        {title}
-                    </Text>
-                    
-                    <Stack spacing="4" mt="8" align="stretch"> 
-                        {children}
-                    </Stack>
-                </Box>
+            <Text 
+                fontWeight="bold" 
+                fontSize="small" 
+                color="gray.400"
+            >
+                {title}
+            </Text>
+            
+            <Stack spacing="4" mt="8" align="stretch"> 
+                {children}
+            </Stack>
+        </Box>
     );
 }

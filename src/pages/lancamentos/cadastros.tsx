@@ -62,6 +62,29 @@ export default function Cadastros(){
                                 </Button>
                             </Link>
                         </SimpleGrid>
+
+                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
+                            <Link href="/lancamentos/registration/bancos" passHref>
+                                <Button 
+                                    colorScheme="purple" 
+                                    h="40"fontSize="30"
+                                    leftIcon={<Icon as={RiBankCardLine}
+                                    fontSize="35"/>}
+                                >
+                                    Investimentos
+                                </Button>
+                            </Link>
+                            <Link href="/lancamentos/registration/NewPayment" passHref>
+                                <Button 
+                                    colorScheme="purple" 
+                                    h="40"fontSize="30"
+                                    leftIcon={<Icon as={RiHandCoinLine}
+                                    fontSize="35"/>}
+                                >
+                                    Forma de Pagamento
+                                </Button>
+                            </Link>
+                        </SimpleGrid>
                         
                     </VStack>                    
 

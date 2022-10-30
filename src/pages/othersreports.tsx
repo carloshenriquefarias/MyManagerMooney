@@ -11,6 +11,32 @@ const Chart = dynamic(() => import ('react-apexcharts'), {
   ssr: false
 }); //usado para carregar loads dinamicos
 
+// const ChartPizza = dynamic(() => import ('react-apexcharts'), {
+//   ssr: false
+// }); //usado para carregar loads dinamicos
+
+// var optionspizza = {
+//   series: [44, 55, 13, 43, 22],
+//   chart: {
+//   width: 380,
+//   type: 'pie',
+// },
+// labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+// responsive: [{
+//   breakpoint: 480,
+//   options: {
+//     chart: {
+//       width: 200
+//     },
+//     legend: {
+//       position: 'bottom'
+//     }
+//   }
+// }]
+// };
+
+// var chartpizza = new ApexCharts(document.querySelector("#chart"), optionspizza);
+// chartpizza.render();
 
 const options = {
   chart:{

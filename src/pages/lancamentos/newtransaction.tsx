@@ -66,7 +66,7 @@ export default function CreateTransaction(){
     //Validando o formulario da transação
 
     const createTransactionFormSchema = yup.object().shape({
-        // type: yup.string().required(''),
+        type: yup.string().required(''),
         date: yup.string().required('Escolha a data'),
         category:yup.string().required('Escolha a categoria'),
         bills: yup.string().required('Escolha a conta'),

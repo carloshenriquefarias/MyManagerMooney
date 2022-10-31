@@ -1,5 +1,7 @@
 import {Flex, Button, Stack, useFormErrorStyles } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
+import {useState, FormEvent, useContext} from 'react'
+import { AuthContext } from '../components/Users/AuthContext';
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,23 +19,38 @@ type SignInFormData = {
 //   password_confirmation: string;
 // }
 
-const signInFormSchema = yup.object().shape({
-  name: yup.string().required('Nome Obrigatório'),
-  email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
-  password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
-  password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
-})
+// const signInFormSchema = yup.object().shape({
+//   name: yup.string().required('Nome Obrigatório'),
+//   email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
+//   password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
+//   password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
+// })
 
 export default function SignIn() {
 
-  const {register, handleSubmit, formState, formState: { errors, isSubmitting }} = useForm({
-    resolver: yupResolver(signInFormSchema)
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSignIn: SubmitHandler<SignInFormData> = async (valeus) =>{
-    await new Promise (resolve => setTimeout (resolve, 2000));
-    console.log(valeus);
+  const {signIn} = useContext(AuthContext)
+
+  async function handleSubmit(event: FormEvent){
+    event.preventDefault();
+    const data = {
+      email, 
+      password
+    }
+
+    await signIn(data)
   }
+
+  // const {register, handleSubmit, formState, formState: { errors, isSubmitting }} = useForm({
+  //   resolver: yupResolver(signInFormSchema)
+  // });
+
+  // const handleSignIn: SubmitHandler<SignInFormData> = async (valeus) =>{
+  //   await new Promise (resolve => setTimeout (resolve, 2000));
+  //   console.log(valeus);
+  // }
 
   return (
     <Flex 
@@ -50,15 +67,35 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
-          onSubmit={handleSubmit(handleSignIn)}
+          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
-            <Input name='email' type='email' label='E-mail' ref={register} /> 
+            <Input 
+              name='email' 
+              type='email' 
+              label='E-mail'  
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            /> 
             {/* //errors={errors.email} */}
-            <Input name='password' type='password' label='Senha'ref={register} />     
+            <Input 
+              name='password' 
+              type='password' 
+              label='Senha' 
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
             {/* errors={errors.password}       */}
           </Stack>
-        <Button type='submit' mt="6" colorScheme="pink" isLoading={formState.isSubmitting}>Entrar</Button>
+        <Button 
+          type='submit' 
+          mt="6" 
+          colorScheme="pink" 
+          // isLoading={formState.isSubmitting}
+        >
+          Entrar
+        </Button>
         </Flex>
     </Flex>
   )

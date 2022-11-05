@@ -1,7 +1,8 @@
-import {Flex, Button, Stack, useFormErrorStyles, Text, Image, Box, Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import {Flex, Button, Stack, Icon, Text, Image, Box, Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
 import {useState, FormEvent, useContext} from 'react'
 import { AuthContext } from '../components/Users/AuthContext';
+import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -62,7 +63,7 @@ export default function SignIn() {
           as="form" 
           w="100%" 
           maxWidth={360}
-          bg="gray.800"
+          bg="gray.900"
           // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
           p="8"
           borderRadius={8}
@@ -92,9 +93,15 @@ export default function SignIn() {
           // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
+            <Flex flexDir="column" justifyContent="center" align="center">
+              <Text fontSize="25"color="orange.400" fontWeight="bold"> Bem vindo ao My Manager Money!</Text>
+              <Text fontSize="14" color="orange.400"> O Melhor sistema de finanças do Brasil</Text>
+            </Flex>
+            
             <Input 
               name='email' 
-              placeholder='Digite seu email'
+              placeholder='Digite seu e-mail'
+              fontSize="sm"
               type='email' 
               label='E-mail'  
               value={email}
@@ -104,10 +111,12 @@ export default function SignIn() {
             <Input 
               name='password' 
               placeholder='Digite sua senha'
+              fontSize="sm"
               type='password' 
               label='Senha' 
               value={password}
               onChange={e => setPassword(e.target.value)}
+              // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
             />
             {/* errors={errors.password}       */}
           </Stack>
@@ -118,13 +127,13 @@ export default function SignIn() {
           >
             <Checkbox defaultChecked fontSize="sm">Lembre-me</Checkbox>
             <Text fontSize="sm">Esqueceu a senha</Text>
-           {/* <Text fontSize="sm">Esqueceu a senha</Text>
-            <Text fontSize="sm">Esqueceu a senha</Text>  */}
           </Flex>
           <Button 
             type='submit' 
             mt="10" 
-            colorScheme="pink" 
+            colorScheme="orange"
+            fontSize="18"
+            // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>} 
             // isLoading={formState.isSubmitting}
           >
             Entrar

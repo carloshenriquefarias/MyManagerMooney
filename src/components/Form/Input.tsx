@@ -1,6 +1,8 @@
-import { FormControl, FormErrorMessage, FormLabel, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
+import { FormControl, Icon, FormErrorMessage, FormLabel, Input as ChakraInput, 
+    InputProps as ChakraInputProps } from "@chakra-ui/react";
 import {forwardRef, ForwardRefRenderFunction} from 'react';
 import {FieldError} from 'react-hook-form';
+import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
 
 interface InputProps extends ChakraInputProps{
     name: string;
@@ -20,6 +22,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
             <ChakraInput 
                 name={name} 
                 id={name}
+                // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
                 focusBorderColor='pink.500'
                 bg="gray.900"
                 variant="filled"

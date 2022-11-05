@@ -1,4 +1,4 @@
-import {Flex, Button, Stack, useFormErrorStyles, Text, Image, Box, Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import {Flex, Button, Stack, useFormErrorStyles } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
 import {useState, FormEvent, useContext} from 'react'
 import { AuthContext } from '../components/Users/AuthContext';
@@ -57,32 +57,11 @@ export default function SignIn() {
       w="100vw" 
       h="100vh" 
       align="center"  
-      justify="space-evenly">
+      justify="center">
         <Flex 
           as="form" 
           w="100%" 
           maxWidth={360}
-          bg="gray.800"
-          // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
-          p="8"
-          borderRadius={8}
-          flexDir="column"
-          // onSubmit={handleSubmit}
-          // onSubmit={handleSubmit(handleSignIn)}
-        >
-          <Stack spacing="4">  
-            <Box>
-              <Image src="images/avatar.svg" alt="Girl Coding" />
-            </Box>                      
-            <Text>
-              kjbsdfkjcjdfj
-            </Text>
-          </Stack>          
-        </Flex>
-        <Flex 
-          as="form" 
-          w="100%" 
-          maxWidth={500}
           bg="gray.800"
           // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
           p="8"
@@ -94,7 +73,6 @@ export default function SignIn() {
           <Stack spacing="4">  
             <Input 
               name='email' 
-              placeholder='Digite seu email'
               type='email' 
               label='E-mail'  
               value={email}
@@ -103,7 +81,6 @@ export default function SignIn() {
             {/* //errors={errors.email} */}
             <Input 
               name='password' 
-              placeholder='Digite sua senha'
               type='password' 
               label='Senha' 
               value={password}
@@ -111,25 +88,15 @@ export default function SignIn() {
             />
             {/* errors={errors.password}       */}
           </Stack>
-          <Flex 
-            align="center"  
-            justify="space-between"
-            mt="5"
-          >
-            <Checkbox defaultChecked fontSize="sm">Lembre-me</Checkbox>
-            <Text fontSize="sm">Esqueceu a senha</Text>
-          </Flex>
-          <Button 
-            type='submit' 
-            mt="10" 
-            colorScheme="pink" 
-            // isLoading={formState.isSubmitting}
-          >
-            Entrar
-          </Button>
-          <Text fontSize="sm" mt="10">Não é cadastrado ainda? <Text color="blue.400">Cadastre-se!</Text></Text>
+        <Button 
+          type='submit' 
+          mt="6" 
+          colorScheme="pink" 
+          // isLoading={formState.isSubmitting}
+        >
+          Entrar
+        </Button>
         </Flex>
     </Flex>
   )
 }
-

@@ -118,6 +118,8 @@ export default function SignIn() {
           >
             <Checkbox defaultChecked fontSize="sm">Lembre-me</Checkbox>
             <Text fontSize="sm">Esqueceu a senha</Text>
+           {/* <Text fontSize="sm">Esqueceu a senha</Text>
+            <Text fontSize="sm">Esqueceu a senha</Text>  */}
           </Flex>
           <Button 
             type='submit' 

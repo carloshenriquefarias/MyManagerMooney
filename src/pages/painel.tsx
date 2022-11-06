@@ -1,67 +1,67 @@
-import { Box, Flex, Heading, Text, Button, VStack, SimpleGrid, Divider, Input, Icon, Table, Thead, Tr, Th, Td, Select, Tbody, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Button, VStack, SimpleGrid, Divider, Input, Icon, Table, 
+    useToast, Select, Tbody, useBreakpointValue, Modal, ModalOverlay, ModalContent, ModalHeader, 
+    ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, useDisclosure } from "@chakra-ui/react";
 import { Header } from "../components/Header/Index";
 import { SideBar } from "../components/Sidebar/index";
 import { Pagination } from "../components/Pagination";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
+import { useContext } from "react";
+import { AuthContext } from "../components/Users/AuthContext";
+// import { useDisclosure } from "@chakra-ui/core";
+import React from "react";
+// import { ToastContainer, useToast, toast, TypeOptions } from "react-toastify";
+// import "react-toastify/ReactToastify.min.css";
 
-export default function BankAnalisis(){
+export default function Painel(){
 
-    // const isWideVersion = useBreakpointValue({
-    //     base: false,
-    //     lg: true,
-    // });
+    //Autenticação do usuario em todas as paginas
+    // const {user} = useContext(AuthContext)
 
-    return (
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const initialRef = React.useRef(null)
+    const finalRef = React.useRef(null)
+
+    const toast = useToast()
+     
+
+    return (        
+
         <Box>
-            {/* <Header/> */}
+            {/* //Autenticação do usuario em todas as paginas */}
+            {/* <Text>{user.email}</Text> */}
+            <Header/>
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
-                {/* <SideBar /> */}
-                {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
+                <SideBar />                
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"> 
-                    <Flex mb="8" justify="space-between" align="center">
-                        {/* <Text>O pin do meu cliente é: 1325</Text> */}
-                        <Heading size="lg" fontWeight="normal">O pin do meu cliente é: 1325</Heading>
-                        
-                        {/* as = a => converte o botao como link para outra pagina */} 
-                        {/* <Select width="30%" placeholder='Selecione o banco'variant='filled'bg="gray.700" color="gray.500">
-                            <option value='option1'>Itau</option>
-                            <option value='option2'>C6 Bank</option>
-                            <option value='option3'>Santander</option>
-                        </Select>                */}
+                    <Flex mb="8" justify="space-between" align="center">                        
+                        <Heading size="lg" fontWeight="normal">O pin do meu cliente é: 1325</Heading>                                    
                     </Flex>
                     <VStack spacing="6">
-                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
-                            <Link href="/lancamentos/registration/receitas" passHref> 
-                                                           
-                                <Button 
-                                    colorScheme="blue" 
-                                    h="40" fontSize="20" 
-                                    rightIcon={<Icon as={RiPencilLine}
-                                    fontSize="25"/>}
-                                    justifyContent="space-between"
-                                    // alignItems="center"
-                                >
-                                    Saldo
-                                    {/* <Text mt="20" p="10">1536,00 R$</Text> */}
-                                    {/* <Flex>
-                                        <Divider mt="10" my="6" borderColor="gray.700"></Divider>
-                                        <Text mt="20" p="3">1536,00 R$</Text>
-                                    </Flex>                             */}
-                                </Button>                         
-                                
-                            </Link>
-                            <Link href="/lancamentos/registration/despesas" passHref>
-                                <Button 
-                                    colorScheme="whatsapp" 
-                                    h="40"fontSize="20" 
-                                    rightIcon={<Icon as={RiPencilLine}
-                                    fontSize="25"/>}
-                                    justifyContent="space-between"
-                                >
-                                    Números Comprados
-                                </Button>
-                            </Link>
+                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                                                   
+                            <Button 
+                                colorScheme="blue" 
+                                h="40" fontSize="20" 
+                                rightIcon={<Icon as={RiPencilLine}
+                                fontSize="25"/>}
+                                justifyContent="space-between"
+                                onClick={onOpen}
+                                // isLoading={formState.isSubmitting}
+                                // alignItems="center"
+                            >
+                                Saldo                          
+                            </Button>                  
+                            <Button 
+                                colorScheme="whatsapp" 
+                                h="40"fontSize="20" 
+                                rightIcon={<Icon as={RiPencilLine}
+                                fontSize="25"/>}
+                                justifyContent="space-between"
+                                onClick={onOpen}
+                            >
+                                Números Comprados
+                            </Button>                           
                         </SimpleGrid>
                     </VStack>
                     <VStack spacing="8" mt="10">
@@ -267,133 +267,63 @@ export default function BankAnalisis(){
                                 </Button>                         
                             </Link>
                         </SimpleGrid>
-                    </VStack>
-                    
-
-
-                    
+                    </VStack>           
                     {/* <Pagination/> */}
                 </Box>
             </Flex>
+           
+            <Modal
+                initialFocusRef={initialRef}
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={onClose}
+            >
+                <ModalOverlay />
+                <ModalContent>
+                <ModalHeader color="gray.700">Comprar novo número</ModalHeader>
+                <ModalHeader color="blue.400">Saldo Atual: 152,36 R$</ModalHeader>
+                <ModalCloseButton color="gray.700"/>
+                <ModalBody pb={6}>
+                    <FormControl>
+                    <FormLabel color="gray.700">Serviço Selecionado</FormLabel>
+                    <Input ref={initialRef} color="gray.200" placeholder='Comida' fontSize="sm" />
+                    </FormControl>
+
+                    <FormControl mt={4}>
+                    <FormLabel color="gray.700">Selecione o País</FormLabel>
+                    <Select placeholder='Brasil' color="gray.200" fontSize="sm"/>
+                    </FormControl>
+
+                    <FormControl mt={4}>
+                    <FormLabel color="gray.700">Selecione a Operadora</FormLabel>
+                    <Select color="gray.200" placeholder='VIVO' fontSize="sm"/>
+                    </FormControl>
+
+                    <FormControl mt={4}>
+                    <FormLabel color="gray.700">Digite o Valor do Serviço</FormLabel>
+                    <Input color="gray.200" placeholder='15,00 R$' fontSize="sm"/>
+                    </FormControl>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button colorScheme='blue' mr={3} 
+                        onClick={() =>
+                            toast({
+                            title: 'PARABÉNS',
+                            description: "Sua compra foi efetuada com sucesso!",
+                            status: 'success',
+                            duration: 9000,
+                            isClosable: true,
+                            })
+                        } 
+                    >
+                        Efetuar Compra                                               
+                    </Button>
+                    
+                    <Button onClick={onClose} bg="red.400">Cancelar</Button>
+                </ModalFooter>
+                </ModalContent>
+            </Modal>
         </Box>
     );
 }   
-
-{/* <Table colorScheme="whiteAlpha" width="100%">
-        <Thead>
-            <Tr>                                
-                <Th>Saldo Inicial</Th>
-                <Th>Entradas</Th>
-                <Th>Saidas</Th>
-                <Th>Saldo</Th>
-                <Th>Acumulado</Th>
-                <Th>Lucratividade</Th>                                                              
-            </Tr>
-        </Thead> 
-        <Tbody>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Janeiro</Td>
-                <Td fontSize="sm">1.000,00 R$</Td>  
-                <Td fontSize="sm">2.000,00 R$</Td>  
-                <Td fontSize="sm">1.500,00 R$</Td>   
-                <Td fontSize="sm">1.500,00 R$</Td>  
-                <Td fontSize="sm">50%</Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Fevereiro</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Março</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Abril</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Maio</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Junho</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Julho</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Agosto</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Setembro</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Outubro</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Novembro</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Dezembro</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr> 
-            <Tr px={["4","6"]} _hover={{bg: 'gray.700'}}>
-                <Td fontSize="sm">Total</Td>
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>   
-                <Td fontSize="sm"></Td>  
-                <Td fontSize="sm"></Td>                                                               
-            </Tr>                   
-        </Tbody>
-    </Table> */}

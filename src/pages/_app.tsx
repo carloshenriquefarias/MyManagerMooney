@@ -22,8 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </SidebarDrawerProvider>              
           </ChakraProvider> 
-        </QueryClientProvider>
-        <Component{...pageProps}/>
+        </QueryClientProvider>        
       </>
     </AuthProvider>
        

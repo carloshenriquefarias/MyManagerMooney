@@ -1,15 +1,15 @@
 import { Header } from "../components/Header/Index";
 import { Summary } from "../components/Form/summary";
 import { SideBar } from "../components/Sidebar/index";
-import {Flex, Box, Text, Button, Stack, SimpleGrid } from '@chakra-ui/react'
+import {Flex, Box, Text, Button, VStack, Stack, Divider, SimpleGrid } from '@chakra-ui/react'
 import dynamic from "next/dynamic";
 import { theme } from "../styles/theme";
 import { Tooltip } from "@chakra-ui/core";
+// import ApexCharts from 'apexcharts'
 
 const Chart = dynamic(() => import ('react-apexcharts'), {
     ssr: false
 }); //usado para carregar loads dinamicos
-
 
 const options = {
     chart:{
@@ -73,66 +73,198 @@ export default function Dashboard(){
                 <SideBar /> 
                 {/* <SimpleGrid>
                     <Summary /> 
-                </SimpleGrid> */}
+                </SimpleGrid> */}                    
                                         
                 <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start"> 
-                                                    
-                    <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Inscritos da Semana</Text>
-                        <Chart options={options} series={series} type="area" height={160}>
+                    <Flex direction="column"> 
 
-                        </Chart>
-                    </Box>
-                    {/* <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
-                        <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box>
-                    <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
-                        <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box>
-                    <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
-                        <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box>
-                    <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
-                        <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box>
-                    <Box
-                        p={["6","8"]}
-                        bg="gray.800"
-                        borderRadius={8}
-                        pb="4"
-                    >
-                        <Text fontSize="lg" mb="4">Taxa de Abertura</Text>
-                        <Chart options={options} series={series} type="area" height={160}></Chart>
-                    </Box> */}
+                        {/* //Paineis                    */}
+                        <Stack spacing="6">
+                            <SimpleGrid minChildWidth="240px" spacing="4" width="100%">                                                                               
+                                <Button 
+                                    colorScheme="teal"  
+                                    h="40"
+                                    // onClick={onOpen}                                   
+                                    // alignItems="center"
+                                > 
+                                    <VStack width="100%">
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="space-between"
+                                            align="center"
+                                        >                                        
+                                            <Text mt="0">Saldo no PIX:</Text>                                            
+                                            {/* <Image src="favicon.png" alt="Girl Coding"/> */}
+                                        </Flex> 
+                                        <Text mt="10" fontSize="25">12,00 R$</Text> 
+                                        <Divider mt="10" mb="10" borderColor="gray.100"></Divider> 
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="center"
+                                        >                                        
+                                            <Text mt="2"color="blue.100">Recaregar Agora!</Text>
+                                        </Flex>
+                                    </VStack>                                                     
+                                </Button>
+
+                                <Button 
+                                    colorScheme="blue"  
+                                    h="40"
+                                    // onClick={onOpen}                                   
+                                    // alignItems="center"
+                                > 
+                                    <VStack width="100%">
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="space-between"
+                                            align="center"
+                                        >                                        
+                                            <Text mt="0">Saldo no PIX:</Text>                                            
+                                            {/* <Image src="favicon.png" alt="Girl Coding"/> */}
+                                        </Flex> 
+                                        <Text mt="10" fontSize="25">12,00 R$</Text> 
+                                        <Divider mt="10" mb="10" borderColor="gray.100"></Divider> 
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="center"
+                                        >                                        
+                                            <Text mt="2"color="blue.100">Recaregar Agora!</Text>
+                                        </Flex>
+                                    </VStack>                                                     
+                                </Button>
+
+                                <Button 
+                                    colorScheme="whatsapp"  
+                                    h="40"                                   
+                                    // alignItems="center"
+                                > 
+                                    <VStack width="100%">
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="space-between"
+                                            align="center"
+                                        >                                        
+                                            <Text mt="0">Saldo no Picpay:</Text>                                            
+                                            {/* <Image src="favicon.png" alt="Girl Coding"/> */}
+                                        </Flex> 
+                                        <Text mt="10" fontSize="25">13,92 R$</Text> 
+                                        <Divider mt="10" mb="10" borderColor="gray.100"></Divider> 
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="center"
+                                        >                                        
+                                            <Text mt="2"color="green.200">Recaregar Agora!</Text>
+                                        </Flex>
+                                    </VStack>                                                     
+                                </Button> 
+
+                                <Button 
+                                    colorScheme="orange"  
+                                    h="40"                                   
+                                    // alignItems="center"
+                                > 
+                                    <VStack width="100%">
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="space-between"
+                                            align="center"
+                                        >                                        
+                                            <Text mt="0">Saldo em Criptomoedas:</Text>                                            
+                                            {/* <Image src="favicon.png" alt="Girl Coding"/> */}
+                                        </Flex> 
+                                        <Text mt="10" fontSize="25">17,85 R$</Text> 
+                                        <Divider mt="10" mb="10" borderColor="gray.100"></Divider> 
+                                        <Flex 
+                                            fontSize="20"                                            
+                                            justifyContent="center"
+                                        >                                        
+                                            <Text mt="2"color="orange.100">Recaregar Agora!</Text>
+                                        </Flex>
+                                    </VStack>                                                     
+                                </Button>                          
+                            </SimpleGrid>
+                        </Stack>
+
+                        {/* //Grafico Unico                                */}
+                        <Box
+                            p={["6","8"]}
+                            bg="gray.800"
+                            borderRadius={8}
+                            pb="4"
+                            mt="5"
+                        >
+                            <Text fontSize="lg" mb="4">Inscritos da Semana</Text>
+                            <Chart options={options} series={series} type="area" height={160}></Chart>
+                        </Box>
+
+                        {/* //Graficos Quadruplus */}
+                        <SimpleGrid minChildWidth="240px" spacing="3" width="100%" mt="2"> 
+                            <Box>
+                                {/* <Text pl="3">Comparação do Fluxo de Caixa</Text>                   */}
+                                <Box 
+                                    mt="3"
+                                    mb="1" 
+                                    bg="gray.800"
+                                    p={["1","2"]}                          
+                                    borderRadius={8}
+                                    pb="10"                                     
+                                    h="60" 
+                                    fontSize="30"                           
+                                >  
+                                    <Text fontSize="12" mb="2" textAlign="center">Inscritos da Semana</Text>         
+                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                </Box>
+                            </Box>  
+                            <Box>
+                                {/* <Text pl="3">Investimentos</Text>                   */}
+                                <Box 
+                                    mt="3"
+                                    mb="1" 
+                                    bg="gray.800"
+                                    p={["1","2"]}                          
+                                    borderRadius={8}
+                                    pb="10"                                     
+                                    h="60" 
+                                    fontSize="30"                           
+                                > 
+                                    <Text fontSize="12" mb="2" textAlign="center">Investimentos</Text>           
+                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                </Box>
+                            </Box>  
+                            <Box>
+                                {/* <Text pl="3">Divisão de Receitas</Text>                   */}
+                                <Box 
+                                    mt="3"
+                                    mb="1" 
+                                    bg="gray.800"
+                                    p={["1","2"]}                          
+                                    borderRadius={8}
+                                    pb="10"                                     
+                                    h="60" 
+                                    fontSize="30"                           
+                                >  
+                                    <Text fontSize="12" mb="2" textAlign="center">Divisão de Receitas</Text>         
+                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                </Box>
+                            </Box> 
+                                <Box>
+                                    {/* <Text pl="3">Divisao de Despesas</Text>                   */}
+                                    <Box 
+                                        mt="3"
+                                        mb="1" 
+                                        bg="gray.800"
+                                        p={["1","2"]}                          
+                                        borderRadius={8}
+                                        // pb="10"                                     
+                                        h="60" 
+                                        fontSize="10"                           
+                                    > 
+                                    <Text fontSize="12" mb="1" textAlign="center">Divisao de Despesas</Text>          
+                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                </Box>
+                            </Box>                                  
+                        </SimpleGrid>                                 
+                    </Flex>
                 </SimpleGrid>
             </Flex>
         </Flex>

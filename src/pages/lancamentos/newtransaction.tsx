@@ -1,7 +1,6 @@
 import { Box, Flex, Heading,  Checkbox, Radio, RadioGroup,
     Divider, VStack, SimpleGrid, HStack, Button, Text, Stack,
-    FormErrorMessage, FormLabel, FormControl, Alert, Show
-} from "@chakra-ui/react";
+    FormErrorMessage, FormLabel, FormControl, Alert, Show} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
@@ -11,13 +10,8 @@ import { FormEvent, useState, useEffect, useRef} from 'react';
 import { api } from "../../services/api";
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-import {
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-  } from '@chakra-ui/react'
+import {NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
+    NumberDecrementStepper } from '@chakra-ui/react'
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -63,10 +57,11 @@ export default function CreateTransaction(){
     const [ListBanks, setListBanks] = useState<ListBanks[]>([]); 
     const [ListPaymentMethod, setListPaymentMethod] = useState<ListPaymentMethod[]>([]);
     const [parcelas, setParcelas] = useState('');
-    //Validando o formulario da transação
 
+    //Validando o formulario da transação
+    
     const createTransactionFormSchema = yup.object().shape({
-        type: yup.string().required(''),
+        // type: yup.string().required(''),
         date: yup.string().required('Escolha a data'),
         category:yup.string().required('Escolha a categoria'),
         bills: yup.string().required('Escolha a conta'),
@@ -82,14 +77,13 @@ export default function CreateTransaction(){
 
     const {errors} = formState
 
+    // function handleParcelas(value){
+    //     setParcelas(value)
+    // }
 
-    function handleParcelas(value){
-        setParcelas(value)
-    }
     //Listando novas transações
-
     const handleNewTransaction: SubmitHandler<TransactionProps> = async (dados) =>{
-        // await new Promise (resolve => setTimeout (resolve, 1200));
+    await new Promise (resolve => setTimeout (resolve, 1200));
         console.log(dados);        
 
         try {
@@ -120,9 +114,7 @@ export default function CreateTransaction(){
         });
     }   
         
-    //Pegando os dados da API e Listando as receitas cadastradas na tabela
-
-    
+    //Pegando os dados da API e Listando as receitas cadastradas na tabela    
     useEffect(() => {
         //Receitas
         async function loadRevenues() {          
@@ -171,7 +163,7 @@ export default function CreateTransaction(){
                     <VStack spacing="6" >                        
                         <Text>Escolha o tipo de transação que deseja realizar</Text>
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" >  
-                            <RadioGroup 
+                            {/* <RadioGroup 
                                 defaultValue='2'
                                 bg="gray.900" 
                                 my="1" 
@@ -191,7 +183,7 @@ export default function CreateTransaction(){
                                         Investimentos
                                     </Radio>
                                 </Stack>
-                            </RadioGroup>                          
+                            </RadioGroup>                           */}
                             {/* <Button 
                                 colorScheme="teal" 
                                 gap="2" 
@@ -255,9 +247,9 @@ export default function CreateTransaction(){
                                 })}  
                                 {...register("bills")}                               
                             >                              
-                            </Select>                        
-                            <Select      
-                                
+                            </Select> 
+
+                            <Select                                      
                                 onChange={event => setParcelas(event.target.value)}                        
                                 name="pagamento" 
                                 label="Forma de Pagamento"                      
@@ -278,16 +270,18 @@ export default function CreateTransaction(){
                         </SimpleGrid> */}
                                  
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            {/* <Input 
+                        {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+                            //Quantidade de Parcelas
+                            <Input 
                                 name="parcelas" 
                                 label="Escolha a quantidade de parcelas"
                                 type="number" 
                                 // {...register("parcelas")}
                                 // error={errors.payment}
-                            />  */}
+                            /> 
                             {(parcelas=='Cartão') ? 
-                                
+
+                            //Data de Vencimento da Parcela                                
                             <NumberInput defaultValue={0} min={0} max={2000}>                                
                                 <NumberInputField />
                                     <NumberInputStepper>
@@ -297,7 +291,7 @@ export default function CreateTransaction(){
                             </NumberInput> 
                             
                             : null }
-                        </SimpleGrid>                       
+                        </SimpleGrid>                        */}
                        
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">                    
                             <Select                                
@@ -330,9 +324,9 @@ export default function CreateTransaction(){
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <Input 
                                 name="historico" 
-                                label="Histórico"                                
-                                {...register("history")}
+                                label="Histórico"                         
                                 error={errors.history}
+                                {...register("history")}
                             />                           
                         </SimpleGrid>                       
 

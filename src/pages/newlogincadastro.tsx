@@ -13,19 +13,21 @@ type SignInFormData = {
   password: string;
 }
 
-// type CreateUserFormData = {
-//   name: string;
-//   email: string;
-//   password: string;
-//   password_confirmation: string;
-// }
+type CreateNewUserFormData = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
 
-// const signInFormSchema = yup.object().shape({
-//   name: yup.string().required('Nome Obrigatório'),
-//   email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
-//   password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
-//   password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
-// })
+const signInFormSchema = yup.object().shape({
+  firstname: yup.string().required('Primeiro Nome é Obrigatório'),
+  lastname: yup.string().required('Último Nome é Obrigatório'),
+  email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
+  password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
+  password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
+})
 
 export default function Register() {
 
@@ -50,14 +52,14 @@ export default function Register() {
     await signIn(data)
   }
 
-  // const {register, handleSubmit, formState, formState: { errors, isSubmitting }} = useForm({
-  //   resolver: yupResolver(signInFormSchema)
-  // });
+  const {register, formState, formState: { errors, isSubmitting }} = useForm({
+    resolver: yupResolver(signInFormSchema)
+  });
 
-  // const handleSignIn: SubmitHandler<SignInFormData> = async (valeus) =>{
-  //   await new Promise (resolve => setTimeout (resolve, 2000));
-  //   console.log(valeus);
-  // }
+  const handleNewRegister: SubmitHandler<SignInFormData> = async (valeus) =>{
+    await new Promise (resolve => setTimeout (resolve, 2000));
+    console.log(valeus);
+  }
 
   return (
     <Flex 
@@ -70,24 +72,23 @@ export default function Register() {
           w="100%"         
           maxWidth={800}
           bg="gray.900"          
-          p="8"        
+          p="4"        
           flexDir="column"  
         >
-            <Flex flexDir="column" align="center">
-                {/* <Text fontSize="25" color="orange.400" fontWeight="bold" mb="15">JRS Productions</Text> */}
-                <Text fontSize="35" color="orange.400" fontWeight="bold" mb="35">My Manager Money</Text>
-            </Flex>            
-            
-            <Flex justify="space-between">                
-              <Image boxSize='350px' src="images/avatar.svg" alt="Girl Coding" />  
-              <Box>
-                <Text fontSize="45" color="gray.100"  fontWeight="bold" mb="15">Junte-se a nós e controle suas finanças de uma maneira incrivel!</Text>
-              </Box>
-                          
-            </Flex>                      
-            <Text>
+          <Flex flexDir="column" justify="center">
+            {/* <Text fontSize="25" color="orange.400" fontWeight="bold" mb="15">JRS Productions</Text> */}
+            <Text fontSize="45" color="orange.400" fontWeight="bold" mb="35">My Manager Money</Text>
+          </Flex>            
+          
+          <Flex justify="space-between" flexDir="row">                
+            <Image boxSize='380px' src="images/avatar.svg" alt="Girl Coding" />  
+            <Box>
+              <Text fontSize="45" color="gray.200" fontWeight="bold" ml="20" mb="35">Junte-se a nós e controle suas finanças de uma maneira incrível!</Text>
+              <Text fontSize="20" color="orange.400" fontWeight="bold" ml="20" mt="15">
                 O Melhor sistema de finanças do Brasil
-            </Text>         
+              </Text> 
+            </Box>                          
+          </Flex>           
         </Flex>
 
         <Flex 
@@ -105,20 +106,19 @@ export default function Register() {
         >
           <Stack spacing="4">  
             <Flex flexDir="column" >
-              <Text fontSize="25"color="gray.200" fontWeight="bold"> Crie sua conta</Text>
-              {/* <Text fontSize="14" color="orange.400"> O Melhor sistema de finanças do Brasil</Text> */}
+              <Text fontSize="25"color="gray.200" fontWeight="bold"> Crie sua conta</Text>              
             </Flex>
             
             <Input 
               name='nome' 
               placeholder='Digite seu primeiro nome'
-              fontSize="sm"
-            //   type='' 
+              fontSize="sm"         
             //   label='Digite seu primeiro nome'  
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
+              // errors={errors.email}
             /> 
-            {/* //errors={errors.email} */}
+            
             <Input 
               name='password' 
               placeholder='Digite seu ultimo nome'

@@ -3,15 +3,18 @@ import {Input} from '../components/Form/Input'
 import {useState, FormEvent, useContext} from 'react'
 import { AuthContext } from '../components/Users/AuthContext';
 import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
+import { api } from "../services/api";
+import { ToastContainer, toast, TypeOptions } from "react-toastify";
+import "react-toastify/ReactToastify.min.css";
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
 
-type SignInFormData = {
-  email: string;
-  password: string;
-}
+// type SignInFormData = {
+//   email: string;
+//   password: string;
+// }
 
 // type CreateUserFormData = {
 //   name: string;
@@ -20,38 +23,66 @@ type SignInFormData = {
 //   password_confirmation: string;
 // }
 
-// const signInFormSchema = yup.object().shape({
-//   name: yup.string().required('Nome Obrigatório'),
-//   email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
-//   password: yup.string().required('Senha obrigatório').min(6, 'No mínimo 6 caracteres'),
-//   password_confirmation: yup.string().oneOf([null, yup.ref('password')], 'As senhas precisam ser iguais' )
-// })
+interface CreateUserFormData { 
+  email: string;
+  password: string; 
+}
 
 export default function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {signIn} = useContext(AuthContext)
+  //Fazendo a validação do formulário
+  const signInFormSchema = yup.object().shape({   
+    email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
+    password: yup.string().required('Senha obrigatória').min(6, 'No mínimo 6 caracteres'),    
+  })  
 
-  async function handleSubmit(event: FormEvent){
-    event.preventDefault();
-    const data = {
-      email, 
-      password
-    }
+  const {register, handleSubmit, formState} = useForm<CreateUserFormData>({
+    resolver: yupResolver(signInFormSchema)
+  });
 
-    await signIn(data)
+  const {errors} = formState
+
+  const handleSignIn: SubmitHandler<CreateUserFormData> = async (dados) =>{
+    await new Promise (resolve => setTimeout (resolve, 2000));
+    console.log(dados);
+
+    try {
+      const response = await api.post('/newtransaction', {                
+        // type: dados.type,
+        email: dados.email,
+        password: dados.password,             
+      })
+      console.log(response.data)                 
+
+    } catch (error) {  
+
+    }        
+    toast.success('Seu cadastro foi realizado com sucesso!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
-  // const {register, handleSubmit, formState, formState: { errors, isSubmitting }} = useForm({
-  //   resolver: yupResolver(signInFormSchema)
-  // });
+  // const {signIn} = useContext(AuthContext)
 
-  // const handleSignIn: SubmitHandler<SignInFormData> = async (valeus) =>{
-  //   await new Promise (resolve => setTimeout (resolve, 2000));
-  //   console.log(valeus);
-  // }
+  // async function handleSubmit(event: FormEvent){
+  //   event.preventDefault();
+  //   const data = {
+  //     email, 
+  //     password
+  //   }
+
+  //   await signIn(data)
+  // }  
 
   return (
     <Flex 
@@ -63,21 +94,20 @@ export default function SignIn() {
           as="form" 
           w="100%" 
           maxWidth={360}
-          bg="gray.900"
-          // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
+          bg="gray.900"          
           p="8"
           borderRadius={8}
           flexDir="column"
           // onSubmit={handleSubmit}
-          // onSubmit={handleSubmit(handleSignIn)}
+          onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
             <Box>
               <Image src="images/avatar.svg" alt="Girl Coding" />
             </Box>                      
-            <Text>
+            {/* <Text>
               kjbsdfkjcjdfj
-            </Text>
+            </Text> */}
           </Stack>          
         </Flex>
         <Flex 
@@ -89,8 +119,8 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
-          onSubmit={handleSubmit}
-          // onSubmit={handleSubmit(handleSignIn)}
+          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
             <Flex flexDir="column" justifyContent="center" align="center">
@@ -106,8 +136,10 @@ export default function SignIn() {
               label='E-mail'  
               value={email}
               onChange={e => setEmail(e.target.value)}
+              {...register("email")}
+              error={errors.email}
             /> 
-            {/* //errors={errors.email} */}
+        
             <Input 
               name='password' 
               placeholder='Digite sua senha'
@@ -116,9 +148,11 @@ export default function SignIn() {
               label='Senha' 
               value={password}
               onChange={e => setPassword(e.target.value)}
+              {...register("password")}
+              error={errors.password}
               // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
             />
-            {/* errors={errors.password}       */}
+           
           </Stack>
           <Flex 
             align="center"  
@@ -134,7 +168,7 @@ export default function SignIn() {
             colorScheme="orange"
             fontSize="18"
             // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>} 
-            // isLoading={formState.isSubmitting}
+            isLoading={formState.isSubmitting}
           >
             Entrar
           </Button>

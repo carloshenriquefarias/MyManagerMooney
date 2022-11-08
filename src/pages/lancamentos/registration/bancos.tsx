@@ -83,7 +83,14 @@ export default function Bancos(){
                                 placeholder="Ex: Itaú"
                                 error={errors.bank}
                                 {...register("bank")}
-                            />                            
+                            />   
+                            <Input 
+                                name="data" 
+                                label="Informe o Saldo" 
+                                placeholder="Ex: 500,00 R$"
+                                // error={errors.bank}
+                                // {...register("bank")}
+                            />                          
                         </SimpleGrid>                       
                         
                     </VStack>

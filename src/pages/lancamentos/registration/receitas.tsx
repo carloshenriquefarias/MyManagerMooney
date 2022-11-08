@@ -44,13 +44,7 @@ export default function Receitas(){
                 bills: dados.bills           
                 
             })
-
             console.log(response.data)
-
-            if (response) {
-                toast.success('Seu cadastro foi realizado com sucesso!');
-                return;
-            }
 
         } catch (error) {
             

@@ -23,7 +23,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
                 name={name} 
                 id={name}
                 // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
-                focusBorderColor='pink.500'
+                focusBorderColor='orange.500'
                 bg="gray.900"
                 variant="filled"
                 _hover={{

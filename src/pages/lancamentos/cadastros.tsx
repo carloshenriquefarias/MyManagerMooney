@@ -14,13 +14,13 @@ export default function Cadastros(){
                 <SideBar />
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"> 
-                    <Heading size="lg" fontWeight="normal">O que deseja cadastrar?</Heading>
+                    <Heading size="lg" fontWeight="bold" color="orange.400">O que deseja cadastrar?</Heading>
                     <Divider my="6" borderColor="gray.700"></Divider>
                     <VStack spacing="8">
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
                             <Link href="/lancamentos/registration/receitas" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    colorScheme="orange" 
                                     h="40" fontSize="30" 
                                     leftIcon={<Icon as={RiMoneyDollarCircleLine}
                                     fontSize="35"/>}
@@ -30,7 +30,8 @@ export default function Cadastros(){
                             </Link>
                             <Link href="/lancamentos/registration/despesas" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    // colorScheme="purple"
+                                    colorScheme="orange" 
                                     h="40"fontSize="30" 
                                     leftIcon={<Icon as={RiShoppingCart2Line}
                                     fontSize="35"/>}
@@ -43,7 +44,8 @@ export default function Cadastros(){
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
                             <Link href="/lancamentos/registration/bancos" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    // colorScheme="purple"
+                                    colorScheme="orange" 
                                     h="40"fontSize="30"
                                     leftIcon={<Icon as={RiBankCardLine}
                                     fontSize="35"/>}
@@ -53,7 +55,8 @@ export default function Cadastros(){
                             </Link>
                             <Link href="/lancamentos/registration/NewPayment" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    // colorScheme="purple"
+                                    colorScheme="orange" 
                                     h="40"fontSize="30"
                                     leftIcon={<Icon as={RiHandCoinLine}
                                     fontSize="35"/>}
@@ -66,7 +69,8 @@ export default function Cadastros(){
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">                           
                             <Link href="/lancamentos/registration/bancos" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    // colorScheme="purple"
+                                    colorScheme="orange" 
                                     h="40"fontSize="30"
                                     leftIcon={<Icon as={RiBankCardLine}
                                     fontSize="35"/>}
@@ -76,7 +80,8 @@ export default function Cadastros(){
                             </Link>
                             <Link href="/lancamentos/registration/NewPayment" passHref>
                                 <Button 
-                                    colorScheme="purple" 
+                                    // colorScheme="purple"
+                                    colorScheme="orange" 
                                     h="40"fontSize="30"
                                     leftIcon={<Icon as={RiHandCoinLine}
                                     fontSize="35"/>}

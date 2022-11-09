@@ -21,7 +21,7 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
             <ChakraSelect 
                 name={name} 
                 id={name}
-                focusBorderColor='pink.500'
+                focusBorderColor='orange.500'
                 bg="gray.900"
                 variant="filled"
                 _hover={{

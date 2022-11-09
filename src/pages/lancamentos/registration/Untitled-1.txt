@@ -1,9 +1,0 @@
-
-
-1 vai no schme cria o model que é a tabela. nao esquece de rodar o cmd ...generate (npx prisma generate)
-
-2 - criar rota no servers.ts
-
-3 - testa no insmonia a rota, pra ver se ta ok
-
-4- depois faz no frontend

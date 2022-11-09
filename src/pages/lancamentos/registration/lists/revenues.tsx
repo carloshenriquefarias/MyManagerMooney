@@ -42,15 +42,15 @@ export default function RevenuesTable(){
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"> 
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="normal">Receitas Cadastradas</Heading>
+                        <Heading size="lg" fontWeight="bold" color="orange.400">Receitas Cadastradas</Heading>
                         {/* as = a => converte o botao como link para outra pagina */}
                         
                         <Link href="/lancamentos/registration/receitas" passHref>
                             <Button 
                                 as="a" 
-                                size="sm" 
+                                // size="sm" 
                                 fontSize="sm" 
-                                colorScheme="whatsapp"
+                                colorScheme="orange"
                                 leftIcon={<Icon as={RiAddLine}fontSize="20"/>}
                             > 
                                 Cadastrar Nova Receita

@@ -71,26 +71,28 @@ export default function Receitas(){
                     as="form" onSubmit={handleSubmit(handleNewRevenues)}
                 >
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="normal" justifyContent="space-between" alignItems="center">
+                        <Heading size="lg" fontWeight="bold" justifyContent="space-between" alignItems="center" color="orange.400">
                             <Text>Informe a Nova Receita</Text>                                              
                         </Heading>
                         <Link href="/lancamentos/registration/lists/revenues" passHref>
-                            <Button colorScheme="pink">Lista de Receitas </Button> 
+                            <Button colorScheme="orange">Lista de Receitas </Button> 
                         </Link>
                     </Flex>
                     <Divider my="6" borderColor="gray.700"></Divider>
                     <VStack spacing="8">
-                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
+                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%" color="gray.200">
                             <Input 
                                 name="data" 
-                                label="Informe a Categoria da Receita" 
+                                label="Informe a Categoria da Receita"
+                                color="gray.600" 
                                 placeholder="Ex: Receitas Familiares"                                                                
                                 error={errors.categoryOfRevenue}
                                 {...register("categoryOfRevenue")}
                             />
                             <Input 
                                 name="categoria" 
-                                label="Informe a conta que deseja cadastrar" 
+                                label="Informe a conta que deseja cadastrar"
+                                color="gray.600" 
                                 placeholder="Ex: Salário"                       
                                 error={errors.bills}    
                                 {...register("bills")}                            
@@ -101,7 +103,7 @@ export default function Receitas(){
                     <Flex mt="8" justify="flex-end">
                         <HStack spacing="4" >
                             <Link href="/lancamentos/registration/lists/revenues" passHref>
-                                <Button colorScheme="whiteAlpha">Cancelar</Button>
+                                <Button colorScheme="red">Cancelar</Button>
                             </Link>                                                     
                             <Button 
                                 colorScheme="whatsapp" 

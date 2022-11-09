@@ -1,0 +1,14 @@
+
+TELA DE CADASTRO:
+ 1 - Incluir a nova transação na rota e no banco
+ 2 - Fazer o Label do numero de parcelas
+ 3 - Se a conta for paga em parcelas, MOSTRAR OS NOVOS CAMPOS, senao deixe OCULTOS
+
+LANÇAMENTOS REALIZADOS:
+1- Arrumar o botão de Editar no modal
+
+LISTA DE RECEITAS:
+1 - Arrumar os botões e por os modais de edição e exclusão
+
+LISTA DE BANCOS:
+1 - Arruma a tabela dos bancos cadastrados

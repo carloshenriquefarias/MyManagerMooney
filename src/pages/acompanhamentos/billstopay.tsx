@@ -20,7 +20,7 @@ export default function BillsToPay(){
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"> 
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="normal">Contas a Receber</Heading>
+                        <Heading size="lg" fontWeight="bold">Contas a Pagar</Heading>
                         {/* as = a => converte o botao como link para outra pagina */}     
                         {/* leftIcon={<Icon as={RiFilter2Line}fontSize="16"/>}                    */}
                         {/* <Input placeholder="Selecione a Categoria" w="50" fontSize="sm"></Input> 
@@ -38,7 +38,7 @@ export default function BillsToPay(){
                         <Flex>                        
                             <Select
                                 name="select"
-                                bg="gray.900"                                
+                                bg="gray.700"                                
                                 // w="25%"
                                 // size=""
                                 // fontsize="sm"                                 
@@ -48,7 +48,7 @@ export default function BillsToPay(){
                                 <option value='option2' color="gray.700">Fevereiro</option>
                                 <option value='option3' color="gray.700">Março</option>
                             </Select>
-                            <Select
+                            {/* <Select
                                 name="select"
                                 bg="gray.900"
                                 // w="25%"
@@ -58,7 +58,7 @@ export default function BillsToPay(){
                                 <option value='option1' color="gray.700">Janeiro</option>
                                 <option value='option2' color="gray.700">Fevereiro</option>
                                 <option value='option3' color="gray.700">Março</option>
-                            </Select>
+                            </Select> */}
                         </Flex>
                         
                     </Flex>

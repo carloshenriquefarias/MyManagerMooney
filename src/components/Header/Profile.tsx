@@ -18,11 +18,12 @@ export function Profile({showProfileData = true}:ProfileProps){
             )}
             
             <Avatar     //IMAGEM DO USUARIO
-                    size="md" 
-                    name='Carlos Henrique' 
-                    src="https://github.com/carloshenriquepvh@hotmail.com.png">
-                </Avatar>
+                size="md" 
+                name='Carlos Henrique'
+                bg="orange.400" 
+                src="https://github.com/carloshenriquepvh@hotmail.com.png">
+            </Avatar>
                 
-            </Flex>
+        </Flex>
     );
 }

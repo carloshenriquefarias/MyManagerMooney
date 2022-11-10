@@ -1,6 +1,7 @@
-import {createContext, ReactNode, useState} from "react"
+import {createContext, ReactNode, useEffect, useState} from "react"
 import { api } from "../../services/api";
 import Router from "next/router";
+import {setCookie, parseCookies} from "nookies"
 
 interface SingInCredentials {
     email: string;
@@ -27,7 +28,21 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({children}: AuthProviderProps){
     const [user, setUser] = useState<User>()
-      const isAuthenticated = !!user;
+    const isAuthenticated = !!user;
+    
+    //Quando o usuario fizer o login pela 1 vez
+    useEffect(() => {
+        const {'nextauth.token': token} = parseCookies()
+
+        if(token){
+            api.get('/me').then(response =>{
+                const {email, permissions, roles} = response.data
+
+                setUser({email, permissions, roles})
+            })
+        }
+
+    }, [])
 
     async function signIn({email, password}: SingInCredentials){
         // console.log({email, password});
@@ -37,13 +52,21 @@ export function AuthProvider({children}: AuthProviderProps){
                 password,
             })
 
-            const {permissions, roles} = response.data
+            const {token, refreshToken, permissions, roles} = response.data
+
+            setCookie(undefined, 'nextauth.token', token, {
+                maxAge: 60 * 60 * 24 * 30, //30 dias, tempo de vida do cookie
+                path: '/'
+            })
+            setCookie(undefined, 'nextauth.refreshtoken', refreshToken)
 
             setUser({
                 email,
                 permissions,
                 roles,
             })
+
+            api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
             //Direncionando o usuario para a pagina (so vai funcionar se ele estiver logado)
             Router.push('/painel');

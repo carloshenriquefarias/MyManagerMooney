@@ -6,8 +6,9 @@ import { SideBar } from "../components/Sidebar/index";
 import { Pagination } from "../components/Pagination";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../components/Users/AuthContext";
+import { api } from "../services/api";
 // import { useDisclosure } from "@chakra-ui/core";
 import React from "react";
 // import { ToastContainer, useToast, toast, TypeOptions } from "react-toastify";
@@ -16,7 +17,12 @@ import React from "react";
 export default function Painel(){
 
     //Autenticação do usuario em todas as paginas
-    // const {user} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
+
+    useEffect(() => {
+        api.get('/me').then(response => console.log(response));
+
+    }, [])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     
@@ -30,7 +36,7 @@ export default function Painel(){
 
         <Box>
             {/* //Autenticação do usuario em todas as paginas */}
-            {/* <Text>{user.email}</Text> */}
+            <Text>{user.email}</Text>
             <Header/>
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar />                

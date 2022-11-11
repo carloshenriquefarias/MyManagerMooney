@@ -34,43 +34,43 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
 
   //Fazendo a validação do formulário
-  const signInFormSchema = yup.object().shape({   
-    email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
-    password: yup.string().required('Senha obrigatória').min(6, 'No mínimo 6 caracteres'),    
-  })  
+  // const signInFormSchema = yup.object().shape({   
+  //   email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
+  //   password: yup.string().required('Senha obrigatória').min(6, 'No mínimo 6 caracteres'),    
+  // })  
 
-  const {register, handleSubmit, formState} = useForm<CreateUserFormData>({
-    resolver: yupResolver(signInFormSchema)
-  });
+  // const {register, handleSubmit, formState} = useForm<CreateUserFormData>({
+  //   resolver: yupResolver(signInFormSchema)
+  // });
 
-  const {errors} = formState
+  // const {errors} = formState
 
-  const handleSignIn: SubmitHandler<CreateUserFormData> = async (dados) =>{
-    await new Promise (resolve => setTimeout (resolve, 2000));
-    console.log(dados);
+  // const handleSignIn: SubmitHandler<CreateUserFormData> = async (dados) =>{
+  //   await new Promise (resolve => setTimeout (resolve, 2000));
+  //   console.log(dados);
 
-    try {
-      const response = await api.post('/newtransaction', {                
-        // type: dados.type,
-        email: dados.email,
-        password: dados.password,             
-      })
-      console.log(response.data)                 
+  //   try {
+  //     const response = await api.post('/newtransaction', {                
+  //       // type: dados.type,
+  //       email: dados.email,
+  //       password: dados.password,             
+  //     })
+  //     console.log(response.data)                 
 
-    } catch (error) {  
+  //   } catch (error) {  
 
-    }        
-    toast.success('Seu cadastro foi realizado com sucesso!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-  }
+  //   }        
+  //   toast.success('Seu cadastro foi realizado com sucesso!', {
+  //     position: "top-right",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored",
+  //   });
+  // }
 
   // const {signIn} = useContext(AuthContext)
 
@@ -98,8 +98,7 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
-          // onSubmit={handleSubmit}
-          onSubmit={handleSubmit(handleSignIn)}
+          // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
             <Box>
@@ -120,7 +119,7 @@ export default function SignIn() {
           borderRadius={8}
           flexDir="column"
           // onSubmit={handleSubmit}
-          onSubmit={handleSubmit(handleSignIn)}
+          // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
             <Flex flexDir="column" justifyContent="center" align="center">
@@ -136,8 +135,8 @@ export default function SignIn() {
               label='E-mail'  
               value={email}
               onChange={e => setEmail(e.target.value)}
-              {...register("email")}
-              error={errors.email}
+              // {...register("email")}
+              // error={errors.email}
             /> 
         
             <Input 
@@ -148,8 +147,8 @@ export default function SignIn() {
               label='Senha' 
               value={password}
               onChange={e => setPassword(e.target.value)}
-              {...register("password")}
-              error={errors.password}
+              // {...register("password")}
+              // error={errors.password}
               // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
             />
            
@@ -168,7 +167,7 @@ export default function SignIn() {
             colorScheme="orange"
             fontSize="18"
             // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>} 
-            isLoading={formState.isSubmitting}
+            // isLoading={formState.isSubmitting}
           >
             Entrar
           </Button>

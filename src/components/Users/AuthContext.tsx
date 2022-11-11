@@ -58,7 +58,10 @@ export function AuthProvider({children}: AuthProviderProps){
                 maxAge: 60 * 60 * 24 * 30, //30 dias, tempo de vida do cookie
                 path: '/'
             })
-            setCookie(undefined, 'nextauth.refreshtoken', refreshToken)
+            setCookie(undefined, 'nextauth.refreshtoken', refreshToken,{
+                maxAge: 60 * 60 * 24 * 30, //30 dias, tempo de vida do cookie
+                path: '/'
+            })
 
             setUser({
                 email,

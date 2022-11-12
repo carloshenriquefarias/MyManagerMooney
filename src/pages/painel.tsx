@@ -19,9 +19,9 @@ export default function Painel(){
     //Autenticação do usuario em todas as paginas
     const {user} = useContext(AuthContext)
 
+    // Verifica a requisição para liberar a página, SE O USUARIO TIVER LOGADO!
     useEffect(() => {
         api.get('/me').then(response => console.log(response));
-
     }, [])
 
     const { isOpen, onOpen, onClose } = useDisclosure()

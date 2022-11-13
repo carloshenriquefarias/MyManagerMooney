@@ -14,6 +14,7 @@ let failRequestQueue = [];
 export const api = axios.create({
     // baseURL: 'http://localhost:3000/api',   
     baseURL: 'http://localhost:3333',
+    // baseURL: 'http://localhost:3334',
     headers:{
         Authorization: `Bearer ${cookies['nextauth.token']}`
     }

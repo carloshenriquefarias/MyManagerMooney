@@ -1,6 +1,6 @@
 import {Flex, Button, Stack, Icon, Text, Image, Box, Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
-import {useState, FormEvent, useContext} from 'react'
+import {useState, FormEvent, useContext, useEffect} from 'react'
 import { AuthContext } from '../components/Users/AuthContext';
 import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
 import { api } from "../services/api";
@@ -11,16 +11,15 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
 
-// type SignInFormData = {
-//   email: string;
-//   password: string;
-// }
+type SignInFormData = {
+  email: string;
+  password: string;
+}
 
-// type CreateUserFormData = {
-//   name: string;
+// interface UserData {  
 //   email: string;
 //   password: string;
-//   password_confirmation: string;
+//   // password_confirmation: string;
 // }
 
 interface CreateUserFormData { 
@@ -32,6 +31,32 @@ export default function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // const [listUsers, setListUsers] = useState<UserData[]>([]);
+  // const [passwordUsers, setPasswordUsers] = useState<UserData[]>([]);
+     
+  // //Pegando os dados da API e Listando as receitas cadastradas na tabela
+  // useEffect(() => {
+  //   async function loadUsers() {          
+  //     await api.get('/users').then( response => {
+  //       setListUsers(response.data);
+  //       console.log(response.data);
+  //     })      
+  //   }
+  //   loadUsers();    
+  // }, []);     
+
+  // useEffect(() => {
+  //   async function loadPassword() {          
+  //     await api.get('/users').then( response => {
+  //       setPasswordUsers(response.data);
+  //       console.log(response.data);
+  //     })      
+  //   }
+  //   loadPassword();    
+  // }, []); 
+
+  // __________________________________
 
   //Fazendo a validação do formulário
   // const signInFormSchema = yup.object().shape({   
@@ -72,17 +97,17 @@ export default function SignIn() {
   //   });
   // }
 
-  // const {signIn} = useContext(AuthContext)
+  const {signIn} = useContext(AuthContext)
 
-  // async function handleSubmit(event: FormEvent){
-  //   event.preventDefault();
-  //   const data = {
-  //     email, 
-  //     password
-  //   }
+  async function handleSubmit(event: FormEvent){
+    event.preventDefault();
+    const data = {
+      email, 
+      password
+    }
 
-  //   await signIn(data)
-  // }  
+    await signIn(data)
+  }  
 
   return (
     <Flex 
@@ -98,6 +123,7 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
+          onSubmit={handleSubmit}
           // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
@@ -118,7 +144,7 @@ export default function SignIn() {
           p="8"
           borderRadius={8}
           flexDir="column"
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           // onSubmit={handleSubmit(handleSignIn)}
         >
           <Stack spacing="4">  
@@ -133,8 +159,9 @@ export default function SignIn() {
               fontSize="sm"
               type='email' 
               label='E-mail'  
-              value={email}
+              value={email}              
               onChange={e => setEmail(e.target.value)}
+              // onChange={e => setListUsers(e.target.value)}
               // {...register("email")}
               // error={errors.email}
             /> 
@@ -145,8 +172,9 @@ export default function SignIn() {
               fontSize="sm"
               type='password' 
               label='Senha' 
-              value={password}
+              value={password}             
               onChange={e => setPassword(e.target.value)}
+              // onChange={e => setPasswordUsers(e.target.value)}
               // {...register("password")}
               // error={errors.password}
               // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}

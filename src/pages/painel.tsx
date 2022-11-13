@@ -17,12 +17,12 @@ import React from "react";
 export default function Painel(){
 
     //Autenticação do usuario em todas as paginas
-    const {user} = useContext(AuthContext)
+    // const {user} = useContext(AuthContext)
 
     // Verifica a requisição para liberar a página, SE O USUARIO TIVER LOGADO!
-    useEffect(() => {
-        api.get('/me').then(response => console.log(response));
-    }, [])
+    // useEffect(() => {
+    //     api.get('/me').then(response => console.log(response));
+    // }, [])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     
@@ -36,7 +36,7 @@ export default function Painel(){
 
         <Box>
             {/* //Autenticação do usuario em todas as paginas */}
-            <Text>{user.email}</Text>
+            {/* <Text>{user.email}</Text> */}
             <Header/>
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar />                

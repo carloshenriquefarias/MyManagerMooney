@@ -2,6 +2,7 @@ import {createContext, ReactNode, useEffect, useState} from "react"
 import { api } from "../../services/api";
 import Router from "next/router";
 import {setCookie, parseCookies} from "nookies"
+import { string } from "yup/lib/locale";
 
 interface SingInCredentials {
     email: string;
@@ -48,9 +49,19 @@ export function AuthProvider({children}: AuthProviderProps){
         // console.log({email, password});
         try{
             const response =  await api.post('sessions',{
+            // const response =  await api.post('users',{
                 email,
                 password,
             })
+
+            // console.log('email ',typeof(email))
+            // console.log('password ',typeof(password))
+
+            // if (email == 'prisco@gmail.com' && password == '2'){
+            //     Router.push('/painel');
+            // } else {
+            //     alert('Usuario e senha invalidos')
+            // }
 
             const {token, refreshToken, permissions, roles} = response.data
 
@@ -71,15 +82,14 @@ export function AuthProvider({children}: AuthProviderProps){
 
             api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-            //Direncionando o usuario para a pagina (so vai funcionar se ele estiver logado)
+            // Direncionando o usuario para a pagina (so vai funcionar se ele estiver logado)
             Router.push('/painel');
 
-            // console.log(response.data);
+            console.log(response.data);
         } catch (err){
             console.log(err)
         }
-        
-        
+                
     }
 
     return(

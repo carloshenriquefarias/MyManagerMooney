@@ -1,11 +1,29 @@
 import { Header } from "../components/Header/Index";
-import { Summary } from "../components/Form/summary";
+// import { Summary } from "../components/Form/summary";
 import { SideBar } from "../components/Sidebar/index";
 import {Flex, Box, Text, Button, VStack, Stack, Divider, SimpleGrid } from '@chakra-ui/react'
 import dynamic from "next/dynamic";
 import { theme } from "../styles/theme";
 import { Tooltip } from "@chakra-ui/core";
+
+import { useContext, useEffect } from "react";
+// import { api } from "../services/apiClient";
+import { AuthContext } from "../components/Users/AuthContext";
+// import { withSSRAuth } from "../utils/withSSRAuth";
+// import { setupAPIClient } from "../services/api";
+
 // import ApexCharts from 'apexcharts'
+
+//Autenticação do usuario em todas as paginas
+// const {user} = useContext(AuthContext)
+
+// Verifica a requisição para liberar a página, SE O USUARIO TIVER LOGADO!
+// useEffect(() => {
+//     api.get('/me')
+//         .then(response => console.log(response))
+//         // .catch(error => console.log(error))    
+// }, [])
+
 
 const Chart = dynamic(() => import ('react-apexcharts'), {
     ssr: false
@@ -65,7 +83,7 @@ const series= [
 ];
 
 export default function Dashboard(){
-    return (
+    return (        
         <Flex direction="column" height="100vh"> 
             <Header/>   
                     
@@ -261,6 +279,7 @@ export default function Dashboard(){
                                     > 
                                     <Text fontSize="12" mb="1" textAlign="center">Divisao de Despesas</Text>          
                                     <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                    {/* <Text>{user?.email}</Text> */}
                                 </Box>
                             </Box>                                  
                         </SimpleGrid>                                 
@@ -271,3 +290,14 @@ export default function Dashboard(){
         
     )
 }
+
+// export const getServerSideProps = withSSRAuth(async(ctx) =>{
+
+//     const apiClient = setupAPIClient(ctx)
+//     const response = await apiClient.get('/me')
+//     console.log(response.data)
+
+//     return{
+//         props:{}
+//     }
+// })

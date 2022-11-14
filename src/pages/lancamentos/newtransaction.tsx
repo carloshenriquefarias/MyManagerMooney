@@ -174,7 +174,7 @@ export default function CreateTransaction(){
                                 label="Escolha a nova transação" 
                                 color="gray.200"   
                                 // color="orange.400"                 
-                                error={errors.category} 
+                                error={errors.category}                                 
                                 // fontSize="sm"                                                              
                                 option={ListRevenuesTable.map(revenue => {
                                     return (
@@ -183,9 +183,10 @@ export default function CreateTransaction(){
                                         </option>
                                     )
                                 })}
+
                                 {...register("category")}                               
-                                > 
-                                                                
+                            > 
+                                                                  
                             </Select>                     
                         </SimpleGrid>
 

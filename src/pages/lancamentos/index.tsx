@@ -61,7 +61,6 @@ export default function TransactionsTable(){
     }, []);
     
     //Reduzindo o tamanho da tela
-
     const isWideVersion = useBreakpointValue({
         base: false,
         lg: true,
@@ -77,39 +76,42 @@ export default function TransactionsTable(){
                     <Flex mb="8" justify="space-between" align="center">
                         <Heading size="lg" fontWeight="bold" color="orange.400">Lançamentos Realizados</Heading>
                         {/* as = a => converte o botao como link para outra pagina */}
-                        
-                        <Link href="/lancamentos/newtransaction" passHref>
-                            <Button 
-                                as="a" 
-                                // size="sm" 
-                                fontSize="sm" 
-                                colorScheme="orange"
-                                leftIcon={<Icon as={RiAddLine}fontSize="20"/>}
-                            > 
-                                Cadastrar Novo Lançamento
-                            </Button>
-                        </Link>                        
+                        {isWideVersion && (
+                            <Link href="/lancamentos/newtransaction" passHref>
+                                <Button 
+                                    as="a" 
+                                    // size="sm" 
+                                    fontSize="sm" 
+                                    colorScheme="orange"
+                                    leftIcon={<Icon as={RiAddLine}fontSize="20"/>}
+                                > 
+                                    Cadastrar Novo Lançamento
+                                </Button>
+                            </Link> 
+                        )}                       
                     </Flex>
 
                     <Flex mb="8" align="center" justify="space-between">
                         {/* <Heading size="md" fontWeight="normal" color="gray.200">Selecione um período</Heading> */}
-                        <Flex gap="3" direction="row">                         
-                            <Input
-                                name="calendario"
-                                bg="gray.700"
-                                color="gray.200"   
-                                type="date"
-                                size="md"                                                                            
-                            >                            
-                            </Input>  
-                            <Input
-                                name="calendario"
-                                bg="gray.700"  
-                                color="gray.200" 
-                                type="date"                                            
-                            >                            
-                            </Input>                            
-                        </Flex>
+                        {isWideVersion && (
+                            <Flex gap="3" direction="row">                         
+                                <Input
+                                    name="calendario"
+                                    bg="gray.700"
+                                    color="gray.200"   
+                                    type="date"
+                                    size="md"                                                                            
+                                >                            
+                                </Input>  
+                                <Input
+                                    name="calendario"
+                                    bg="gray.700"  
+                                    color="gray.200" 
+                                    type="date"                                            
+                                >                            
+                                </Input>                            
+                            </Flex>
+                        )}
                         <Button 
                             // as="a" 
                             size="md" 
@@ -136,35 +138,34 @@ export default function TransactionsTable(){
                                 <Thead>
                                     {/* Colocar a Key e o ID das transacoes */}
                                     <Tr>    
-                                        <Th>Tipo</Th>                           
+                                        { isWideVersion && <Th>Tipo</Th>}                          
                                         <Th>Data</Th>
-                                        <Th>Categoria</Th>
+                                        { isWideVersion && <Th>Categoria</Th>}
                                         <Th>Conta</Th>
-                                        <Th fontSize="sm" textAlign="center">Forma de Pagamento</Th>
-                                        <Th>Tipo de Banco</Th>
+                                        { isWideVersion && <Th fontSize="sm" textAlign="center">Forma de Pagamento</Th>}
+                                        { isWideVersion && <Th>Tipo de Banco</Th>}
                                         <Th>Valor da Transação</Th>
-                                        <Th>Histórico</Th>                                
+                                        { isWideVersion && <Th>Histórico</Th>}                               
                                         <Th w="8">Ações</Th>
                                     </Tr>
                                 </Thead> 
                                 <Tbody>
                                     {transactions.map((transaction) => (
                                         <Tr px={["2","3"]} _hover={{bg: 'gray.700'}}>
-                                            <Td fontSize="sm">{transaction.type}</Td>
+                                            { isWideVersion && <Td fontSize="sm">{transaction.type}</Td>}
                                             <Td fontSize="sm">{transaction.date}</Td>
                                             {/* <Td fontSize="sm">{new Intl.DateTimeFormat('pt-BR').format(                              
                                                 new Date(transaction.date)
                                             )}</Td> */}
-                                            <Td fontSize="sm">{transaction.category}</Td>  
+                                            { isWideVersion && <Td fontSize="sm">{transaction.category}</Td>}  
                                             <Td fontSize="sm">{transaction.bills}</Td>  
-                                            <Td fontSize="sm" textAlign="center">{transaction.payment}</Td>   
-                                            <Td fontSize="sm">{transaction.bank}</Td>  
+                                            { isWideVersion && <Td fontSize="sm" textAlign="center">{transaction.payment}</Td>}   
+                                            { isWideVersion && <Td fontSize="sm">{transaction.bank}</Td>}  
                                             <Td fontSize="sm">{new Intl.NumberFormat('pt-BR', {
                                                 style: 'currency',
                                                 currency: 'BRL'
                                             }).format(transaction.value)}</Td>
-                                            <Td fontSize="sm">{transaction.history}</Td>                             
-                                            {/* { isWideVersion && <Td>12 de setembro de 2022</Td>} */}
+                                            { isWideVersion && <Td fontSize="sm">{transaction.history}</Td>}                                   
                                             <Td>
                                                 <Button 
                                                     // onClick={onOpen}

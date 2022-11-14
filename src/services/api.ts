@@ -1,7 +1,7 @@
 import { rejects } from 'assert';
 import axios, {AxiosError}from 'axios';
 import {parseCookies, setCookie} from "nookies"
-import { AuthProvider } from '../components/Users/AuthContext';
+import { AuthProvider, signOut } from '../components/Users/AuthContext';
 
 interface AxiosErrorResponse {
     code?: string;
@@ -20,7 +20,7 @@ export const api = axios.create({
     }
 })
 
-// Apenas na 1 vez qu eo usuario fizer login
+// // Apenas na 1 vez qu eo usuario fizer login
 api.interceptors.response.use(response => {
     return response;
 }, (error: AxiosError<AxiosErrorResponse>) => {
@@ -56,7 +56,11 @@ api.interceptors.response.use(response => {
                     failRequestQueue = []; 
                 }).catch(err =>  {
                     failRequestQueue.forEach(request => request.onFailure(err))  
-                    failRequestQueue = [];   
+                    failRequestQueue = []; 
+                    
+                    // if(typeof(window !== 'undefined')){
+                    //     signOut()
+                    // }
 
                 }).finally(() => {
                     isRefreshing = false
@@ -77,7 +81,9 @@ api.interceptors.response.use(response => {
 
         } else{
             //deslogar usuario
-        }
-    };
+            signOut();
+        }        
+    }
+    return Promise.reject (error)
 })
 

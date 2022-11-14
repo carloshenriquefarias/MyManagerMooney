@@ -6,10 +6,16 @@ import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
 import { api } from "../services/api";
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
+import {parseCookies, setCookie} from "nookies"
 
+//Validação de formulários
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
+
+//Autenticação das páginas
+import { GetServerSideProps } from 'next';
+// import { withSSRGuest } from '../utils/withSSRGuest';
 
 type SignInFormData = {
   email: string;
@@ -205,3 +211,9 @@ export default function SignIn() {
   )
 }
 
+// export const getServerSideProps = withSSRGuest(async(ctx) => {
+//   // console.log(ctx);
+//   return{
+//     props:{}
+//   }
+// });

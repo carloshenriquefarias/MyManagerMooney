@@ -7,9 +7,10 @@ export function Logo(){
             fontWeight="bold"
             letterSpacing="tight"
             width="64"
+            color="orange.400"
         >
-            Dashboard
-            <Text as="span" ml="1" color="pink.500">.</Text>
+            My Manager
+            <Text as="span" ml="1" color="orange.400">.</Text>
         </Text>
     );
 }

@@ -20,9 +20,11 @@ export default function Painel(){
     // const {user} = useContext(AuthContext)
 
     // Verifica a requisição para liberar a página, SE O USUARIO TIVER LOGADO!
-    // useEffect(() => {
-    //     api.get('/me').then(response => console.log(response));
-    // }, [])
+    useEffect(() => {
+        api.get('/me')
+            .then(response => console.log(response))
+            .catch(error => console.log(error))    
+    }, [])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     

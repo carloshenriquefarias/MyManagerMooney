@@ -120,92 +120,106 @@ export default function SignIn() {
       w="100vw" 
       h="100vh" 
       align="center"  
-      justify="space-evenly">
-        <Flex 
-          as="form" 
+      justify="center"
+      bg="gray.900" >
+
+        <Flex
           w="100%" 
-          maxWidth={360}
+          maxWidth={1200}
           bg="gray.900"          
           p="8"
           borderRadius={8}
-          flexDir="column"
-          onSubmit={handleSubmit}
-          // onSubmit={handleSubmit(handleSignIn)}
-        >
-          <Stack spacing="4">  
-            <Box>
-              <Image src="images/avatar.svg" alt="Girl Coding" />
-            </Box>                      
-            {/* <Text>
-              kjbsdfkjcjdfj
-            </Text> */}
-          </Stack>          
-        </Flex>
-        <Flex 
-          as="form" 
-          w="100%" 
-          maxWidth={500}
-          bg="gray.800"
-          // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
-          p="8"
-          borderRadius={8}
-          flexDir="column"
-          onSubmit={handleSubmit}
-          // onSubmit={handleSubmit(handleSignIn)}
-        >
-          <Stack spacing="4">  
-            <Flex flexDir="column" justifyContent="center" align="center">
-              <Text fontSize="25"color="orange.400" fontWeight="bold"> Bem vindo ao My Manager Money!</Text>
-              <Text fontSize="14" color="orange.400"> O Melhor sistema de finanças do Brasil</Text>
-            </Flex>
-            
-            <Input 
-              name='email' 
-              placeholder='Digite seu e-mail'
-              fontSize="sm"
-              type='email' 
-              label='E-mail'  
-              value={email}              
-              onChange={e => setEmail(e.target.value)}
-              // onChange={e => setListUsers(e.target.value)}
-              // {...register("email")}
-              // error={errors.email}
-            /> 
-        
-            <Input 
-              name='password' 
-              placeholder='Digite sua senha'
-              fontSize="sm"
-              type='password' 
-              label='Senha' 
-              value={password}             
-              onChange={e => setPassword(e.target.value)}
-              // onChange={e => setPasswordUsers(e.target.value)}
-              // {...register("password")}
-              // error={errors.password}
-              // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
-            />
-           
-          </Stack>
+          align="center"  
+          justify="space-evenly"
+        >  
           <Flex 
-            align="center"  
-            justify="space-between"
-            mt="5"
+            as="form" 
+            w="100%" 
+            h="80%"
+            maxWidth={400}
+            bg="gray.900"          
+            p="8"
+            borderRadius={8}
+            flexDir="column"
+            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit(handleSignIn)}
           >
-            <Checkbox defaultChecked fontSize="sm">Lembre-me</Checkbox>
-            <Text fontSize="sm">Esqueceu a senha</Text>
+            <Stack spacing="4">  
+              <Text fontSize="35"color="orange.400" fontWeight="bold" textAlign="left">
+                Administre suas finanças de um jeito incrível!
+              </Text>
+              <Box>
+                <Image src="images/avatar.svg" alt="Girl Coding" boxSize='350px'alignItems="center"/>
+              </Box>     
+            </Stack> 
+
           </Flex>
-          <Button 
-            type='submit' 
-            mt="10" 
-            colorScheme="orange"
-            fontSize="18"
-            // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>} 
-            // isLoading={formState.isSubmitting}
+          <Flex 
+            as="form" 
+            w="100%" 
+            maxWidth={600}
+            bg="gray.800"
+            // SE QUISER SABER EM PX multiplique por 4, se for em rem divide por 4
+            p="8"
+            borderRadius={8}
+            flexDir="column"
+            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit(handleSignIn)}
           >
-            Entrar
-          </Button>
-          <Text fontSize="sm" mt="10">Não é cadastrado ainda? <Text color="blue.400">Cadastre-se!</Text></Text>
+            <Stack spacing="4">  
+              <Flex flexDir="column" justifyContent="center" align="center">
+                <Text fontSize="25"color="orange.400" fontWeight="bold"> Bem vindo ao My Manager Money!</Text>
+                <Text fontSize="14" color="orange.400"> O Melhor sistema de finanças do Brasil</Text>
+              </Flex>
+              
+              <Input 
+                name='email' 
+                placeholder='Digite seu e-mail'
+                fontSize="sm"
+                type='email' 
+                label='E-mail'  
+                value={email}              
+                onChange={e => setEmail(e.target.value)}
+                // onChange={e => setListUsers(e.target.value)}
+                // {...register("email")}
+                // error={errors.email}
+              /> 
+          
+              <Input 
+                name='password' 
+                placeholder='Digite sua senha'
+                fontSize="sm"
+                type='password' 
+                label='Senha' 
+                value={password}             
+                onChange={e => setPassword(e.target.value)}
+                // onChange={e => setPasswordUsers(e.target.value)}
+                // {...register("password")}
+                // error={errors.password}
+                // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
+              />
+            
+            </Stack>
+            <Flex 
+              align="center"  
+              justify="space-between"
+              mt="5"
+            >
+              <Checkbox defaultChecked fontSize="sm">Lembre-me</Checkbox>
+              <Text fontSize="sm">Esqueceu a senha</Text>
+            </Flex>
+            <Button 
+              type='submit' 
+              mt="10" 
+              colorScheme="orange"
+              fontSize="18"
+              // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>} 
+              // isLoading={formState.isSubmitting}
+            >
+              Entrar
+            </Button>
+            <Text fontSize="sm" mt="10">Não é cadastrado ainda? <Text color="blue.400">Cadastre-se!</Text></Text>
+          </Flex>
         </Flex>
     </Flex>
   )

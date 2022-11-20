@@ -2,6 +2,7 @@ import {Flex, Text, Box, Avatar, Button, useDisclosure,
     AlertDialog, AlertDialogOverlay, AlertDialogHeader, AlertDialogContent, 
     AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter,} from '@chakra-ui/react'
 import React from "react";
+import Link from 'next/link'
 
 interface ProfileProps{
     showProfileData?: boolean;
@@ -54,9 +55,11 @@ export function Profile({showProfileData = true}:ProfileProps){
                     <Button colorScheme='red' ref={cancelRef} onClick={onClose}>
                         Não, Volte!
                     </Button>
-                    <Button colorScheme='whatsapp' ml={3}>
-                        Sim, Tenho certeza!
-                    </Button>
+                    <Link href="/" passHref>
+                        <Button colorScheme='whatsapp' ml={3}>
+                            Sim, Tenho certeza!
+                        </Button>
+                    </Link>
                 </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>                

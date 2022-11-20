@@ -1,4 +1,4 @@
-import {Flex, Button, Stack, Icon, Text, Image, Box, useBreakpointValue, Checkbox, CheckboxGroup, SimpleGrid, VStack } from '@chakra-ui/react'
+import {Flex, Button, Stack, Icon, Text, Image, Box, Checkbox, CheckboxGroup, SimpleGrid, VStack } from '@chakra-ui/react'
 import {Input} from '../components/Form/Input'
 import {useState, FormEvent, useContext} from 'react'
 import { AuthContext } from '../components/Users/AuthContext';
@@ -24,11 +24,6 @@ type CreateNewUserFormData = {
   password: string;
   password_confirmation: string;
 }
-
-// const isWideVersion = useBreakpointValue({ //Na versao MOBO deixar somente a imagem do usuario
-//   base: false,
-//   lg: true,
-// })
 
 export default function NewUser() {
 
@@ -89,12 +84,12 @@ export default function NewUser() {
       h="100vh" 
       align="center"  
       justify="center"
-      bg="gray.900"
+      bg="red"
       // flexDir="column"
       // maxWidth={1480}       
       >
         <Flex 
-          bg="gray.900" 
+          bg="blue" 
           w="100%"         
           maxWidth={1200}  
           // flex="1"
@@ -103,8 +98,8 @@ export default function NewUser() {
           p="2" 
           gap="2"
         >
-          {/* <SimpleGrid flex="1" gap="2" minChildWidth="240px" alignItems="flex-start" bg="blue">           */}
-          
+          <SimpleGrid flex="1" gap="4" minChildWidth="240px" alignItems="flex-start" >
+
             <Flex         
               w="100%"         
               maxWidth={1000}
@@ -116,27 +111,24 @@ export default function NewUser() {
               justify="space-between" 
               flexDir="row"
               borderRadius={8}
-              
-            >      
-              {/* {!isWideVersion && ( */}
-                <Image boxSize='600px' src="images/avatar.svg" alt="Girl Coding" />
-                  <SimpleGrid flex="1" gap="2" minChildWidth="240px" alignItems="flex-start" > 
-                    <Box ml="2" >
-                      <Text fontSize="35" color="orange.400" fontWeight="bold" >
-                        Junte-se a nós e controle suas finanças de uma maneira incrível!
-                      </Text>
-                      <Text fontSize="16" color="gray.200" fontWeight="bold" mt="95" >
-                        O Melhor sistema de finanças do Brasil
-                      </Text>             
-                    </Box>
-                  </SimpleGrid>  
-              {/* // )} */}
+            >  
+              <SimpleGrid flex="1" gap="4" minChildWidth="240px" alignItems="flex-start" >  
+                <Image boxSize={['240px', '500px']} src="images/avatar.svg" alt="Girl Coding" />         
+                <Box ml="10">
+                  <Text fontSize={["2xl", "40"]} color="orange.400" fontWeight="bold" mt="15">
+                    Junte-se a nós e controle suas finanças de uma maneira incrível!
+                  </Text>
+                  <Text fontSize="20" color="orange.400" fontWeight="bold" >
+                    O Melhor sistema de finanças do Brasil
+                  </Text>             
+                </Box>                
+              </SimpleGrid>
             </Flex>
 
             <Flex 
               as="form" 
               w="100%"           
-              maxWidth={400}
+              maxWidth={1000}
               // minWidth="240px"
               mx="auto"
               bg="gray.800"            
@@ -214,69 +206,8 @@ export default function NewUser() {
                     error={errors.firstname}
                     {...register("firstname")}
                   /> 
-                </SimpleGrid>
-
-                {/* <Flex flexDir="column" >
-                  <Text fontSize="25"color="gray.200" fontWeight="bold"> Crie sua conta</Text>              
-                </Flex>
-                
-                <Input 
-                  name='nome' 
-                  placeholder='Digite seu primeiro nome'
-                  fontSize="sm"         
-                  // label='Digite seu primeiro nome'  
-                  value={firstName}
-                  // onChange={e => setFirstName(e.target.value)}
-                  error={errors.firstname}
-                  {...register("firstname")}
-                /> 
-                
-                <Input 
-                  name='password' 
-                  placeholder='Digite seu ultimo nome'
-                  fontSize="sm"                
-                  // label='Digite seu ultimo nome' 
-                  value={lastName}
-                  // onChange={e => setLastName(e.target.value)}
-                  error={errors.lastname} 
-                  {...register("lastname")}               
-                />
-                
-                <Input 
-                  name='email' 
-                  placeholder='Digite seu e-mail'
-                  fontSize="sm"
-                  type='email'               
-                  value={email}
-                  // onChange={e => setEmail(e.target.value)}
-                  error={errors.email}
-                  {...register("email")}
-                /> 
-                
-                <Input 
-                  name='password' 
-                  placeholder='Digite sua senha'
-                  fontSize="sm"
-                  type='password'             
-                  value={password}
-                  // onChange={e => setPassword(e.target.value)}
-                  error={errors.password}   
-                  {...register("password")}             
-                />
-                
-                <Input 
-                  name='password' 
-                  placeholder='Confirme sua senha'
-                  fontSize="sm"
-                  type='password'               
-                  value={passwordConfirmation}
-                  // onChange={e => setPasswordConfirmation(e.target.value)}
-                  error={errors.password_confirmation}  
-                  {...register("password_confirmation")}               
-                />                    */}
-              </VStack>
-
-              {/* <Link href="/" passHref> */}
+                </SimpleGrid>                
+              </VStack>              
                 <Button 
                   type='submit' 
                   mt="10" 
@@ -285,8 +216,7 @@ export default function NewUser() {
                   isLoading={formState.isSubmitting}
                 >
                   Efetuar Cadastro
-                </Button>
-              {/* </Link> */}
+                </Button>             
 
               <Box textAlign="center">
                 <Text 
@@ -306,26 +236,10 @@ export default function NewUser() {
                     </Text>
                 </Text>
               </Box>
-              
+            
             </Flex>
-        {/* </SimpleGrid>  */}
+          </SimpleGrid>
         </Flex>
     </Flex>
   )
 }
-
-  // const {signIn} = useContext(AuthContext)
-
-  // async function handleSubmit(event: FormEvent){
-  //   event.preventDefault();
-  //   const data = {
-  //     email, 
-  //     password, 
-  //     firstName,
-  //     lastName,
-  //     passwordConfirmation
-  //   }
-
-  //   await signIn(data)
-  // }
-

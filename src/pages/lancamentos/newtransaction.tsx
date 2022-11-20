@@ -12,15 +12,13 @@ import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
 import {NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
     NumberDecrementStepper } from '@chakra-ui/react'
+import React from "react";
 
+//Validação de formularios
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
-import React from "react";
 
-// interface RadioInputProps{
-//     isActive: boolean;
-// }
 
 interface TransactionProps {
     // id: number;
@@ -50,8 +48,6 @@ interface ListPaymentMethod{
    description: string;              
 }
 
-//Fazendo a validação do formulário
-
 export default function CreateTransaction(){  
 
     //Numero de Parcelas
@@ -63,8 +59,7 @@ export default function CreateTransaction(){
     const [ListPaymentMethod, setListPaymentMethod] = useState<ListPaymentMethod[]>([]);
     const [parcelas, setParcelas] = useState('');
 
-    //Validando o formulario da transação
-    
+    //Validando o formulario da transação    
     const createTransactionFormSchema = yup.object().shape({
         // type: yup.string().required(''),
         date: yup.string().required('Escolha a data'),
@@ -81,10 +76,6 @@ export default function CreateTransaction(){
     });
 
     const {errors} = formState
-
-    // function handleParcelas(value){
-    //     setParcelas(value)
-    // }
 
     //Listando novas transações
     const handleNewTransaction: SubmitHandler<TransactionProps> = async (dados) =>{
@@ -152,9 +143,9 @@ export default function CreateTransaction(){
     return (
         <Box>
             <Header/>
-            <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
+            <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6"bg="gray.900">
                 <SideBar />
-                {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
+                
                 <Box 
                     as="form" 
                     flex="1" 

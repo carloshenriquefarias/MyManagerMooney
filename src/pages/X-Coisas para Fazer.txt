@@ -12,3 +12,7 @@ LISTA DE RECEITAS:
 
 LISTA DE BANCOS:
 1 - Arruma a tabela dos bancos cadastrados
+
+TELA DE LOGIN E CADASTRO DE USUARIO:
+1 - Colocar os icones de 'olho' e 'user' DENTRO DOS INPUTS
+2 - Verificar porque não posso digitar nos campos de login e senha.

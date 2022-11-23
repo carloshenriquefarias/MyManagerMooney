@@ -167,23 +167,25 @@ export default function TransactionsTable(){
                                             }).format(transaction.value)}</Td>
                                             { isWideVersion && <Td fontSize="sm">{transaction.history}</Td>}                                   
                                             <Td>
-                                                <Button 
-                                                    // onClick={onOpen}
-                                                    as="a" 
-                                                    _hover={{bg:'blue.700'}}
-                                                    size="sm" 
-                                                    fontSize="sm" 
-                                                    colorScheme="blue"
-                                                    leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
-                                                > 
-                                                    Editar
-                                                </Button>
+                                                <Link href="/lancamentos/edittransaction" passHref>
+                                                    <Button 
+                                                        // onClick={onOpen}
+                                                        as="a" 
+                                                        _hover={{bg:'blue.700'}}
+                                                        size="sm" 
+                                                        fontSize="sm" 
+                                                        colorScheme="purple" 
+                                                        leftIcon={<Icon as={RiPencilLine} fontSize="20"/>}                                        
+                                                    > 
+                                                        Editar
+                                                    </Button>
+                                                </Link>
 
                                                 <Button onClick={onOpen}
                                                     as="a" 
                                                     size="sm" 
                                                     fontSize="sm" 
-                                                    colorScheme="red"
+                                                    colorScheme="purple"
                                                     leftIcon={<Icon as={RiDeleteBin3Line} fontSize="15"/>}
                                                     mt="2"
                                                     >Excluir

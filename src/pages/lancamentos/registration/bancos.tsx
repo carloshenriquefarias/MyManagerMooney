@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Button} from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Icon, Divider, VStack, SimpleGrid, HStack, Button} from "@chakra-ui/react";
 import { Header } from "../../../components/Header/Index";
 import { SideBar } from "../../../components/Sidebar/index";
 import { Input } from "../../../components/Form/Input";
@@ -71,9 +71,17 @@ export default function Bancos(){
                 <Box flex="1" borderRadius={8} bg="gray.800" p="8"
                 as="form" onSubmit={handleSubmit(handleNewBank)}
                 > 
-                    <Heading size="lg" fontWeight="normal">
+                    <Flex mb="8" justify="space-between" align="center">
+                        <Heading size="lg" fontWeight="bold" justifyContent="space-between" alignItems="center" color="orange.400">
+                            <Text>Informe seu banco e saldo</Text>                                              
+                        </Heading>
+                        <Link href="/lancamentos/registration/lists/banks" passHref>
+                            <Button colorScheme="orange">Lista de Bancos </Button> 
+                        </Link>
+                    </Flex>
+                    {/* <Heading size="lg" fontWeight="normal">
                         Realize seu Novo Cadastro                        
-                    </Heading>
+                    </Heading> */}
                     <Divider my="6" borderColor="gray.700"></Divider>
                     <VStack spacing="8">
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
@@ -88,8 +96,8 @@ export default function Bancos(){
                                 name="data" 
                                 label="Informe o Saldo" 
                                 placeholder="Ex: 500,00 R$"
-                                // error={errors.bank}
-                                // {...register("bank")}
+                                error={errors.bank}
+                                {...register("bank")}
                             />                          
                         </SimpleGrid>                       
                         
@@ -97,7 +105,7 @@ export default function Bancos(){
                     <Flex mt="8" justify="flex-end">
                         <HStack spacing="4">
                             <Link href="/lancamentos/registration/lists/banks" passHref>
-                                <Button colorScheme="whiteAlpha">Cancelar</Button>
+                                <Button colorScheme="red">Cancelar</Button>
                             </Link>                            
                             <Button 
                                 colorScheme="whatsapp" 

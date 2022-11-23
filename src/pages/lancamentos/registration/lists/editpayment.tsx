@@ -1,9 +1,9 @@
 import { Box, Text, Flex, Heading, Divider, VStack, SimpleGrid, HStack, Button} from "@chakra-ui/react";
-import { Header } from "../../../components/Header/Index";
-import { SideBar } from "../../../components/Sidebar/index";
-import { Input } from "../../../components/Form/Input";
+import { Header } from "../../../../components/Header/Index";
+import { SideBar } from "../../../../components/Sidebar/index";
+import { Input } from "../../../../components/Form/Input";
 import Link from 'next/link'
-import { api } from "../../../services/api";
+import { api } from "../../../../services/api";
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
 // import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
@@ -21,7 +21,7 @@ const createPaymentMethodFormSchema = yup.object().shape({
     paymentmethod: yup.string().required('Digite uma forma de pagamento'),               
 })
 
-export default function PaymentMethod(){
+export default function EditPaymentMethod(){
 
     //Validando o formulario da transação
 
@@ -45,7 +45,7 @@ export default function PaymentMethod(){
         } catch (error) {
             
         }
-        toast.success('Seu cadastro foi realizado com sucesso!', {
+        toast.success('Sua edição foi realizado com sucesso!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -68,10 +68,10 @@ export default function PaymentMethod(){
                 >
                     <Flex mb="8" justify="space-between" align="center">
                         <Heading size="lg" fontWeight="bold" color="orange.400" justifyContent="space-between" alignItems="center">
-                            <Text>Nova Forma de Pagamento</Text>                                              
+                            <Text>Edite sua Forma de Pagamento</Text>                                              
                         </Heading>
                         <Link href="/lancamentos/registration/lists/payment" passHref>
-                            <Button colorScheme="orange">Lista de Pagamento </Button> 
+                            <Button colorScheme="orange">Lista de Métodos de Pagamento </Button> 
                         </Link>
                     </Flex>
                     <Divider my="6" borderColor="gray.700"></Divider>
@@ -79,7 +79,7 @@ export default function PaymentMethod(){
                         <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
                             <Input 
                                 name="data" 
-                                label="Informe a nova forma de pagaento" 
+                                label="Edite a forma de pagamento atual" 
                                 placeholder="Ex: Dinheiro"                                                                
                                 error={errors.paymentmethod}
                                 {...register("paymentmethod")}

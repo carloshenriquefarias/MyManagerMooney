@@ -1,10 +1,11 @@
-import { Box, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Button} from "@chakra-ui/react";
-import { Header } from "../../../components/Header/Index";
-import { SideBar } from "../../../components/Sidebar/index";
-import { Input } from "../../../components/Form/Input";
+import { Box, Spinner, Text, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Button} from "@chakra-ui/react";
+import { Header } from "../../../../components/Header/Index";
+import { SideBar } from "../../../../components/Sidebar/index";
+import { Input } from "../../../../components/Form/Input";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
-import { api } from "../../../services/api";
+import { useEffect, useState, FormEvent } from "react";
+import { api } from "../../../../services/api";
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
 
@@ -23,7 +24,7 @@ const createExpensesFormSchema = yup.object().shape({
     bills: yup.string().required('Digite a nova conta')         
 })
 
-export default function Despesas(){
+export default function EditRevenues(){
 
     //Validando o formulario da transação
 
@@ -33,29 +34,22 @@ export default function Despesas(){
 
     const {errors} = formState
 
-    //Inserção de dados e chama a API e faz o post
-
     const handleNewExpenses: SubmitHandler<InputExpensesProps> = async (dados) =>{
-        await new Promise (resolve => setTimeout (resolve, 2000));
+        // await new Promise (resolve => setTimeout (resolve, 2000));
         console.log(dados);    
 
-        try {            
+        try {
             const response = await api.post('/expenses', {
                 categoryOfExpenses: dados.categoryOfExpenses,
-                bills: dados.bills        
+                bills: dados.bills           
+                
             })
-
             console.log(response.data)
-
-            if (response) {
-                toast.success('Seu cadastro foi realizado com sucesso!');
-                return;
-            }
 
         } catch (error) {
             
         }
-        toast.success('Seu cadastro foi realizado com sucesso!', {
+        toast.success('Sua edição foi realizada com sucesso!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -73,52 +67,51 @@ export default function Despesas(){
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar />
                 {/* //flex dentro da box abaixo = ocupar toda a largura possivel */}
-                <Box flex="1" 
-                    borderRadius={8} 
-                    bg="gray.800" 
-                    p="8" 
-                    as="form" 
-                    onSubmit={handleSubmit(handleNewExpenses)}
-                > 
+                <Box flex="1" borderRadius={8} bg="gray.800" p="8" 
+                    as="form" onSubmit={handleSubmit(handleNewExpenses)}
+                >
                     <Flex mb="8" justify="space-between" align="center">
-                        <Heading size="lg" fontWeight="bold" color="orange.400">
-                            Realize seu Novo Cadastro                        
+                        <Heading size="lg" fontWeight="bold" justifyContent="space-between" alignItems="center" color="orange.400">
+                            <Text>Insira a Edição da sua despesa</Text>                                              
                         </Heading>
                         <Link href="/lancamentos/registration/lists/expenses" passHref>
-                            <Button colorScheme="orange">Lista de Despesas </Button> 
+                            <Button colorScheme="orange">Voltar para a Lista de Despesas </Button> 
                         </Link>
                     </Flex>
                     <Divider my="6" borderColor="gray.700"></Divider>
                     <VStack spacing="8">
-                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%">
+                        <SimpleGrid minChildWidth="240px" spacing="8" width="100%" color="gray.200">
                             <Input 
                                 name="data" 
-                                label="Informe a Categoria da Despesa" 
-                                placeholder="Ex: Casa"
+                                label="Edite a Categoria da Despesa"
+                                color="gray.600" 
+                                placeholder="Ex: Casa"                                                                
                                 error={errors.categoryOfExpenses}
                                 {...register("categoryOfExpenses")}
                             />
                             <Input 
                                 name="categoria" 
-                                label="Informe a conta de despesa que deseja cadastrar" 
-                                placeholder="Ex: Móveis"
-                                error={errors.bills}
-                                {...register("bills")}
+                                label="Edite a conta cadastrada"
+                                color="gray.600" 
+                                placeholder="Ex: Móveis"                       
+                                error={errors.bills}    
+                                {...register("bills")}                            
                             />                            
                         </SimpleGrid>                       
                         
                     </VStack>
                     <Flex mt="8" justify="flex-end">
-                        <HStack spacing="4">
+                        <HStack spacing="4" >
                             <Link href="/lancamentos/registration/lists/expenses" passHref>
                                 <Button colorScheme="red">Cancelar</Button>
-                            </Link>                             
-                                <Button 
-                                    colorScheme="whatsapp" 
-                                    type="submit"
-                                    isLoading={formState.isSubmitting}
-                                >Finalizar Cadastro 
-                            </Button>                            
+                            </Link>                                                     
+                            <Button 
+                                colorScheme="whatsapp" 
+                                type="submit"
+                                isLoading={formState.isSubmitting}
+                            >
+                                Finalizar a Edição
+                            </Button>                                                        
                         </HStack>
                     </Flex>
 

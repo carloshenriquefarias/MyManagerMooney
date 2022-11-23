@@ -48,7 +48,7 @@ interface ListPaymentMethod{
    description: string;              
 }
 
-export default function CreateTransaction(){  
+export default function EditTransaction(){  
 
     //Numero de Parcelas
     const [value, setValue] = React.useState(0)
@@ -98,7 +98,7 @@ export default function CreateTransaction(){
         } catch (error) {  
 
         }        
-        toast.success('Seu cadastro foi realizado com sucesso!', {
+        toast.success('Sua edição foi realizada com sucesso!', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -153,7 +153,7 @@ export default function CreateTransaction(){
                     bg="gray.800" p="6" 
                     onSubmit={handleSubmit(handleNewTransaction)}
                 > 
-                    <Heading size="lg" fontWeight="bold" color="orange.400">Cadastrar Nova Transação</Heading>
+                    <Heading size="lg" fontWeight="bold" color="orange.400">Editar Transação</Heading>
                     <Divider my="6" borderColor="gray.700"></Divider>
                     {/* <Text mb="25" fontSize="25" color="orange.400">Escolha o tipo de transação que deseja realizar</Text> */}
 

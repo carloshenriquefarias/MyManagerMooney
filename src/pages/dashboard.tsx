@@ -5,6 +5,7 @@ import {Flex, Box, Text, Button, VStack, Stack, Divider, SimpleGrid } from '@cha
 import dynamic from "next/dynamic";
 import { theme } from "../styles/theme";
 import { Tooltip } from "@chakra-ui/core";
+import { Chart } from "react-google-charts";
 
 import { useContext, useEffect } from "react";
 // import { api } from "../services/apiClient";
@@ -25,67 +26,85 @@ import { AuthContext } from "../components/Users/AuthContext";
 // }, [])
 
 
-const Chart = dynamic(() => import ('react-apexcharts'), {
-    ssr: false
-}); //usado para carregar loads dinamicos
 
-const options = {
-    chart:{
-        toolbar:{ //Titulo do Grafico
-            show:false,
-        },
-        zoom:{
-            enabled:false,
-        },
-        foreColor: theme.colors.gray[500] //cor dos numeros
-    },
-    grid:{
-        show:false, // Linhas dentro do Grafico
-    },
-    dataLabels:{
-        enabled:false,
-    },
-    // stroke:{
-    //     curve: 'smooth', //Linhas arrendondadas
-    // },
-    Tooltip:{
-        enabled:false, //efeito quando passa o mouse sob o grafico
-    },
-    xaxis:{
-        type:'datetime',
-        axisBorder:{
-            color:theme.colors.gray[500]
-        },
-        axisTicks:{
-            color:theme.colors.gray[500]
-        },
-        categories:[ //
-            '2022-09-09T00:00:00.000Z',
-            '2022-09-10T00:00:00.000Z',
-            '2022-09-11T00:00:00.000Z',
-            '2022-09-12T00:00:00.000Z',
-            '2022-09-13T00:00:00.000Z',            
-        ],
-    }, 
-    fill:{
-        opacity:0.3,
-        type:'gradient',
-        gradient:{
-            shade: 'dark',
-            opacityfrom: 0.7,
-            opacityto: 0.3,
-        }
-    }
-}
 
-const series= [
-    {name: 'Series 1', data: [10,80,30,70,50]}
-];
+// const Chart = dynamic(() => import ('react-apexcharts'), {
+//     ssr: false
+// }); //usado para carregar loads dinamicos
+
+// const options = {
+//     chart:{
+//         toolbar:{ //Titulo do Grafico
+//             show:false,
+//         },
+//         zoom:{
+//             enabled:false,
+//         },
+//         foreColor: theme.colors.gray[500] //cor dos numeros
+//     },
+//     grid:{
+//         show:false, // Linhas dentro do Grafico
+//     },
+//     dataLabels:{
+//         enabled:false,
+//     },
+//     // stroke:{
+//     //     curve: 'smooth', //Linhas arrendondadas
+//     // },
+//     Tooltip:{
+//         enabled:false, //efeito quando passa o mouse sob o grafico
+//     },
+//     xaxis:{
+//         type:'datetime',
+//         axisBorder:{
+//             color:theme.colors.gray[500]
+//         },
+//         axisTicks:{
+//             color:theme.colors.gray[500]
+//         },
+//         categories:[ //
+//             '2022-09-09T00:00:00.000Z',
+//             '2022-09-10T00:00:00.000Z',
+//             '2022-09-11T00:00:00.000Z',
+//             '2022-09-12T00:00:00.000Z',
+//             '2022-09-13T00:00:00.000Z',            
+//         ],
+//     }, 
+//     fill:{
+//         opacity:0.3,
+//         type:'gradient',
+//         gradient:{
+//             shade: 'dark',
+//             opacityfrom: 0.7,
+//             opacityto: 0.3,
+//         }
+//     }
+// }
+
+// const series= [
+//     {name: 'Series 1', data: [10,80,30,70,50]}
+// ];
+
+export const data = [
+    ["Year", "Sales", "Expenses", "Profit"],
+    ["2014", 1000, 400, 200],
+    ["2015", 1170, 460, 250],
+    ["2016", 660, 1120, 300],
+    ["2017", 1030, 540, 350],
+  ];
+  
+  export const options = {
+    chart: {
+      title: "Company Performance",
+      subtitle: "Sales, Expenses, and Profit: 2014-2017",
+    },
+};
 
 export default function Dashboard(){
     return (        
         <Flex direction="column" height="100vh"> 
             <Header/>   
+            
                     
             <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <SideBar /> 
@@ -212,7 +231,14 @@ export default function Dashboard(){
                             mt="5"
                         >
                             <Text fontSize="lg" mb="4">Inscritos da Semana</Text>
-                            <Chart options={options} series={series} type="area" height={160}></Chart>
+                            <Chart
+                                chartType="Bar"
+                                width="100%"
+                                height="400px"
+                                data={data}
+                                options={options}
+                            />
+                            {/* <Chart options={options} series={series} type="area" height={160}></Chart> */}
                         </Box>
 
                         {/* //Graficos Quadruplus */}
@@ -230,7 +256,7 @@ export default function Dashboard(){
                                     fontSize="30"                           
                                 >  
                                     <Text fontSize="12" mb="2" textAlign="center">Inscritos da Semana</Text>         
-                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                    {/* <Chart options={options} series={series} type="area" height={225}></Chart>  */}
                                 </Box>
                             </Box>  
                             <Box>
@@ -246,7 +272,7 @@ export default function Dashboard(){
                                     fontSize="30"                           
                                 > 
                                     <Text fontSize="12" mb="2" textAlign="center">Investimentos</Text>           
-                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                    {/* <Chart options={options} series={series} type="area" height={225}></Chart>  */}
                                 </Box>
                             </Box>  
                             <Box>
@@ -262,7 +288,7 @@ export default function Dashboard(){
                                     fontSize="30"                           
                                 >  
                                     <Text fontSize="12" mb="2" textAlign="center">Divisão de Receitas</Text>         
-                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                    {/* <Chart options={options} series={series} type="area" height={225}></Chart>  */}
                                 </Box>
                             </Box> 
                                 <Box>
@@ -278,7 +304,7 @@ export default function Dashboard(){
                                         fontSize="10"                           
                                     > 
                                     <Text fontSize="12" mb="1" textAlign="center">Divisao de Despesas</Text>          
-                                    <Chart options={options} series={series} type="area" height={225}></Chart> 
+                                    {/* <Chart options={options} series={series} type="area" height={225}></Chart>  */}
                                     {/* <Text>{user?.email}</Text> */}
                                 </Box>
                             </Box>                                  

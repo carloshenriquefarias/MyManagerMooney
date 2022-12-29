@@ -4,9 +4,8 @@ TELA DE CADASTRO:
  2 - Fazer o Label do numero de parcelas
  3 - Se a conta for paga em parcelas, MOSTRAR OS NOVOS CAMPOS, senao deixe OCULTOS
 
-TELA DE LOGIN E CADASTRO DE USUARIO:
-1 - Colocar os icones de 'olho' e 'user' DENTRO DOS INPUTS
-2 - Verificar porque não posso digitar nos campos de login e senha.
+TELA DE NOVA TRANSAÇÃO:
+1 - Construir as rotas de tipos de transação (despesas, receitas e investimentos)
 
 AUTENCICAÇÃO DE USUÁRIOS:
 1 - Colocar autenticação de usuarios em todas as paginas do projeto

@@ -1,18 +1,23 @@
+import Link from 'next/link'
+import { FormEvent, useState, useEffect, useRef} from 'react';
+import React from "react";
+
 import { Box, Flex, Heading,  Checkbox, Radio, RadioGroup,
     Divider, VStack, SimpleGrid, HStack, Button, Text, Stack,
-    FormErrorMessage, FormLabel, FormControl, Alert, Show, Slider, SliderTrack, SliderFilledTrack, SliderThumb} from "@chakra-ui/react";
+    FormErrorMessage, FormLabel, FormControl, Alert, Show, 
+    Slider, SliderTrack, SliderFilledTrack, SliderThumb, 
+    NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
+NumberDecrementStepper} from "@chakra-ui/react";
+
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
 import { Select } from "../../components/Form/Select";
-import Link from 'next/link'
-import { FormEvent, useState, useEffect, useRef} from 'react';
+
 import { api } from "../../services/api";
+
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-import {NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
-    NumberDecrementStepper } from '@chakra-ui/react'
-import React from "react";
 
 //Validação de formularios
 import * as yup from 'yup'
@@ -22,7 +27,7 @@ import {yupResolver } from "@hookform/resolvers/yup"
 
 interface TransactionProps {
     // id: number;
-    // type: string;
+    type: string;
     date: string;
     category: string;
     bills: string;
@@ -61,6 +66,7 @@ export default function CreateTransaction(){
 
     //Validando o formulario da transação    
     const createTransactionFormSchema = yup.object().shape({
+        // type:yup.string().required('Escolha o tipo da transação'),
         // type: yup.string().required(''),
         date: yup.string().required('Escolha a data'),
         category:yup.string().required('Escolha a categoria'),

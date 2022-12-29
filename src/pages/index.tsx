@@ -36,8 +36,8 @@ interface CreateUserFormData {
 
 export default function SignIn() {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
   // const [listUsers, setListUsers] = useState<UserData[]>([]);
   // const [passwordUsers, setPasswordUsers] = useState<UserData[]>([]);
@@ -103,6 +103,8 @@ export default function SignIn() {
       theme: "colored",
     });
   }
+
+  console.log(handleSignIn);
 
   // ___________________________________________
 
@@ -185,26 +187,28 @@ export default function SignIn() {
                   fontSize="sm"
                   type='email' 
                   label='E-mail'  
-                  value={email}              
-                  onChange={e => setEmail(e.target.value)}
+
+                  // value={email}              
+                  // onChange={e => setEmail(e.target.value)}
                   // onChange={e => setListUsers(e.target.value)}
                   {...register("email")}
                   error={errors.email}
-                /> 
+                />                   
             
-                <Input 
+                <Input      
+                  label="Senha"            
                   name='password' 
                   placeholder='Digite sua senha'
                   fontSize="sm"
                   type='password' 
-                  label='Senha' 
-                  value={password}             
-                  onChange={e => setPassword(e.target.value)}
+                  // label='Senha' 
+                  // value={password}             
+                  // onChange={e => setPassword(e.target.value)}
                   // onChange={e => setPasswordUsers(e.target.value)}
                   {...register("password")}
                   error={errors.password}
                   // rightIcon={<Icon as={RiEyeLine} fontSize="35"/>}
-                />
+                />                                 
               
               </Stack>
               <Flex 

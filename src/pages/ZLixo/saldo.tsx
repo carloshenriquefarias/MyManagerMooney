@@ -2,9 +2,9 @@ import { Box, Flex, Heading, Text, Image, Button, VStack, SimpleGrid, Divider, I
     Table, Thead, Tr, Th, Td, Select, Tbody, useBreakpointValue, Modal, 
     ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, 
     ModalCloseButton, FormControl, FormLabel, useDisclosure } from "@chakra-ui/react";
-import { Header } from "../components/Header/Index";
-import { SideBar } from "../components/Sidebar/index";
-import { Pagination } from "../components/Pagination";
+import { Header } from "../../components/Header/Index";
+import { SideBar } from "../../components/Sidebar/index";
+import { Pagination } from "../../components/Pagination";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 import React from "react";

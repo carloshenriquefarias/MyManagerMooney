@@ -30,13 +30,7 @@ type CreateNewUserFormData = {
 //   lg: true,
 // })
 
-export default function NewUser() {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState(''); 
+export default function SignUp() {
 
   //Validando o formulario da transação
   const newUserFormSchema = yup.object().shape({
@@ -81,6 +75,8 @@ export default function NewUser() {
       theme: "colored",
     });
   }   
+
+  console.log(handleNewRegister);
 
   return (
     <Flex 
@@ -155,10 +151,7 @@ export default function NewUser() {
                   <Input 
                     name='nome' 
                     placeholder='Digite seu primeiro nome'
-                    fontSize="sm"         
-                    // label='Digite seu primeiro nome'  
-                    value={firstName}
-                    // onChange={e => setFirstName(e.target.value)}
+                    fontSize="sm"              
                     error={errors.firstname}
                     {...register("firstname")}
                   /> 
@@ -166,114 +159,44 @@ export default function NewUser() {
 
                 <SimpleGrid minChildWidth="240px" spacing="4" width="100%">
                   <Input 
-                    name='nome' 
-                    placeholder='Digite seu primeiro nome'
-                    fontSize="sm"         
-                    // label='Digite seu primeiro nome'  
-                    value={firstName}
-                    // onChange={e => setFirstName(e.target.value)}
-                    error={errors.firstname}
-                    {...register("firstname")}
+                    name='ultimo nome' 
+                    placeholder='Digite seu último nome'
+                    fontSize="sm"                    
+                    error={errors.lastname}
+                    {...register("lastname")}
                   /> 
                 </SimpleGrid>
 
                 <SimpleGrid minChildWidth="240px" spacing="4" width="100%">
                   <Input 
                     name='nome' 
-                    placeholder='Digite seu primeiro nome'
-                    fontSize="sm"         
-                    // label='Digite seu primeiro nome'  
-                    value={firstName}
-                    // onChange={e => setFirstName(e.target.value)}
-                    error={errors.firstname}
-                    {...register("firstname")}
+                    placeholder='Digite seu e-mail'
+                    fontSize="sm"                        
+                    error={errors.email}
+                    {...register("email")}
                   /> 
                 </SimpleGrid>
 
                 <SimpleGrid minChildWidth="240px" spacing="4" width="100%">
                   <Input 
                     name='nome' 
-                    placeholder='Digite seu primeiro nome'
-                    fontSize="sm"         
-                    // label='Digite seu primeiro nome'  
-                    value={firstName}
-                    // onChange={e => setFirstName(e.target.value)}
-                    error={errors.firstname}
-                    {...register("firstname")}
+                    placeholder='Digite sua senha'
+                    fontSize="sm"                  
+                    error={errors.password}
+                    {...register("password")}
                   /> 
                 </SimpleGrid>
 
                 <SimpleGrid minChildWidth="240px" spacing="4" width="100%">
                   <Input 
                     name='nome' 
-                    placeholder='Digite seu primeiro nome'
-                    fontSize="sm"         
-                    // label='Digite seu primeiro nome'  
-                    value={firstName}
-                    // onChange={e => setFirstName(e.target.value)}
-                    error={errors.firstname}
-                    {...register("firstname")}
+                    placeholder='Confirme sua senha'
+                    fontSize="sm"                   
+                    error={errors.password_confirmation}
+                    {...register("password_confirmation")}
                   /> 
                 </SimpleGrid>
-
-                {/* <Flex flexDir="column" >
-                  <Text fontSize="25"color="gray.200" fontWeight="bold"> Crie sua conta</Text>              
-                </Flex>
                 
-                <Input 
-                  name='nome' 
-                  placeholder='Digite seu primeiro nome'
-                  fontSize="sm"         
-                  // label='Digite seu primeiro nome'  
-                  value={firstName}
-                  // onChange={e => setFirstName(e.target.value)}
-                  error={errors.firstname}
-                  {...register("firstname")}
-                /> 
-                
-                <Input 
-                  name='password' 
-                  placeholder='Digite seu ultimo nome'
-                  fontSize="sm"                
-                  // label='Digite seu ultimo nome' 
-                  value={lastName}
-                  // onChange={e => setLastName(e.target.value)}
-                  error={errors.lastname} 
-                  {...register("lastname")}               
-                />
-                
-                <Input 
-                  name='email' 
-                  placeholder='Digite seu e-mail'
-                  fontSize="sm"
-                  type='email'               
-                  value={email}
-                  // onChange={e => setEmail(e.target.value)}
-                  error={errors.email}
-                  {...register("email")}
-                /> 
-                
-                <Input 
-                  name='password' 
-                  placeholder='Digite sua senha'
-                  fontSize="sm"
-                  type='password'             
-                  value={password}
-                  // onChange={e => setPassword(e.target.value)}
-                  error={errors.password}   
-                  {...register("password")}             
-                />
-                
-                <Input 
-                  name='password' 
-                  placeholder='Confirme sua senha'
-                  fontSize="sm"
-                  type='password'               
-                  value={passwordConfirmation}
-                  // onChange={e => setPasswordConfirmation(e.target.value)}
-                  error={errors.password_confirmation}  
-                  {...register("password_confirmation")}               
-                />                    */}
               </VStack>
 
               {/* <Link href="/" passHref> */}

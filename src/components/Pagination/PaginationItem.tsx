@@ -1,4 +1,4 @@
-import {Flex, Button, Stack, Box, Text, Link, Icon } from '@chakra-ui/react'
+import {Button } from '@chakra-ui/react'
 
 interface PaginationItemProps{
     number: number;

@@ -221,59 +221,7 @@ export default function TransactionsTable(){
                                     ))}                             
                                 </Tbody>
                             </Table>
-                            {/* <Pagination/> */}
-                            {/* <Modal
-                                initialFocusRef={initialRef}
-                                finalFocusRef={finalRef}
-                                isOpen={isOpen}
-                                onClose={onClose}
-                            >
-                                <ModalOverlay />
-                                <ModalContent>
-                                <ModalHeader color="gray.700">Comprar novo número</ModalHeader>
-                                <ModalHeader color="blue.400">Saldo Atual: 152,36 R$</ModalHeader>
-                                <ModalCloseButton color="gray.700"/>
-                                <ModalBody pb={6}>
-                                    <FormControl>
-                                    <FormLabel color="gray.700">Serviço Selecionado</FormLabel>
-                                    <Input ref={initialRef} color="gray.200" placeholder='Comida' fontSize="sm" />
-                                    </FormControl>
-
-                                    <FormControl mt={4}>
-                                    <FormLabel color="gray.700">Selecione o País</FormLabel>
-                                    <Select placeholder='Brasil' color="gray.200" fontSize="sm"/>
-                                    </FormControl>
-
-                                    <FormControl mt={4}>
-                                    <FormLabel color="gray.700">Selecione a Operadora</FormLabel>
-                                    <Select color="gray.200" placeholder='VIVO' fontSize="sm"/>
-                                    </FormControl>
-
-                                    <FormControl mt={4}>
-                                    <FormLabel color="gray.700">Digite o Valor do Serviço</FormLabel>
-                                    <Input color="gray.200" placeholder='15,00 R$' fontSize="sm"/>
-                                    </FormControl>
-                                </ModalBody>
-
-                                <ModalFooter>
-                                    <Button colorScheme='blue' mr={3} 
-                                        // onClick={() =>
-                                        //     toast({
-                                        //     title: 'PARABÉNS',
-                                        //     description: "Sua compra foi efetuada com sucesso!",
-                                        //     status: 'success',
-                                        //     duration: 9000,
-                                        //     isClosable: true,
-                                        //     })
-                                        // } 
-                                    >
-                                        Efetuar Compra                                               
-                                    </Button>
-                                    
-                                    <Button onClick={onClose} bg="red.400">Cancelar</Button>
-                                </ModalFooter>
-                                </ModalContent>
-                            </Modal> */}
+                            <Pagination/>                            
                         </>
                     {/* )} */}
                 </Box>
@@ -281,3 +229,75 @@ export default function TransactionsTable(){
         </Box>
     );
 }   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <Modal
+    initialFocusRef={initialRef}
+    finalFocusRef={finalRef}
+    isOpen={isOpen}
+    onClose={onClose}
+>
+    <ModalOverlay />
+    <ModalContent>
+    <ModalHeader color="gray.700">Comprar novo número</ModalHeader>
+    <ModalHeader color="blue.400">Saldo Atual: 152,36 R$</ModalHeader>
+    <ModalCloseButton color="gray.700"/>
+    <ModalBody pb={6}>
+        <FormControl>
+        <FormLabel color="gray.700">Serviço Selecionado</FormLabel>
+        <Input ref={initialRef} color="gray.200" placeholder='Comida' fontSize="sm" />
+        </FormControl>
+
+        <FormControl mt={4}>
+        <FormLabel color="gray.700">Selecione o País</FormLabel>
+        <Select placeholder='Brasil' color="gray.200" fontSize="sm"/>
+        </FormControl>
+
+        <FormControl mt={4}>
+        <FormLabel color="gray.700">Selecione a Operadora</FormLabel>
+        <Select color="gray.200" placeholder='VIVO' fontSize="sm"/>
+        </FormControl>
+
+        <FormControl mt={4}>
+        <FormLabel color="gray.700">Digite o Valor do Serviço</FormLabel>
+        <Input color="gray.200" placeholder='15,00 R$' fontSize="sm"/>
+        </FormControl>
+    </ModalBody>
+
+    <ModalFooter>
+        <Button colorScheme='blue' mr={3} 
+            // onClick={() =>
+            //     toast({
+            //     title: 'PARABÉNS',
+            //     description: "Sua compra foi efetuada com sucesso!",
+            //     status: 'success',
+            //     duration: 9000,
+            //     isClosable: true,
+            //     })
+            // } 
+        >
+            Efetuar Compra                                               
+        </Button>
+        
+        <Button onClick={onClose} bg="red.400">Cancelar</Button>
+    </ModalFooter>
+    </ModalContent>
+</Modal> */}

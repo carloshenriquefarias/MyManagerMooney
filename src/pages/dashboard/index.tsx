@@ -1,15 +1,15 @@
-import { Header } from "../components/Header/Index";
+import { Header } from "../../components/Header/Index";
 // import { Summary } from "../components/Form/summary";
-import { SideBar } from "../components/Sidebar/index";
+import { SideBar } from "../../components/Sidebar/index";
 import {Flex, Box, Text, Button, VStack, Stack, Divider, SimpleGrid } from '@chakra-ui/react'
 import dynamic from "next/dynamic";
-import { theme } from "../styles/theme";
+import { theme } from "../../styles/theme";
 import { Tooltip } from "@chakra-ui/core";
 import { Chart } from "react-google-charts";
 
 import { useContext, useEffect } from "react";
 // import { api } from "../services/apiClient";
-import { AuthContext } from "../components/Users/AuthContext";
+import { AuthContext } from "../../components/Users/AuthContext";
 // import { withSSRAuth } from "../utils/withSSRAuth";
 // import { setupAPIClient } from "../services/api";
 

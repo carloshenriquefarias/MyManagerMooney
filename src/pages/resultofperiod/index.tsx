@@ -1,13 +1,13 @@
-import { Header } from "../components/Header/Index";
-import { Summary } from "../components/Form/summary";
-import { SideBar } from "../components/Sidebar/index";
+import { Header } from "../../components/Header/Index";
+import { Summary } from "../../components/Form/summary";
+import { SideBar } from "../../components/Sidebar/index";
 import {Flex, Box, Text, Select, Table, Thead, Tr, Th, Td, Tbody, SimpleGrid, Divider, Heading, VStack } from '@chakra-ui/react'
 import dynamic from "next/dynamic";
-import { theme } from "../styles/theme";
+import { theme } from "../../styles/theme";
 import { Tooltip } from "@chakra-ui/core";
 // import { Select } from "../components/Form/Select";
 
-export default function OthersReports(){
+export default function ResultOfPeriod(){
     return (
       <Flex direction="column" height="100vh"> 
         <Header/> 

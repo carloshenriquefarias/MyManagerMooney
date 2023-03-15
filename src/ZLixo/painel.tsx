@@ -1,14 +1,14 @@
 import { Box, Flex, Heading, Text, Button, VStack, SimpleGrid, Divider, Input, Icon, Table, 
     useToast, Select, Tbody, useBreakpointValue, Modal, ModalOverlay, ModalContent, ModalHeader, 
     ModalFooter, ModalBody, ModalCloseButton, FormControl, FormLabel, useDisclosure } from "@chakra-ui/react";
-import { Header } from "../../components/Header/Index";
-import { SideBar } from "../../components/Sidebar/index";
-import { Pagination } from "../../components/Pagination";
+import { Header } from "../components/Header/Index";
+import { SideBar } from "../components/Sidebar/index";
+import { Pagination } from "../components/Pagination";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 import { useContext, useEffect } from "react";
-import { AuthContext } from "../../components/Users/AuthContext";
-import { api } from "../../services/api";
+import { AuthContext } from "../components/Users/AuthContext";
+import { api } from "../services/api";
 // import { useDisclosure } from "@chakra-ui/core";
 import React from "react";
 // import { ToastContainer, useToast, toast, TypeOptions } from "react-toastify";

@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Button, Input, Icon, Table, Thead, Tr, Th, Td, Select, Tbody, useBreakpointValue } from "@chakra-ui/react";
-import { Header } from "../components/Header/Index";
-import { SideBar } from "../components/Sidebar/index";
-import { Pagination } from "../components/Pagination";
+import { Header } from "../../components/Header/Index";
+import { SideBar } from "../../components/Sidebar/index";
+import { Pagination } from "../../components/Pagination";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 

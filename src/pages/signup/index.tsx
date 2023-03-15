@@ -1,12 +1,12 @@
 import {Flex, Button, Stack, Icon, Text, Image, Box, useBreakpointValue, Checkbox, CheckboxGroup, SimpleGrid, VStack } from '@chakra-ui/react'
-import {Input} from '../components/Form/Input'
+import {Input} from '../../components/Form/Input'
 import {useState, FormEvent, useContext} from 'react'
-import { AuthContext } from '../components/Users/AuthContext';
+import { AuthContext } from '../../components/Users/AuthContext';
 import {RiEyeLine, RiEyeOffLine} from 'react-icons/ri'
 import Link from 'next/link'
 import { ToastContainer, toast, TypeOptions } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
-import { api } from "../services/api";
+import { api } from "../../services/api";
 
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";

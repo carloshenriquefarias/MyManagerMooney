@@ -9,23 +9,23 @@ export function SidebarNav(){
         <Stack spacing="12" align="flex-start">
 
             <NavSection title='LANÇAMENTOS'>
-                <NavLink icon={RiAddCircleLine} href="/lancamentos/newtransaction">Nova Transação</NavLink>
-                <NavLink icon={RiFileList3Line} href="/lancamentos/cadastros">Cadastros</NavLink>  
+                <NavLink icon={RiAddCircleLine} href="/newtransaction">Nova Transação</NavLink>
+                <NavLink icon={RiFileList3Line} href="/register">Cadastros</NavLink>  
                 {/* <NavLink icon={RiFileList3Line} href="/lancamentos/registration/receitas">Cadastros</NavLink> */}
-                <NavLink icon={RiEdit2Line} href="/lancamentos">Lançamentos</NavLink>                                              
+                <NavLink icon={RiEdit2Line} href="/transactionrecord">Lançamentos</NavLink>                                              
             </NavSection>
 
             <NavSection title='RELATÓRIOS'>                                        
                 <NavLink icon={RiDashboardLine} href="/dashboard">Dashboard</NavLink>
                 <NavLink icon={RiNumbersLine} href="/othersreports">Outros Relatórios</NavLink>
-                <NavLink icon={RiBankLine} href="/analisebancaria">Análise Bancária</NavLink>   
-                <NavLink icon={RiArticleLine} href="/dre">Resultado do Periodo</NavLink>                  
+                <NavLink icon={RiBankLine} href="/bankinganalysis">Análise Bancária</NavLink>   
+                <NavLink icon={RiArticleLine} href="/resultofperiod">Resultado do Periodo</NavLink>                  
             </NavSection>
             
             <NavSection title='ACOMPANHAMENTOS'>
-                <NavLink icon={RiBankCardLine} href="/acompanhamentos/creditcard">Cartão de Créditos</NavLink>
-                <NavLink icon={RiLogoutBoxLine} href="/automation">Contas a Receber</NavLink>   
-                <NavLink icon={RiLogoutBoxRLine} href="/acompanhamentos/billstopay">Contas a Pagar</NavLink>                  
+                <NavLink icon={RiBankCardLine} href="/creditcards">Cartão de Créditos</NavLink>
+                <NavLink icon={RiLogoutBoxLine} href="/billstoreceive">Contas a Receber</NavLink>   
+                <NavLink icon={RiLogoutBoxRLine} href="/billstopay">Contas a Pagar</NavLink>                  
             </NavSection>
             
         </Stack>

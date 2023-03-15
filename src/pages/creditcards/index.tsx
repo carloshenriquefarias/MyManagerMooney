@@ -6,7 +6,7 @@ import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons
 import Link from 'next/link'
 
 
-export default function CreditCard(){
+export default function CreditCards(){
     return (
         <Box>
             <Header/>

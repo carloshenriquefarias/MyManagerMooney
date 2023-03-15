@@ -29,7 +29,7 @@ interface Transaction{
     history: string;           
 }
 
-export default function TransactionsTable(){   
+export default function TransactionRecord(){   
 
     //Modal do botão Excluir na tabela
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -221,7 +221,7 @@ export default function TransactionsTable(){
                                     ))}                             
                                 </Tbody>
                             </Table>
-                            <Pagination/>                            
+                            {/* <Pagination/>                             */}
                         </>
                     {/* )} */}
                 </Box>

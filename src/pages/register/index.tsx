@@ -6,7 +6,7 @@ import {RiAddLine, RiBankCardLine, RiSearchLine, RiMoneyDollarCircleLine, RiShop
 import Link from 'next/link'
 
 
-export default function Cadastros(){
+export default function Register(){
     return (
         <Box>
             <Header/>

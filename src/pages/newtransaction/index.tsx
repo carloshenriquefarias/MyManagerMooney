@@ -85,7 +85,7 @@ export default function CreateTransaction(){
 
     //Listando novas transações
     const handleNewTransaction: SubmitHandler<TransactionProps> = async (dados) =>{
-    await new Promise (resolve => setTimeout (resolve, 1200));
+        await new Promise (resolve => setTimeout (resolve, 1200));
         console.log(dados);        
 
         try {

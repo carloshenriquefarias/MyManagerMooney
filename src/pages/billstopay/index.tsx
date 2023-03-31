@@ -116,7 +116,12 @@ export default function BillsToPay(){
                             
                         </Tbody>
                     </Table>
-                    {/* <Pagination/> */}
+
+                    {/* <Pagination
+                        totalCountOfRegisters={data.totalCount}
+                        currentPage={page}
+                        onPageChange={setPage}
+                    /> */}
                 </Box>
             </Flex>
         </Box>

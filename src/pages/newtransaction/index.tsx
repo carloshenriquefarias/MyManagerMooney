@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { FormEvent, useState, useEffect, useRef} from 'react';
 import React from "react";
-import Select from 'react-select'
-import makeAnimated from "react-select/animated";
+// import Select from 'react-select'
+// import makeAnimated from "react-select/animated";
 
 import { Box, Flex, Heading,  Checkbox, Radio, RadioGroup,
     Divider, VStack, SimpleGrid, HStack, Button, Text, Stack,
@@ -14,7 +14,7 @@ NumberDecrementStepper} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { Input } from "../../components/Form/Input";
-// import { Select } from "../../components/Form/Select";
+import { Select } from "../../components/Form/Select";
 
 import { api } from "../../services/api";
 
@@ -68,7 +68,7 @@ const options = [
 
 export default function CreateTransaction(){  
 
-    const animatedComponents = makeAnimated();
+    // const animatedComponents = makeAnimated();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const handleSelect = () => {
         console.log(selectedOptions);
@@ -216,7 +216,7 @@ export default function CreateTransaction(){
                                 error={errors.date}
                             />
 
-                            <Select
+                            {/* <Select
                                 defaultValue={[options[0], options[2]]}
                                 components={animatedComponents}
                                 isMulti
@@ -229,11 +229,11 @@ export default function CreateTransaction(){
                                 isLoading={false}
                                 isRtl={false}
                                 closeMenuOnSelect={false}
-                            />
+                            /> */}
 
                             {/* <button onClick={handleSelect}>Imprimir itens</button> */}
 
-                            {/* <Select                                
+                            <Select                                
                                 name="categoria" 
                                 label="Escolha a categoria" 
                                 color="gray.200"                     
@@ -247,11 +247,11 @@ export default function CreateTransaction(){
                                 })}
                                 {...register("category")}                               
                             >                              
-                            </Select>                   */}
+                            </Select>                  
                         </SimpleGrid>   
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >                            
-                            {/* <Select                                                        
+                            <Select                                                        
                                 name="conta" 
                                 label="Conta"
                                 color="gray.200"                                            
@@ -282,7 +282,7 @@ export default function CreateTransaction(){
                                 })}  
                                 {...register("payment")}                               
                             >                              
-                            </Select>                             */}
+                            </Select>                            
                         </SimpleGrid>     
                         {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
                             <label htmlFor="">Parcelas: {parcelas}</label>

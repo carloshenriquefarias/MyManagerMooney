@@ -25,6 +25,8 @@ import "react-toastify/ReactToastify.min.css";
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from "react-hook-form";
 import {yupResolver } from "@hookform/resolvers/yup"
+import Pagination from '../../components/Pagination';
+// import { Pagination } from '../../components/Pagination';
 
 
 interface TransactionProps {
@@ -78,10 +80,17 @@ export default function CreateTransaction(){
     const [value, setValue] = React.useState(0)
     const handleChange = (value) => setValue(value)
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
     const [ListRevenuesTable, setListRevenuesTable] = useState<ListRevenues[]>([]);    
     const [ListBanks, setListBanks] = useState<ListBanks[]>([]); 
     const [ListPaymentMethod, setListPaymentMethod] = useState<ListPaymentMethod[]>([]);
     const [parcelas, setParcelas] = useState('');
+
+    function handlePageChange(page: any) {
+        setCurrentPage(page);
+    };
 
     //Validando o formulario da transação    
     const createTransactionFormSchema = yup.object().shape({
@@ -185,7 +194,7 @@ export default function CreateTransaction(){
                     <VStack spacing="6" >                        
                         
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" fontSize="sm"> 
-                            {/* <Select                                
+                            <Select                                
                                 name="transação" 
                                 label="Escolha a nova transação" 
                                 color="gray.200"   
@@ -203,7 +212,7 @@ export default function CreateTransaction(){
                                 {...register("category")}                               
                             > 
                                                                   
-                            </Select>                      */}
+                            </Select>                     
                         </SimpleGrid>
 
                         <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >
@@ -382,6 +391,12 @@ export default function CreateTransaction(){
                             </Button>                   
                         {/* </HStack> */}
                     </Flex>
+
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
 
                 </Box>
             </Flex>

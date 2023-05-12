@@ -10,15 +10,15 @@ export function NewSearchBar(){
     
     const [repos, setRepos] = useState<Repo[]>([])
     const [search, setSearch] = useState('')
-
+    
     // const filteredRepos = search.length > 0 ? repos.filter(repo => repo.name.includes(search)) : [];
     const filteredRepos = search.length > 0 ? repos.filter(repo => 
         repo.name.toLowerCase().includes(search.toLowerCase())) : [];
-    // console.log('Resultado aqui as 11:56 =>', filteredRepos)
-
-    useEffect(() => {
-        setRepos(animes);
-
+        // console.log('Resultado aqui as 11:59 =>', filteredRepos)
+        
+        useEffect(() => {
+            setRepos(animes);
+        
     }, [])
 
     return(

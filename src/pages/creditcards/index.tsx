@@ -1,13 +1,20 @@
-import { Box, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Text, Button, InputGroup, InputRightElement, Input} from "@chakra-ui/react";
+import { Box, Flex, Heading, Icon, Divider, VStack, SimpleGrid, HStack, Text, Button, 
+    InputGroup, InputRightElement, Input, useDisclosure,
+    AlertDialog, AlertDialogOverlay, AlertDialogHeader, AlertDialogContent, 
+    AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter, Checkbox} from "@chakra-ui/react";
 import { Header } from "../../components/Header/Index";
 import { SideBar } from "../../components/Sidebar/index";
 import { NewSearchBar } from "../../components/NewSearchBar/index";
+import React from "react";
 // import { Input } from "../../components/Form/Input";
 import {RiAddLine, RiPencilLine, RiSearchLine, RiFilter2Line } from 'react-icons/ri'
 import Link from 'next/link'
 
 
 export default function CreditCards(){
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = React.useRef()
+
     return (
         <Box>
             <Header/>
@@ -157,6 +164,101 @@ export default function CreditCards(){
                                 </>
                             } */}
                         </SimpleGrid>
+
+                        <Button bg="gray.900" onClick={onOpen}>
+                            Sair
+                        </Button>
+
+                        <AlertDialog
+                            motionPreset='slideInBottom'
+                            leastDestructiveRef={cancelRef}
+                            onClose={onClose}
+                            isOpen={isOpen}
+                            isCentered                
+                        >
+                            <AlertDialogOverlay />
+
+                            <AlertDialogContent>
+                            <AlertDialogHeader color="gray.500">ATENÇÃO!!!</AlertDialogHeader>                            
+                            <AlertDialogCloseButton color="gray.700"/>
+
+                            <AlertDialogBody color="gray.500" fontWeight="bold">
+                                <HStack justifyContent='space-between' alignItems='center'>
+                                    <Heading fontFamily='heading' fontSize='xl' color='gray.700'>
+                                        Filtrar anúncios
+                                    </Heading>
+
+                                    {/* <IconButton
+                                        onPress={handleCloseModal}
+                                        icon={<Icon
+                                            as={AntDesign}
+                                            name='close'
+                                            size={6}
+                                            color='gray.600'
+                                        />}
+                                    /> */}
+                                </HStack>
+
+                                <Text fontFamily='heading' fontSize='sm' color='gray.600' mb={3}>
+                                    Condição
+                                </Text>
+                        
+                                <HStack mb={6}>
+                                    {/* <FlatList 
+                                        data={conditionOptions}
+                                        keyExtractor={item => item}
+                                        renderItem={({ item }) => (
+                                            <BoxCondition 
+                                                name={item}
+                                                isActive={conditionSelected.toLocaleUpperCase() 
+                                                    === item.toLocaleUpperCase()}
+                                                onPress={() =>  handleCondition(item)}
+                                                    
+                                            />                                      
+                                    
+                                        )}
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                    />                                                                  */}
+                                </HStack>
+
+                            <Text fontFamily='heading' fontSize='sm' color='gray.600' mb={1}>
+                                Aceita troca?
+                            </Text>
+                        
+                            {/* <Switches/> */}
+
+                            <Text fontFamily='heading' fontSize='sm' color='gray.600' mb={3}>
+                                Métodos de Pagamentos Aceitos:
+                            </Text>
+                            
+                            {/* <Checkbox.Group 
+                                onChange={setPaymentMethods} 
+                                value={paymentMethods} 
+                                accessibilityLabel="choose numbers"
+                            > */}
+                                <Checkbox value='boleto' mb={1}>Boleto</Checkbox>
+                                <Checkbox value='pix' mb={1}>Pix</Checkbox>
+                                <Checkbox value='cash' mb={1}>Dinheiro</Checkbox>
+                                <Checkbox value='card' mb={1}>Cartão Crédito</Checkbox>
+                                <Checkbox value='deposit' mb={1}>Depósito Bancário</Checkbox>
+                            {/* </Checkbox.Group>    */}
+
+                            
+
+                            </AlertDialogBody>
+                            <AlertDialogFooter>
+                                <Button colorScheme='red' ref={cancelRef} onClick={onClose}>
+                                    Resetar Filtros!
+                                </Button>
+                                <Link href="/" passHref>
+                                    <Button colorScheme='whatsapp' ml={3}>
+                                        Aplicar Filtros
+                                    </Button>
+                                </Link>
+                            </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>   
                         
                     </VStack>                    
 

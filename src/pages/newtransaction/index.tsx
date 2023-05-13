@@ -175,212 +175,425 @@ export default function CreateTransaction(){
     }, []);     
    
     return (
-        <Box>
-            <Header/>
-            <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6"bg="gray.900">
-                <SideBar />
+        // <Box>
+        //     <Header/>
+        //     <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6"bg="gray.900">
+        //         <SideBar />
                 
-                <Box 
-                    as="form" 
-                    flex="1" 
-                    borderRadius={8} 
-                    bg="gray.800" p="6" 
-                    onSubmit={handleSubmit(handleNewTransaction)}
-                > 
-                    <Heading size="lg" fontWeight="bold" color="orange.400">Cadastrar Nova Transação</Heading>
-                    <Divider my="6" borderColor="gray.700"></Divider>
-                    {/* <Text mb="25" fontSize="25" color="orange.400">Escolha o tipo de transação que deseja realizar</Text> */}
+        //         <Box 
+        //             as="form" 
+        //             flex="1" 
+        //             borderRadius={8} 
+        //             bg="gray.800" p="6" 
+        //             onSubmit={handleSubmit(handleNewTransaction)}
+        //         > 
+        //             <Heading size="lg" fontWeight="bold" color="orange.400">Cadastrar Nova Transação</Heading>
+        //             <Divider my="6" borderColor="gray.700"></Divider>
+        //             {/* <Text mb="25" fontSize="25" color="orange.400">Escolha o tipo de transação que deseja realizar</Text> */}
 
-                    <VStack spacing="6" >                        
+        //             <VStack spacing="6" >                        
                         
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" fontSize="sm"> 
-                            <Select                                
-                                name="transação" 
-                                label="Escolha a nova transação" 
-                                color="gray.200"   
-                                // color="orange.400"                 
-                                error={errors.category}                                 
-                                // fontSize="sm"                                                              
-                                option={ListRevenuesTable.map(revenue => {
-                                    return (
-                                        <option key={revenue.id} value={revenue.id}>
-                                            {revenue.categoryOfRevenue}
-                                        </option>
-                                    )
-                                })}
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" fontSize="sm"> 
+        //                     <Select                                
+        //                         name="transação" 
+        //                         label="Escolha a nova transação" 
+        //                         color="gray.200"   
+        //                         // color="orange.400"                 
+        //                         error={errors.category}                                 
+        //                         // fontSize="sm"                                                              
+        //                         option={ListRevenuesTable.map(revenue => {
+        //                             return (
+        //                                 <option key={revenue.id} value={revenue.id}>
+        //                                     {revenue.categoryOfRevenue}
+        //                                 </option>
+        //                             )
+        //                         })}
 
-                                {...register("category")}                               
-                            > 
+        //                         {...register("category")}                               
+        //                     > 
                                                                   
-                            </Select>                     
-                        </SimpleGrid>
+        //                     </Select>                     
+        //                 </SimpleGrid>
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >
-                           <Input 
-                                name="data" 
-                                label="Data da Transação"
-                                color="gray.200" 
-                                type="date"                                
-                                {...register("date")}
-                                error={errors.date}
-                            />
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >
+        //                    <Input 
+        //                         name="data" 
+        //                         label="Data da Transação"
+        //                         color="gray.200" 
+        //                         type="date"                                
+        //                         {...register("date")}
+        //                         error={errors.date}
+        //                     />
 
-                            {/* <Select
-                                defaultValue={[options[0], options[2]]}
-                                components={animatedComponents}
-                                isMulti
-                                options={options}
-                                // onChange={(item) => setSelectedOptions(item)}
-                                className="select"
-                                isClearable={true}
-                                isSearchable={true}
-                                isDisabled={false}
-                                isLoading={false}
-                                isRtl={false}
-                                closeMenuOnSelect={false}
-                            /> */}
+        //                     {/* <Select
+        //                         defaultValue={[options[0], options[2]]}
+        //                         components={animatedComponents}
+        //                         isMulti
+        //                         options={options}
+        //                         // onChange={(item) => setSelectedOptions(item)}
+        //                         className="select"
+        //                         isClearable={true}
+        //                         isSearchable={true}
+        //                         isDisabled={false}
+        //                         isLoading={false}
+        //                         isRtl={false}
+        //                         closeMenuOnSelect={false}
+        //                     /> */}
 
-                            {/* <button onClick={handleSelect}>Imprimir itens</button> */}
+        //                     {/* <button onClick={handleSelect}>Imprimir itens</button> */}
 
-                            <Select                                
-                                name="categoria" 
-                                label="Escolha a categoria" 
-                                color="gray.200"                     
-                                error={errors.category}                                                               
-                                option={ListRevenuesTable.map(revenue => {
-                                    return (
-                                        <option key={revenue.id} value={revenue.id}>
-                                            {revenue.categoryOfRevenue}
-                                        </option>
-                                    )
-                                })}
-                                {...register("category")}                               
-                            >                              
-                            </Select>                  
-                        </SimpleGrid>   
+        //                     <Select                                
+        //                         name="categoria" 
+        //                         label="Escolha a categoria" 
+        //                         color="gray.200"                     
+        //                         error={errors.category}                                                               
+        //                         option={ListRevenuesTable.map(revenue => {
+        //                             return (
+        //                                 <option key={revenue.id} value={revenue.id}>
+        //                                     {revenue.categoryOfRevenue}
+        //                                 </option>
+        //                             )
+        //                         })}
+        //                         {...register("category")}                               
+        //                     >                              
+        //                     </Select>                  
+        //                 </SimpleGrid>   
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >                            
-                            <Select                                                        
-                                name="conta" 
-                                label="Conta"
-                                color="gray.200"                                            
-                                error={errors.bills}                                                               
-                                option={ListRevenuesTable.map(revenue => {
-                                    return (                                        
-                                        <option key={revenue.id} value={revenue.id}>
-                                            {revenue.bills}
-                                        </option>
-                                    )
-                                })}  
-                                {...register("bills")}                               
-                            >                              
-                            </Select> 
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >                            
+        //                     <Select                                                        
+        //                         name="conta" 
+        //                         label="Conta"
+        //                         color="gray.200"                                            
+        //                         error={errors.bills}                                                               
+        //                         option={ListRevenuesTable.map(revenue => {
+        //                             return (                                        
+        //                                 <option key={revenue.id} value={revenue.id}>
+        //                                     {revenue.bills}
+        //                                 </option>
+        //                             )
+        //                         })}  
+        //                         {...register("bills")}                               
+        //                     >                              
+        //                     </Select> 
 
-                            <Select                                      
-                                onChange={event => setParcelas(event.target.value)}                        
-                                name="pagamento" 
-                                label="Forma de Pagamento"
-                                color="gray.200"                      
-                                error={errors.payment}                                                               
-                                option={ListPaymentMethod.map(ListPayment => {
-                                    return (
-                                        <option key={ListPayment.id} value={ListPayment.id}>
-                                            {ListPayment.description}
-                                        </option>
-                                    )
-                                })}  
-                                {...register("payment")}                               
-                            >                              
-                            </Select>                            
-                        </SimpleGrid>     
-                        {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
-                            <label htmlFor="">Parcelas: {parcelas}</label>
-                        </SimpleGrid> */}
+        //                     <Select                                      
+        //                         onChange={event => setParcelas(event.target.value)}                        
+        //                         name="pagamento" 
+        //                         label="Forma de Pagamento"
+        //                         color="gray.200"                      
+        //                         error={errors.payment}                                                               
+        //                         option={ListPaymentMethod.map(ListPayment => {
+        //                             return (
+        //                                 <option key={ListPayment.id} value={ListPayment.id}>
+        //                                     {ListPayment.description}
+        //                                 </option>
+        //                             )
+        //                         })}  
+        //                         {...register("payment")}                               
+        //                     >                              
+        //                     </Select>                            
+        //                 </SimpleGrid>     
+        //                 {/* <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.200">
+        //                     <label htmlFor="">Parcelas: {parcelas}</label>
+        //                 </SimpleGrid> */}
                                  
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">
-                            {/* //Data de Vencimento da Parcela */}
-                            <Input 
-                                name="vencimento" 
-                                label="Escolha a data de vencimento das parcelas"
-                                color="gray.200"
-                                type="date" 
-                                // {...register("parcelas")}
-                                // error={errors.payment}
-                            /> 
-                            {/* {(parcelas=='Cartão') ?  */}  
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">
+        //                     {/* //Data de Vencimento da Parcela */}
+        //                     <Input 
+        //                         name="vencimento" 
+        //                         label="Escolha a data de vencimento das parcelas"
+        //                         color="gray.200"
+        //                         type="date" 
+        //                         // {...register("parcelas")}
+        //                         // error={errors.payment}
+        //                     /> 
+        //                     {/* {(parcelas=='Cartão') ?  */}  
 
-                            <Flex mt="9">
-                                {/* <Text>Parcelas</Text> */}
-                                <NumberInput maxW='100px' mr='2rem' value={value} onChange={handleChange} color="gray.200">
-                                    <NumberInputField />
-                                    <NumberInputStepper boxSize="30">
-                                        <NumberIncrementStepper />
-                                        <NumberDecrementStepper />
-                                    </NumberInputStepper>
-                                </NumberInput>
-                                <Slider
-                                    flex='1'
-                                    focusThumbOnChange={false}
-                                    value={value}
-                                    onChange={handleChange}                                    
-                                >
-                                    <SliderTrack >
-                                        <SliderFilledTrack/>
-                                    </SliderTrack>
-                                    <SliderThumb fontSize='sm' boxSize='32px' children={value} />
-                                </Slider>
-                            </Flex>                            
+        //                     <Flex mt="9">
+        //                         {/* <Text>Parcelas</Text> */}
+        //                         <NumberInput maxW='100px' mr='2rem' value={value} onChange={handleChange} color="gray.200">
+        //                             <NumberInputField />
+        //                             <NumberInputStepper boxSize="30">
+        //                                 <NumberIncrementStepper />
+        //                                 <NumberDecrementStepper />
+        //                             </NumberInputStepper>
+        //                         </NumberInput>
+        //                         <Slider
+        //                             flex='1'
+        //                             focusThumbOnChange={false}
+        //                             value={value}
+        //                             onChange={handleChange}                                    
+        //                         >
+        //                             <SliderTrack >
+        //                                 <SliderFilledTrack/>
+        //                             </SliderTrack>
+        //                             <SliderThumb fontSize='sm' boxSize='32px' children={value} />
+        //                         </Slider>
+        //                     </Flex>                            
                             
-                            {/* : null } */}
-                        </SimpleGrid>                       
+        //                     {/* : null } */}
+        //                 </SimpleGrid>                       
                        
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">                    
-                            {/* <Select                                
-                                name="bank"                                 
-                                label="Nome do banco"  
-                                color="gray.200"                    
-                                error={errors.bank}                                                               
-                                option={ListBanks.map(BankList => {
-                                    return (
-                                        <option key={BankList.id} value={BankList.id}>
-                                            {BankList.bank}
-                                        </option>
-                                    )
-                                })}  
-                                {...register("bank")}                               
-                            >                              
-                            </Select>      */}
-                            <Input 
-                                name="valor" 
-                                type="number" 
-                                label="Valor" 
-                                color="gray.200"                       
-                                error={errors.value}
-                                // fontSize="sm">{new Intl.NumberFormat('pt-BR', {
-                                //     style: 'currency',
-                                //     currency: 'BRL'
-                                // })}
-                                {...register("value")}
-                            />
-                        </SimpleGrid>
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">                    
+        //                     {/* <Select                                
+        //                         name="bank"                                 
+        //                         label="Nome do banco"  
+        //                         color="gray.200"                    
+        //                         error={errors.bank}                                                               
+        //                         option={ListBanks.map(BankList => {
+        //                             return (
+        //                                 <option key={BankList.id} value={BankList.id}>
+        //                                     {BankList.bank}
+        //                                 </option>
+        //                             )
+        //                         })}  
+        //                         {...register("bank")}                               
+        //                     >                              
+        //                     </Select>      */}
+        //                     <Input 
+        //                         name="valor" 
+        //                         type="number" 
+        //                         label="Valor" 
+        //                         color="gray.200"                       
+        //                         error={errors.value}
+        //                         // fontSize="sm">{new Intl.NumberFormat('pt-BR', {
+        //                         //     style: 'currency',
+        //                         //     currency: 'BRL'
+        //                         // })}
+        //                         {...register("value")}
+        //                     />
+        //                 </SimpleGrid>
 
-                        <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">
-                            <Input 
-                                name="historico" 
-                                label="Histórico"
-                                color="gray.200"                         
-                                error={errors.history}
-                                {...register("history")}
-                            />                           
-                        </SimpleGrid>                       
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">
+        //                     <Input 
+        //                         name="historico" 
+        //                         label="Histórico"
+        //                         color="gray.200"                         
+        //                         error={errors.history}
+        //                         {...register("history")}
+        //                     />                           
+        //                 </SimpleGrid>                       
 
+        //             </VStack>
+        //             <Flex mt="6" justify="space-between">
+        //                 {/* <HStack spacing="4"> */}
+        //                     <Link href="/lancamentos" passHref>
+        //                         <Button bg="red.500">Cancelar</Button>
+        //                     </Link>                      
+        //                     <Button 
+        //                         type="submit" 
+        //                         colorScheme="whatsapp" 
+        //                         // ref={searchInputRef}                                     
+        //                         isLoading={formState.isSubmitting}                                                      
+        //                     >
+        //                         Realizar Lançamento
+        //                     </Button>                   
+        //                 {/* </HStack> */}
+        //             </Flex>
+
+        //             <Pagination
+        //                 currentPage={currentPage}
+        //                 totalPages={totalPages}
+        //                 onPageChange={handlePageChange}
+        //             />
+
+        //         </Box>
+        //     </Flex>
+        //     <ToastContainer/>
+        // </Box>
+
+
+        //COMECA AQUI A PARTE DE FORMULARIO DO MARKETSPACE
+
+
+        // <Box>
+        //     <Header/>
+        //     <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6"bg="gray.900">
+        //         <SideBar />
+                
+        //         <Box 
+        //             as="form" 
+        //             flex="1" 
+        //             borderRadius={8} 
+        //             bg="gray.800" p="6" 
+        //             onSubmit={handleSubmit(handleNewTransaction)}
+        //         > 
+        //             <Heading size="lg" fontWeight="bold" color="orange.400">Cadastrar Nova Transação</Heading>
+        //             <Divider my="6" borderColor="gray.700"></Divider>
+        //             {/* <Text mb="25" fontSize="25" color="orange.400">Escolha o tipo de transação que deseja realizar</Text> */}
+
+        //             <VStack spacing="6" >                        
+                        
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" fontSize="sm"> 
+        //                     <Text>Aqui sera a imagem</Text>                    
+        //                 </SimpleGrid>
+
+        //                 <Text>Sobre o produto</Text>
+
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >                      
+        //                     <Input 
+        //                         name="data" 
+        //                         label="Título do anúncio"
+        //                         color="gray.200" 
+        //                         type="text"                                
+        //                         {...register("date")}
+        //                         error={errors.date}
+        //                     />                          
+        //                 </SimpleGrid>   
+
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" >                            
+        //                     <Input 
+        //                         name="data" 
+        //                         label="Descrição do produto"
+        //                         color="gray.200" 
+        //                         type="text"                                
+        //                         {...register("date")}
+        //                         error={errors.date}
+        //                     />                              
+        //                 </SimpleGrid>                             
+
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">
+        //                     <Radio>Produto Novo</Radio> 
+        //                     <Radio>Produto Usado</Radio>                        
+        //                 </SimpleGrid>                       
+                    
+        //                 <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600">                                
+        //                     <Input 
+        //                         name="data" 
+        //                         label="Valor da venda"
+        //                         color="gray.200" 
+        //                         type="text"                                
+        //                         {...register("date")}
+        //                         error={errors.date}
+        //                     />    
+        //                 </SimpleGrid>             
+
+        //             </VStack>
+
+        //             <VStack>
+        //                 <Checkbox value='boleto' mb={1}>Boleto</Checkbox>
+        //                 <Checkbox value='pix' mb={1}>Pix</Checkbox>
+        //                 <Checkbox value='cash' mb={1}>Dinheiro</Checkbox>
+        //                 <Checkbox value='card' mb={1}>Cartão Crédito</Checkbox>
+        //                 <Checkbox value='deposit' mb={1}>Depósito Bancário</Checkbox>
+        //             </VStack>                
+
+        //             <Flex mt="6" justify="space-between">
+        //                 {/* <HStack spacing="4"> */}
+        //                     <Link href="/lancamentos" passHref>
+        //                         <Button bg="red.500">Cancelar</Button>
+        //                     </Link>                      
+        //                     <Button 
+        //                         type="submit" 
+        //                         colorScheme="whatsapp" 
+        //                         // ref={searchInputRef}                                     
+        //                         isLoading={formState.isSubmitting}                                                      
+        //                     >
+        //                         Realizar Lançamento
+        //                     </Button>                   
+        //                 {/* </HStack> */}
+        //             </Flex>
+
+        //             <Pagination
+        //                 currentPage={currentPage}
+        //                 totalPages={totalPages}
+        //                 onPageChange={handlePageChange}
+        //             />
+
+        //         </Box>
+        //     </Flex>
+        //     <ToastContainer/>
+        // </Box>
+
+
+        //AQUI COMECA A TELA DE PREWIEW
+
+        <Box>
+        <Header/>
+        <Flex width="100%" my="6" maxWidth={1480} mx="auto" px="6"bg="gray.900">
+        <SideBar />
+                
+        <Box 
+            as="form" 
+            flex="1" 
+            borderRadius={8} 
+            bg="gray.800" p="6" 
+            onSubmit={handleSubmit(handleNewTransaction)}
+        > 
+            <Heading size="lg" fontWeight="bold" color="orange.400">Pré visualização do anúncio</Heading>
+            <Text mb="25" fontSize="25" color="orange.400">Seu anuncio aparecerá assim</Text>
+            <Divider my="6" borderColor="gray.700"></Divider>
+            
+
+            <VStack spacing="6" >                        
+                
+                <SimpleGrid minChildWidth="240px" spacing="6" width="100%" color="gray.600" fontSize="sm"> 
+                    <Text>Aqui sera as imagens triplicadas</Text>                    
+                </SimpleGrid>
+
+                <Text>Sobre o produto</Text>
+
+                <VStack             
+                    flex="1"
+                    padding={8}
+                    backgroundColor='gray.100'
+                >                    
+                    {/* <Status name={ads.is_new}/>  */}
+
+                    <HStack justifyContent="space-between" mt={3}>
+                        <Text color="gray.700" fontFamily="heading" fontSize="2xl">
+                            Carlos
+                        </Text>
+
+                        <HStack alignItems="baseline">
+                            <Text color="blue.500" fontWeight="bold" fontSize="md" textAlign="center">
+                                R$
+                            </Text>
+
+                            <Text color="blue.500" fontWeight="bold" fontSize="2xl" textAlign="center">
+                                20,00
+                            </Text>
+                        </HStack>                            
+                    </HStack>
+
+                    <Text color="gray.700" mt={3}>
+                        djkfhskhfkjdshfkjsdhfjksdhfkjshdfkjdshfkjhsdjkhfkhsd
+                    </Text> 
+
+                    <HStack mt={5}>
+                        <Text color="gray.700" fontWeight="bold">
+                            Aceita troca?
+                        </Text>         
+                    
+                        <Text color="gray.700" >
+                            {/* {ads.accept_trade ? 'Sim' : 'Não'} */}
+                            SIM
+                        </Text> 
+                    </HStack>                                     
+    
+                    <Text color="gray.700" mb={0} fontWeight="bold" mt={3}>
+                        Meios de pagamentos aceitos:
+                    </Text>
+
+                    <VStack mt={2}>
+                        {/* {ads.payment_methods.map(method =>
+                            <HStack alignItems='center' key={method}>
+                                <Icon as={MaterialCommunityIcons} name='cash-multiple' size={4} color='gray.2' mr={2}/>
+                                <Text fontFamily='body' textTransform='capitalize' fontSize='sm' color='gray.2'>
+                                    {method}
+                                </Text>
+                            </HStack>
+                        )}                                     */}
+                        METODOS DE PAGAMENTO AQUI
                     </VStack>
+
                     <Flex mt="6" justify="space-between">
-                        {/* <HStack spacing="4"> */}
+                        <HStack spacing="4">
                             <Link href="/lancamentos" passHref>
                                 <Button bg="red.500">Cancelar</Button>
-                            </Link>                      
+                            </Link>
+
                             <Button 
                                 type="submit" 
                                 colorScheme="whatsapp" 
@@ -389,16 +602,20 @@ export default function CreateTransaction(){
                             >
                                 Realizar Lançamento
                             </Button>                   
-                        {/* </HStack> */}
+                        </HStack>
                     </Flex>
+                        
+                </VStack>
 
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                    />
+                   
 
-                </Box>
+            </VStack>
+
+            
+
+           
+
+        </Box>
             </Flex>
             <ToastContainer/>
         </Box>

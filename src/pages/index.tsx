@@ -36,35 +36,6 @@ interface CreateUserFormData {
 
 export default function SignIn() {
 
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const [listUsers, setListUsers] = useState<UserData[]>([]);
-  // const [passwordUsers, setPasswordUsers] = useState<UserData[]>([]);
-     
-  // //Pegando os dados da API e Listando as receitas cadastradas na tabela
-  // useEffect(() => {
-  //   async function loadUsers() {          
-  //     await api.get('/users').then( response => {
-  //       setListUsers(response.data);
-  //       console.log(response.data);
-  //     })      
-  //   }
-  //   loadUsers();    
-  // }, []);     
-
-  // useEffect(() => {
-  //   async function loadPassword() {          
-  //     await api.get('/users').then( response => {
-  //       setPasswordUsers(response.data);
-  //       console.log(response.data);
-  //     })      
-  //   }
-  //   loadPassword();    
-  // }, []); 
-
-  // __________________________________
-
   //Fazendo a validação do formulário
   const signInFormSchema = yup.object().shape({   
     email: yup.string().required('E-mail obrigatório').email('E-mail Inválido'),
@@ -105,22 +76,6 @@ export default function SignIn() {
   }
 
   console.log(handleSignIn);
-
-  // ___________________________________________
-
-  //Autenticação das páginas
-
-  // const {signIn} = useContext(AuthContext)
-
-  // async function handleSubmit(event: FormEvent){
-  //   event.preventDefault();
-  //   const data = {
-  //     email, 
-  //     password
-  //   }
-
-  //   await signIn(data)
-  // }  
 
   return (
     <Flex 
